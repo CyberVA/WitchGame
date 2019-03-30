@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442025165}
   - component: {fileID: 442025166}
+  - component: {fileID: 442025167}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -243,6 +244,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &442025167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442025164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14bf53db1e432414682b0407ef5dc1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493304873
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +267,8 @@ GameObject:
   - component: {fileID: 493304874}
   - component: {fileID: 493304876}
   - component: {fileID: 493304875}
+  - component: {fileID: 493304878}
+  - component: {fileID: 493304877}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -349,6 +364,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &493304877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493304873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b73ab009ac1d247a8eb690dd6c68fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBox: {fileID: 0}
+  scenes: 
+--- !u!114 &493304878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493304873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb724fc4cf63b2542a11ce9909702d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBox: {fileID: 0}
 --- !u!1 &516363208
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +435,8 @@ GameObject:
   - component: {fileID: 1309034129}
   - component: {fileID: 1309034131}
   - component: {fileID: 1309034130}
+  - component: {fileID: 1309034133}
+  - component: {fileID: 1309034132}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -488,6 +532,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1309034132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309034128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b73ab009ac1d247a8eb690dd6c68fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBox: {fileID: 0}
+  scenes: 
+--- !u!114 &1309034133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309034128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb724fc4cf63b2542a11ce9909702d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBox: {fileID: 0}
 --- !u!1 &1464787441
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +570,8 @@ GameObject:
   - component: {fileID: 1464787442}
   - component: {fileID: 1464787444}
   - component: {fileID: 1464787443}
+  - component: {fileID: 1464787446}
+  - component: {fileID: 1464787445}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -594,3 +667,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1464787445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464787441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b73ab009ac1d247a8eb690dd6c68fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBox: {fileID: 0}
+  scenes: Project/Scenes/Official
+--- !u!114 &1464787446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464787441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb724fc4cf63b2542a11ce9909702d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myBox: {fileID: 0}
