@@ -34,17 +34,29 @@ public class MouseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (clickables != null)
+        if (SceneManager.sceneCount < 2)
+        {
+            mainCam = Camera.main;
+            clickables = FindObjectsOfType<Clickable>();
+        }
+            if (clickables != null)
         {
             for (int i = 0; i < clickables.Length; i++)
             {
-                if (clickables[i].myBox.OverlapPoint(mainCam.ScreenToWorldPoint(Input.mousePosition)))
+                if (clickables[i].myBox != null)
                 {
-                    clickables[i].OnHover();
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    if (clickables[i].myBox.OverlapPoint(mainCam.ScreenToWorldPoint(Input.mousePosition)))
                     {
-                        clickables[i].OnClick();
+                        clickables[i].OnHover();
+                        if (Input.GetKeyDown(KeyCode.Mouse0))
+                        {
+                            clickables[i].OnClick();
+                        }
                     }
+                }
+                else if (clickables[i].myBox == null)
+                {
+                    Debug.LogWarning("No Clickable Box Colliders");
                 }
             }
         }
@@ -64,6 +76,7 @@ public class MouseController : MonoBehaviour
 
     protected virtual void OnClick()
     {
-
+        mainCam = Camera.main;
+        clickables = FindObjectsOfType<Clickable>();
     }
 }
