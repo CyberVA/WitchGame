@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         DontDestroyOnLoad(transform.gameObject);
         if (gMan == null)
         {
@@ -18,7 +17,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            DestroyObject(gameObject);
+            Destroy(gameObject);
         }
     }
 
