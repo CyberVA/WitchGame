@@ -20,7 +20,6 @@ public class TestMovement : MonoBehaviour
     public Color glColor;
 
     //Auto Ref
-    IEnumerable<Box> boxes;
     Animator animator;
 
     //Data
@@ -35,7 +34,6 @@ public class TestMovement : MonoBehaviour
     
     void Awake()
     {
-        boxes = roomController.staticColliders;
         colbox.Center = transform.position;
         animator = GetComponent<Animator>();
     }
@@ -75,7 +73,7 @@ public class TestMovement : MonoBehaviour
         }
 
         //Movement Applied
-        SuperTranslate(colbox, movement, boxes);
+        SuperTranslate(colbox, movement, roomController.staticColliders);
         //colbox.Center += movement;
         transform.position = colbox.Center;
 
@@ -101,7 +99,7 @@ public class TestMovement : MonoBehaviour
                 weapon.transform.position = attackBox.Center;
                 foreach (IHurtable h in GlobalData.instance.combatTriggers)
                 {
-                    if (!h.Friendly && Intersects(attackBox, h.HurtBox))
+                    if (!h.Friendly && Intersects(attackBox, h.HitBox))
                     {
                         h.Hurt(1, DamageTypes.Melee);
                     }

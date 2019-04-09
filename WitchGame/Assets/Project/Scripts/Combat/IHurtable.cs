@@ -9,7 +9,7 @@ public enum DamageTypes { Melee, Shroom}
 
 public interface IHurtable
 {
-    Box HurtBox { get; }
+    Box HitBox { get; }
     bool Friendly { get; }
     void Hurt(int damage, DamageTypes damageType);
 }
