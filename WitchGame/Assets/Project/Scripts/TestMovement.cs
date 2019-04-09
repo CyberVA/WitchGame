@@ -9,8 +9,12 @@ public class TestMovement : MonoBehaviour
 {
     //Editor Ref
     public RoomController roomController;
+    public SpriteRenderer weapon;
+
+    //Editor Data
     public Box colbox;
-    public float speed = 5f;
+    public float speed = 3f;
+    public float attackLength = 1f;
 
     public Material glMaterial;
     public Color glColor;
@@ -18,6 +22,12 @@ public class TestMovement : MonoBehaviour
     //Auto Ref
     IEnumerable<Box> boxes;
     Animator animator;
+
+    //Data
+    bool attackActive;
+    float attackTimer;
+    Box attackBox = new Box(0, 0, 1, 1);
+    Vector2 attackVector;
 
     //temp var used every frame
     Vector2 movement;
@@ -70,7 +80,34 @@ public class TestMovement : MonoBehaviour
         transform.position = colbox.Center;
 
         //Post-Movement
-
+        if (!attackActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            attackActive = true;
+            weapon.enabled = true;
+            attackVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
+            attackTimer += attackLength;
+        }
+        if (attackActive)
+        {
+            attackTimer -= Time.deltaTime;
+            if(attackTimer < 0)
+            {
+                attackActive = false;
+                weapon.enabled = false;
+            }
+            else
+            {
+                attackBox.Center = colbox.Center + attackVector;
+                weapon.transform.position = attackBox.Center;
+                foreach (IHurtable h in GlobalData.instance.combatTriggers)
+                {
+                    if (!h.Friendly && Intersects(attackBox, h.HurtBox))
+                    {
+                        h.Hurt(1, DamageTypes.Melee);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -79,6 +116,11 @@ public class TestMovement : MonoBehaviour
     {
         BeginBoxesGL(glMaterial, glColor);
         DrawBoxGL(colbox);
+        if(attackActive)
+        {
+            GL.Color(Color.red);
+            DrawBoxGL(attackBox);
+        }
         EndBoxesGL();
     }
 #endif

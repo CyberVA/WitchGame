@@ -7,19 +7,20 @@ public class GlobalData : MonoBehaviour
     public static GlobalData instance;
 
     /// <summary>
-    /// Triggers that enemies need to check
+    /// Objects in level that can be physically hurt
     /// </summary>
-    public IEnumerable<Trigger> enemyTriggers;
-    /// <summary>
-    /// Triggers that player needs to check
-    /// </summary>
-    public IEnumerable<Trigger> playerTriggers;
-
+    public List<IHurtable> combatTriggers;
+    
     private void Awake()
     {
         if(instance == null)
         {
             instance = this;
+            combatTriggers = new List<IHurtable>();
+        }
+        else
+        {
+            Debug.LogWarning("There are multiple globaldata objects. dont do that");
         }
     }
 }
