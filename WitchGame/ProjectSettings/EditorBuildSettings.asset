@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Vincent.unity
     guid: c851181d586fe0848828cbcffb27e052
+  - enabled: 1
+    path: Assets/Project/Scenes/Options.unity
+    guid: 8dd2efc093883c74f9cf2d83a0592f2e
   m_configObjects: {}
