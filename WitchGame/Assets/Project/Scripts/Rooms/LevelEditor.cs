@@ -15,7 +15,6 @@ public class LevelEditor : MonoBehaviour
 
     //Auto References
     SpriteRenderer spriteRenderer;
-    GridTransform gridInfo;
 
     //Data
     Room loadedRoom;
@@ -25,11 +24,13 @@ public class LevelEditor : MonoBehaviour
     //Update Logic
     GridPos mp, prevMousePos;
 
+    //Properties
+    GridTransform gridInfo => roomController.gridInfo;
+
     private void Awake()
     {
         //Grab References
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gridInfo = roomController.gridInfo;
 
         //Generate Tiles
         roomController.Setup(width, height);
@@ -104,6 +105,11 @@ public class LevelEditor : MonoBehaviour
             else
             {
                 spriteRenderer.enabled = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                roomController.Position += new Vector2(1, 1);
             }
         }
 

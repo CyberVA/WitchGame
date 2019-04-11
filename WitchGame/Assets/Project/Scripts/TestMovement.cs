@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using static TwoStepCollision.Func;
 
-public class TestMovement : MonoBehaviour
+public class TestMovement : MonoBehaviour, IMover
 {
     //Editor Ref
     public RoomController roomController;
@@ -31,7 +31,15 @@ public class TestMovement : MonoBehaviour
     //temp var used every frame
     Vector2 movement;
     float f;
-    
+
+    #region IMover
+    Box IMover.box => colbox;
+    void IMover.SetPosition(Vector2 position)
+    {
+        transform.position = position;
+    }
+    #endregion
+
     void Awake()
     {
         colbox.Center = transform.position;
@@ -73,9 +81,7 @@ public class TestMovement : MonoBehaviour
         }
 
         //Movement Applied
-        SuperTranslate(colbox, movement, roomController.staticColliders);
-        //colbox.Center += movement;
-        transform.position = colbox.Center;
+        SuperTranslate(this, movement, roomController.staticColliders);
 
         //Post-Movement
         if (!attackActive && Input.GetKeyDown(KeyCode.Space))

@@ -7,6 +7,7 @@ using UnityEngine;
 public class GridTransform
 {
     public Vector2 origin;
+    public Vector2 offset;
     public float tileSize;
 
     public GridTransform()
@@ -22,13 +23,13 @@ public class GridTransform
 
     public GridPos GetGridPos(Vector2 v)
     {
-        v -= origin;
+        v -= origin + offset;
         GridPos p = new GridPos((int)((v.x + tileSize / 2) / tileSize), (int)((v.y + tileSize / 2) / tileSize));
         return p;
     }
     public Vector2 GetGridVector(GridPos p)
     {
-        return new Vector2(p.x * tileSize, p.y * tileSize) + origin;
+        return new Vector2(p.x * tileSize, p.y * tileSize) + origin + offset;
     }
     public Vector2 SnappedVector(Vector2 v)
     {

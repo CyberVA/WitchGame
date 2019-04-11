@@ -29,35 +29,37 @@ namespace TwoStepCollision
         {
             return Contains(a, p.x, p.y);
         }
-        public static void SuperTranslate(Box agent, Vector2 movement, IEnumerable<Box> boxes)
+        public static void SuperTranslate(IMover mover, Vector2 movement, IEnumerable<Box> boxes)
         {
+            Box box = mover.box;
             IEnumerator<Box> boxEnum = boxes.GetEnumerator();
             float f;
             if (movement.y != 0f)
             {
                 f = movement.y > 0f ? -0.5f : 0.5f;
-                agent.y += movement.y;
+                box.y += movement.y;
                 while (boxEnum.MoveNext())
                 {
-                    if (Intersects(agent, boxEnum.Current))
+                    if (Intersects(box, boxEnum.Current))
                     {
-                        agent.y = boxEnum.Current.y + f * (boxEnum.Current.height + agent.height + padding);
+                        box.y = boxEnum.Current.y + f * (boxEnum.Current.height + box.height + padding);
                     }
                 }
             }
             if (movement.x != 0f)
             {
                 f = movement.x > 0f ? -0.5f : 0.5f;
-                agent.x += movement.x;
+                box.x += movement.x;
                 boxEnum.Reset();
                 while (boxEnum.MoveNext())
                 {
-                    if (Intersects(agent, boxEnum.Current))
+                    if (Intersects(box, boxEnum.Current))
                     {
-                        agent.x = boxEnum.Current.x + f * (boxEnum.Current.width + agent.width + padding);
+                        box.x = boxEnum.Current.x + f * (boxEnum.Current.width + box.width + padding);
                     }
                 }
             }
+            mover.SetPosition(box.Center);
         }
         public static void BeginBoxesGL(Material mat)
         {
@@ -158,5 +160,12 @@ namespace TwoStepCollision
         }
         #endregion
     }
+
+    public interface IMover
+    {
+        Box box { get; }
+        void SetPosition(Vector2 position);
+    }
+
 
 }

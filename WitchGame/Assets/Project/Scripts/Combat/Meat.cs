@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TwoStepCollision;
 using static TwoStepCollision.Func;
 
-public class Meat : MonoBehaviour, IHurtable
+public class Meat : MonoBehaviour, IHurtable, IMover
 {
     //Editor Ref
     public RoomController roomController;
@@ -25,11 +25,19 @@ public class Meat : MonoBehaviour, IHurtable
     //Gizmos
     public Material glMaterial;
     public Color glColor;
-
-    //Hurtable properties
+    
+    #region Hurtable
     public Box HitBox => box;
     public bool Friendly => false;
+    #endregion
 
+    #region Mover
+    Box IMover.box => box;
+    void IMover.SetPosition(Vector2 position)
+    {
+        transform.position = position;
+    }
+    #endregion
     private void Awake()
     {
         staticColliders = roomController.staticColliders;
@@ -48,7 +56,7 @@ public class Meat : MonoBehaviour, IHurtable
         }
         if(velocity != Vector2.zero)
         {
-            SuperTranslate(box, velocity * Time.deltaTime, staticColliders);
+            SuperTranslate(this, velocity * Time.deltaTime, staticColliders);
             //velocity *= 1f - (Time.deltaTime * inertia);
         }
     }
@@ -69,4 +77,5 @@ public class Meat : MonoBehaviour, IHurtable
             iTimer += iLength;
         }
     }
+
 }

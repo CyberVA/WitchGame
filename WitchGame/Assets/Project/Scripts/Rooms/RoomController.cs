@@ -25,6 +25,20 @@ public class RoomController : MonoBehaviour
     [NonSerialized]
     public List<Box> staticColliders = new List<Box>();
     SpriteRenderer[] sprites;
+
+    //Properties
+    public Vector2 Position
+    {
+        get
+        {
+            return transform.position;
+        }
+        set
+        {
+            transform.position = value;
+            gridInfo.origin = value;
+        }
+    }
     
     public void Setup(int w, int h)
     {
