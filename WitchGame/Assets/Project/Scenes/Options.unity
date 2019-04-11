@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  scenes: Project/Scenes/Vincent
+  scenes: Project/Scenes/MainMenu
   highlightColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!61 &1339501546
 BoxCollider2D:
