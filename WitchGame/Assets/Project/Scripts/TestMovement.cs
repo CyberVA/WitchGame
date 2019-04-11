@@ -11,6 +11,11 @@ public class TestMovement : MonoBehaviour
     public RoomController roomController;
     public SpriteRenderer weapon;
 
+    //Abilities
+    public ability mushMancy;
+    public ability rootWall;
+    public ability cure;
+
     //Editor Data
     public Box colbox;
     public float speed = 3f;
@@ -36,6 +41,19 @@ public class TestMovement : MonoBehaviour
     {
         colbox.Center = transform.position;
         animator = GetComponent<Animator>();
+
+        //Ability initialization
+        mushMancy.name = "Mush Mancy";
+        mushMancy.cooldown = 10f;
+        mushMancy.damage = 0.5f;
+        mushMancy.requiredMana = 1f;
+        rootWall.name = "Root Wall";
+        rootWall.cooldown = 5f;
+        rootWall.requiredMana = 0.5f;
+        cure.name = "Cure";
+        cure.cooldown = 10f;
+        cure.damage = -0.25f;
+        cure.requiredMana = 1f;
     }
     
     private void Update()
@@ -108,6 +126,18 @@ public class TestMovement : MonoBehaviour
         }
     }
 
+    void Abilities()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+
+        }
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -122,4 +152,13 @@ public class TestMovement : MonoBehaviour
         EndBoxesGL();
     }
 #endif
+}
+
+public struct ability
+{
+    public string name;
+    public float cooldown;
+    public float damage;
+    public float requiredMana;
+    public bool isCasted;
 }
