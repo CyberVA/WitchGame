@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 442025166}
   - component: {fileID: 442025167}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: PersistentObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,6 +257,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bf53db1e432414682b0407ef5dc1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: 1
+  mana: 1
+  cooldowns:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1 &493304873
 GameObject:
   m_ObjectHideFlags: 0
