@@ -7,9 +7,11 @@ public class Meat : MonoBehaviour, IHurtable, IMover
 {
     //Editor Ref
     public RoomController roomController;
+    public SpriteRenderer flash;
 
     //Editor Data
     public Box box;
+    public float inertia;
     public float minVelocity;
 
     //Auto Ref
@@ -26,18 +28,19 @@ public class Meat : MonoBehaviour, IHurtable, IMover
     public Material glMaterial;
     public Color glColor;
     
-    #region Hurtable
+    #region IHurtable
     public Box HitBox => box;
     public bool Friendly => false;
     #endregion
 
-    #region Mover
+    #region IMover
     Box IMover.box => box;
     void IMover.SetPosition(Vector2 position)
     {
         transform.position = position;
     }
     #endregion
+
     private void Awake()
     {
         staticColliders = roomController.staticColliders;
@@ -52,12 +55,21 @@ public class Meat : MonoBehaviour, IHurtable, IMover
     {
         if(iTimer > 0)
         {
+            flash.color = new Color(1f, 1f, 1f, iTimer / iLength);
             iTimer -= Time.deltaTime;
+            if(iTimer <= 0)
+            {
+                flash.enabled = false;
+            }
         }
         if(velocity != Vector2.zero)
         {
             SuperTranslate(this, velocity * Time.deltaTime, staticColliders);
-            //velocity *= 1f - (Time.deltaTime * inertia);
+            velocity *= 1f - (Time.deltaTime * inertia);
+            if(velocity.magnitude < minVelocity)
+            {
+                velocity = Vector2.zero;
+            }
         }
     }
 
@@ -69,11 +81,18 @@ public class Meat : MonoBehaviour, IHurtable, IMover
     }
 
     //Hurtable implementation
-    public void Hurt(int damage, DamageTypes damageType)
+    public void Hurt(int damage, DamageTypes damageType, Vector2 vector)
     {
         if(iTimer <= 0)
         {
-            Debug.Log("oof");
+            velocity = vector;
+            transform.localScale *= 0.9f;
+            box.height *= 0.9f;
+            box.width *= 0.9f;
+
+            flash.enabled = true;
+            flash.color = Color.white;
+
             iTimer += iLength;
         }
     }

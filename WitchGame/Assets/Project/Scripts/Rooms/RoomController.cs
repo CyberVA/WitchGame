@@ -16,6 +16,7 @@ public class RoomController : MonoBehaviour
     public TileSet tileSet;
     int width;
     int height;
+    int layerId;
 
     public bool showBoxes;
     public Material glMaterial;
@@ -39,7 +40,12 @@ public class RoomController : MonoBehaviour
             gridInfo.origin = value;
         }
     }
-    
+
+    private void Awake()
+    {
+        layerId = SortingLayer.NameToID("Tiles");
+    }
+
     public void Setup(int w, int h)
     {
         width = w;
@@ -55,6 +61,7 @@ public class RoomController : MonoBehaviour
                 obj.transform.SetParent(transform);
                 obj.transform.position = gridInfo.GetGridVector(p);
                 sprites[p.GetIndex(width)] = obj.AddComponent<SpriteRenderer>();
+                sprites[p.GetIndex(width)].sortingLayerID = layerId;
                 p.x++;
             }
             p.y++;

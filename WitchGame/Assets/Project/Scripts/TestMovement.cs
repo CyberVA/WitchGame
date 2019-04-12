@@ -125,7 +125,7 @@ public class TestMovement : MonoBehaviour, IMover
                 {
                     if (!h.Friendly && Intersects(attackBox, h.HitBox))
                     {
-                        h.Hurt(1, DamageTypes.Melee);
+                        h.Hurt(1, DamageTypes.Melee, attackVector * 2);
                     }
                 }
             }
