@@ -12,10 +12,10 @@ public class TestMovement : MonoBehaviour, IMover
     public SpriteRenderer weapon;
 
     //Abilities
-    public ability mushMancy;
-    public ability rootWall;
-    public ability cure;
-    public ability melee;
+    public Ability mushMancy;
+    public Ability rootWall;
+    public Ability cure;
+    public Ability melee;
 
     //Editor Data
     public Box colbox;
@@ -52,14 +52,18 @@ public class TestMovement : MonoBehaviour, IMover
         animator = GetComponent<Animator>();
 
         //Ability initialization
+        mushMancy.name = AbilityName._MushMancy;
         mushMancy.cooldown = 10f;
         mushMancy.damage = 0.5f;
         mushMancy.requiredMana = 1f;
+        rootWall.name = AbilityName._RootWall;
         rootWall.cooldown = 5f;
         rootWall.requiredMana = 0.5f;
+        cure.name = AbilityName._Cure;
         cure.cooldown = 10f;
         cure.damage = -0.25f;
         cure.requiredMana = 1f;
+        melee.name = AbilityName._Melee;
         melee.cooldown = 0.1f;
         melee.damage = 0.2f;
     }
@@ -130,35 +134,42 @@ public class TestMovement : MonoBehaviour, IMover
                 }
             }
         }
+
+        //Ability Activation
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            MushMancy();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            RootWall();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Cure();
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Melee();
+        }
+
     }
 
-    void Abilities()
+    public void MushMancy()
     {
 
+    }
+    public void RootWall()
+    {
 
+    }
+    public void Cure()
+    {
 
+    }
+    public void Melee()
+    {
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            melee.isCasted = true;
-            if(melee.isCasted)
-            {
-                GameManager.gMan.mana += melee.damage;
-                melee.isCasted = false;
-            }
-        }
     }
 
 
@@ -177,10 +188,10 @@ public class TestMovement : MonoBehaviour, IMover
 #endif
 }
 
-public enum abilityName {MushMancy, RootWall, Cure, Melee}
-public struct ability
+public enum AbilityName {_MushMancy, _RootWall, _Cure, _Melee}
+public struct Ability
 {
-    public abilityName name;
+    public AbilityName name;
     public float cooldown;
     public float damage;
     public float requiredMana;

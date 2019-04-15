@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gMan;
 
+    //Amount of player health
     [Range(0, 1)]
     public float playerHealth;
+    //Amount of player Mana
     [Range(0,1)]
     public float mana;
-    public float[] cooldowns = new float[5];
+    public float[] currentCooldowns = new float[5];
 
     // Start is called before the first frame update
     void Start()

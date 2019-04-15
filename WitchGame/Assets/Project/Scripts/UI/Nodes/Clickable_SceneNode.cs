@@ -11,7 +11,14 @@ public class Clickable_SceneNode : Clickable
 
     public override void OnClick()
     {
-        SceneManager.LoadScene(scenes);
+        if (scenes != null)
+        {
+            SceneManager.LoadScene(scenes);
+        }
+        else
+        {
+            Debug.LogWarning("Scene undefined on " + gameObject.name);
+        }
     }
     public override void OnHover()
     {

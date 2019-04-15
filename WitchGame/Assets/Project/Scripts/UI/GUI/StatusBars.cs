@@ -22,6 +22,8 @@ public class StatusBars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //For Debuging purposes only, delete this entire function when status bars is fully integrated with the player controller
         Health(GameManager.gMan.playerHealth);
         Mana(GameManager.gMan.mana);
     }
@@ -30,7 +32,7 @@ public class StatusBars : MonoBehaviour
     /// Function for adding or subtracting hp from the players healthbar
     /// </summary>
     /// <param name="hp"> How much HP we're adding/subtracting</param>
-    void Health(float hp)
+    public void Health(float hp)
     {
         healthBar.size = new Vector2(hp, 1);
     }
@@ -39,7 +41,7 @@ public class StatusBars : MonoBehaviour
     /// Function for adding or subtracting mana from the players healthbar
     /// </summary>
     /// <param name="hp"> How much MP we're adding/subtracting</param>
-    void Mana(float mp)
+    public void Mana(float mp)
     {
         manaBar.size = new Vector2(mp, 1);
     }
@@ -49,7 +51,8 @@ public class StatusBars : MonoBehaviour
     /// </summary>
     /// <param name="sprite"> Which sprite are we applying our cooldown to?</param>
     /// <param name="activated"> Was the ability used?</param>
-    void CoolDowns(SpriteRenderer sprite, int ability)
+    public void CoolDowns(int abilityID, float curCool)
     {
+        abilities[abilityID].size = new Vector2(curCool, 1);
     }
 }
