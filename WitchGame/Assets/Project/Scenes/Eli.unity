@@ -112,6 +112,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &507430540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 507430541}
+  m_Layer: 0
+  m_Name: Combat Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &507430541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507430540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 831731313}
+  - {fileID: 1975270264}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &640006765
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +181,11 @@ MonoBehaviour:
   showBoxes: 0
   glMaterial: {fileID: 0}
   glColor: {r: 1, g: 1, b: 1, a: 0}
+  roomBounds:
+    x: 0
+    y: 0
+    width: 0
+    height: 0
 --- !u!4 &640006767
 Transform:
   m_ObjectHideFlags: 0
@@ -163,6 +200,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &831731312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831731313}
+  - component: {fileID: 831731314}
+  m_Layer: 0
+  m_Name: SporePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &831731313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831731312}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 507430541}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &831731314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831731312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e31fa4ff16fc0b46a757ac4faf7064b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 234347102917249250, guid: b7ab80ea4944e5648ba6708e5b352090, type: 3}
+  roomController: {fileID: 640006766}
+  startingSize: 2
+  maxSize: 5
 --- !u!1 &949683541
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomController: {fileID: 640006766}
-  roomName: start
+  roomName: FF1
 --- !u!4 &1425850524
 Transform:
   m_ObjectHideFlags: 0
@@ -310,7 +394,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1425850525
 MonoBehaviour:
@@ -362,7 +446,7 @@ MonoBehaviour:
     y: 2
     width: 1
     height: 1
-  inertia: 1
+  inertia: 2
   minVelocity: 0.1
   iLength: 0.5
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
@@ -380,7 +464,7 @@ Transform:
   m_Children:
   - {fileID: 2079501987}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1780229530
 SpriteRenderer:
@@ -576,6 +660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomController: {fileID: 640006766}
+  roomLoader: {fileID: 1425850523}
+  statusBars: {fileID: 0}
   weapon: {fileID: 1975270263}
   colbox:
     x: 0
@@ -583,9 +669,11 @@ MonoBehaviour:
     width: 1
     height: 1
   speed: 2
-  attackLength: 0.4
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   glColor: {r: 0, g: 1, b: 0.10499692, a: 1}
+  meleeLength: 0.4
+  meleeCooldown: 0.6
+  shroomCooldown: 1.3
 --- !u!4 &1891442014
 Transform:
   m_ObjectHideFlags: 0
@@ -673,12 +761,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975270262}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3332062, y: 1.9135933, z: 0.037109375}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 507430541}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2079501986
 GameObject:

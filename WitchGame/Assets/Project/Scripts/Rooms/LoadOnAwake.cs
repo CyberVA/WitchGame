@@ -9,7 +9,7 @@ public class LoadOnAwake : MonoBehaviour
 {
     public RoomController roomController;
     public string roomName;
-    Room room;
+    public Room room;
 
     private void Awake()
     {

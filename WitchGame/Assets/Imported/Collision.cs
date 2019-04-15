@@ -106,11 +106,32 @@ namespace TwoStepCollision
                 y = value.y;
             }
         }
-        public float Top
+        public float Left
         {
             get
             {
                 return x - width * 0.5f;
+            }
+        }
+        public float Right
+        {
+            get
+            {
+                return x + width * 0.5f;
+            }
+        }
+        public float Top
+        {
+            get
+            {
+                return y + height * 0.5f;
+            }
+        }
+        public float Bottom
+        {
+            get
+            {
+                return y - height * 0.5f;
             }
         }
         public Box(float x, float y, float width, float height)

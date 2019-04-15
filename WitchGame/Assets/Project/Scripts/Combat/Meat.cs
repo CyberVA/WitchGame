@@ -85,7 +85,7 @@ public class Meat : MonoBehaviour, IHurtable, IMover
     {
         if(iTimer <= 0)
         {
-            velocity = vector;
+            velocity = vector * 2;
             transform.localScale *= 0.9f;
             box.height *= 0.9f;
             box.width *= 0.9f;
