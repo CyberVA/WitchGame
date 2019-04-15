@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: Melee
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &168858626
 GameObject:
@@ -353,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: SpellPri
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &338697794
 GameObject:
@@ -555,6 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: Down
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &549171400
 GameObject:
@@ -758,6 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: Right
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &1115862138
 GameObject:
@@ -918,6 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: SpellTer
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &1339501542
 GameObject:
@@ -1161,6 +1166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: Left
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &1866174095
 GameObject:
@@ -1282,6 +1288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: SpellSec
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &2099527488
 GameObject:
@@ -1403,4 +1410,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  keyToChange: Up
   highlightColor: {r: 1, g: 1, b: 0, a: 1}

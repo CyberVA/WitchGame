@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  scenes: 
+  scenes: Project/Scenes/Credits
   highlightColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &516363208
 GameObject:
