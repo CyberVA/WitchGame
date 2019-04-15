@@ -25,6 +25,7 @@ public class RoomController : MonoBehaviour
     //Runtime Data
     [NonSerialized]
     public List<Box> staticColliders = new List<Box>();
+    public Box roomBounds = new Box(0f, 0f, 0f, 0f);
     SpriteRenderer[] sprites;
 
     //Properties
@@ -38,6 +39,7 @@ public class RoomController : MonoBehaviour
         {
             transform.position = value;
             gridInfo.origin = value;
+            roomBounds.Center = value;
         }
     }
 
@@ -50,6 +52,8 @@ public class RoomController : MonoBehaviour
     {
         width = w;
         height = h;
+        roomBounds.width = width * gridInfo.tileSize;
+        roomBounds.height = height * gridInfo.tileSize;
         GridPos p = new GridPos(0, 0);
         sprites = new SpriteRenderer[width * height];
         GameObject obj;

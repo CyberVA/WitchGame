@@ -9,18 +9,13 @@ public class TestMovement : MonoBehaviour, IMover
 {
     //Editor Ref
     public RoomController roomController;
+    public LoadOnAwake roomLoader;
+    public StatusBars statusBars;
     public SpriteRenderer weapon;
-
-    //Abilities
-    public ability mushMancy;
-    public ability rootWall;
-    public ability cure;
-    public ability melee;
 
     //Editor Data
     public Box colbox;
     public float speed = 3f;
-    public float attackLength = 1f;
 
     public Material glMaterial;
     public Color glColor;
@@ -28,15 +23,33 @@ public class TestMovement : MonoBehaviour, IMover
     //Auto Ref
     Animator animator;
 
+    //Melee Attack
+    public float meleeLength = 1f;
+    public float meleeCooldown = 1.3f;
+    bool meleeActive;
+    float meleeTimer;
+    Vector2 meleeVector;
+
+    //Shroom Attack
+    public float shroomCooldown = 1.3f;
+    float shroomTimer;
+
     //Data
-    bool attackActive;
-    float attackTimer;
     Box attackBox = new Box(0, 0, 1, 1);
-    Vector2 attackVector;
 
     //temp var used every frame
     Vector2 movement;
-    float f;
+
+    Vector2 pos
+    {
+        get => colbox.Center;
+        set
+        {
+            colbox.Center = value;
+            transform.position = value;
+        }
+    }
+
 
     #region IMover
     Box IMover.box => colbox;
@@ -50,18 +63,6 @@ public class TestMovement : MonoBehaviour, IMover
     {
         colbox.Center = transform.position;
         animator = GetComponent<Animator>();
-
-        //Ability initialization
-        mushMancy.cooldown = 10f;
-        mushMancy.damage = 0.5f;
-        mushMancy.requiredMana = 1f;
-        rootWall.cooldown = 5f;
-        rootWall.requiredMana = 0.5f;
-        cure.cooldown = 10f;
-        cure.damage = -0.25f;
-        cure.requiredMana = 1f;
-        melee.cooldown = 0.1f;
-        melee.damage = 0.2f;
     }
     
     private void Update()
@@ -102,72 +103,98 @@ public class TestMovement : MonoBehaviour, IMover
         SuperTranslate(this, movement, roomController.staticColliders);
 
         //Post-Movement
-        if (!attackActive && Input.GetKeyDown(KeyCode.Space))
+
+        //Room travel
+        if (pos.x > roomController.roomBounds.Right)
         {
-            attackActive = true;
-            weapon.enabled = true;
-            attackVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
-            attackTimer += attackLength;
+            roomLoader.LoadEast();
+            pos -= new Vector2(roomController.roomBounds.width, 0f);
+            return;
         }
-        if (attackActive)
+        else if (pos.x < roomController.roomBounds.Left)
         {
-            attackTimer -= Time.deltaTime;
-            if(attackTimer < 0)
+            roomLoader.LoadWest();
+            pos += new Vector2(roomController.roomBounds.width, 0f);
+            return;
+        }
+        if (pos.y > roomController.roomBounds.Top)
+        {
+            roomLoader.LoadNorth();
+            pos -= new Vector2(0f, roomController.roomBounds.height);
+            return;
+        }
+        else if (pos.y < roomController.roomBounds.Bottom)
+        {
+            roomLoader.LoadSouth();
+            pos += new Vector2(0f, roomController.roomBounds.height);
+            return;
+        }
+
+        //Melee Attack
+        if (meleeTimer < meleeCooldown)
+        {
+            meleeTimer += Time.deltaTime;
+            if(meleeTimer > meleeCooldown)
             {
-                attackActive = false;
+                meleeTimer = meleeCooldown;
+            }
+            //set status bar here
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            meleeActive = true;
+            weapon.enabled = true;
+            meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
+            meleeTimer = 0;
+            //set status bar here
+        }
+        if (meleeActive)
+        {
+            if(meleeTimer > meleeLength)
+            {
+                meleeActive = false;
                 weapon.enabled = false;
             }
             else
             {
-                attackBox.Center = colbox.Center + attackVector;
+                attackBox.Center = colbox.Center + meleeVector;
                 weapon.transform.position = attackBox.Center;
                 foreach (IHurtable h in GlobalData.instance.combatTriggers)
                 {
                     if (!h.Friendly && Intersects(attackBox, h.HitBox))
                     {
-                        h.Hurt(1, DamageTypes.Melee, attackVector * 2);
+                        h.Hurt(1, DamageTypes.Melee, meleeVector);
                     }
                 }
             }
         }
-    }
-
-    void Abilities()
-    {
-
-
-
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        //Shroom
+        if (shroomTimer < shroomCooldown)
         {
-
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            melee.isCasted = true;
-            if(melee.isCasted)
+            shroomTimer += Time.deltaTime;
+            if (shroomTimer > shroomCooldown)
             {
-                GameManager.gMan.mana += melee.damage;
-                melee.isCasted = false;
+                shroomTimer = shroomCooldown;
             }
+            //set status bar here
         }
-    }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
+            Spore spore = SporePooler.instance.GetSpore();
+            spore.Activate(colbox.Center, mouseAim, 5f);
+            shroomTimer = 0;
+            //set status bar here
+        }
 
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         BeginBoxesGL(glMaterial, glColor);
         DrawBoxGL(colbox);
-        if(attackActive)
+        if(meleeActive)
         {
             GL.Color(Color.red);
             DrawBoxGL(attackBox);
@@ -175,14 +202,4 @@ public class TestMovement : MonoBehaviour, IMover
         EndBoxesGL();
     }
 #endif
-}
-
-public enum abilityName {MushMancy, RootWall, Cure, Melee}
-public struct ability
-{
-    public abilityName name;
-    public float cooldown;
-    public float damage;
-    public float requiredMana;
-    public bool isCasted;
 }
