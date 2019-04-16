@@ -5,12 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using static TwoStepCollision.Func;
 
-public class TestMovement : MonoBehaviour, IMover
+public class Player : MonoBehaviour, IMover
 {
     //Editor Ref
-    public RoomController roomController;
-    public LoadOnAwake roomLoader;
-    public StatusBars statusBars;
     public SpriteRenderer weapon;
 
     //Editor Data
@@ -21,7 +18,39 @@ public class TestMovement : MonoBehaviour, IMover
     public Color glColor;
 
     //Auto Ref
+    RoomController roomController;
     Animator animator;
+
+    //Stats
+    public float maxHealth = 1f;
+    float _health;
+    public float Health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            _health = value;
+            GameController.Main.statusBars.Health(_health / maxHealth);
+        }
+    }
+    public float maxMana = 1f;
+    float _mana;
+    public float Mana
+    {
+        get
+        {
+            return _mana;
+        }
+        set
+        {
+            _mana = value;
+            GameController.Main.statusBars.Mana(_mana / maxMana);
+        }
+    }
+
 
     //Melee Attack
     public float meleeLength = 1f;
@@ -40,6 +69,9 @@ public class TestMovement : MonoBehaviour, IMover
     //temp var used every frame
     Vector2 movement;
 
+    /// <summary>
+    /// Shortcut for handling player position
+    /// </summary>
     Vector2 pos
     {
         get => colbox.Center;
@@ -61,8 +93,13 @@ public class TestMovement : MonoBehaviour, IMover
 
     void Awake()
     {
+        roomController = GameController.Main.roomController;
+
         colbox.Center = transform.position;
         animator = GetComponent<Animator>();
+
+        Health = maxHealth;
+        Mana = maxMana;
     }
 
     private void Update()
@@ -107,25 +144,25 @@ public class TestMovement : MonoBehaviour, IMover
         //Room travel
         if (pos.x > roomController.roomBounds.Right)
         {
-            roomLoader.LoadEast();
+            GameController.Main.LoadEast();
             pos -= new Vector2(roomController.roomBounds.width, 0f);
             return;
         }
         else if (pos.x < roomController.roomBounds.Left)
         {
-            roomLoader.LoadWest();
+            GameController.Main.LoadWest();
             pos += new Vector2(roomController.roomBounds.width, 0f);
             return;
         }
         if (pos.y > roomController.roomBounds.Top)
         {
-            roomLoader.LoadNorth();
+            GameController.Main.LoadNorth();
             pos -= new Vector2(0f, roomController.roomBounds.height);
             return;
         }
         else if (pos.y < roomController.roomBounds.Bottom)
         {
-            roomLoader.LoadSouth();
+            GameController.Main.LoadSouth();
             pos += new Vector2(0f, roomController.roomBounds.height);
             return;
         }
@@ -138,7 +175,7 @@ public class TestMovement : MonoBehaviour, IMover
             {
                 meleeTimer = meleeCooldown;
             }
-            //set status bar here
+            GameController.Main.statusBars.CoolDowns(0, meleeTimer / meleeCooldown);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -146,7 +183,7 @@ public class TestMovement : MonoBehaviour, IMover
             weapon.enabled = true;
             meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
             meleeTimer = 0;
-            //set status bar here
+            GameController.Main.statusBars.CoolDowns(0, 0f);
         }
         if (meleeActive)
         {
@@ -159,16 +196,19 @@ public class TestMovement : MonoBehaviour, IMover
             {
                 attackBox.Center = colbox.Center + meleeVector;
                 weapon.transform.position = attackBox.Center;
-                foreach (IHurtable h in GlobalData.instance.combatTriggers)
+                foreach (IHurtable h in roomController.enemies)
                 {
                     if (!h.Friendly && Intersects(attackBox, h.HitBox))
                     {
-                        h.Hurt(1, DamageTypes.Melee, meleeVector);
+                        if(h.Hurt(1, DamageTypes.Melee, meleeVector))
+                        {
+                            Mana = Mathf.Max(Mana + 0.5f, maxMana);
+                        }
                     }
                 }
             }
         }
-        //Shroom
+        //Shroomancy
         if (shroomTimer < shroomCooldown)
         {
             shroomTimer += Time.deltaTime;
@@ -176,15 +216,16 @@ public class TestMovement : MonoBehaviour, IMover
             {
                 shroomTimer = shroomCooldown;
             }
-            //set status bar here
+            GameController.Main.statusBars.CoolDowns(1, shroomTimer / shroomCooldown);
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) && Mana >= 1f)
         {
             Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
+            Mana -= 1f;
             Spore spore = SporePooler.instance.GetSpore();
             spore.Activate(colbox.Center, mouseAim, 5f);
             shroomTimer = 0;
-            //set status bar here
+            GameController.Main.statusBars.CoolDowns(1, 0f);
         }
 
     }

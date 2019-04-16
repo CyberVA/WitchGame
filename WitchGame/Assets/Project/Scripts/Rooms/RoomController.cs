@@ -14,6 +14,7 @@ public class RoomController : MonoBehaviour
     //Editor Data
     public GridTransform gridInfo;
     public TileSet tileSet;
+    public RoomPrefabs roomPrefabs;
     int width;
     int height;
     int layerId;
@@ -23,8 +24,10 @@ public class RoomController : MonoBehaviour
     public Color glColor;
 
     //Runtime Data
-    [NonSerialized]
     public List<Box> staticColliders = new List<Box>();
+    public List<IHurtable> enemies = new List<IHurtable>();
+    public List<GameObject> removeOnLoad = new List<GameObject>();
+    [NonSerialized]
     public Box roomBounds = new Box(0f, 0f, 0f, 0f);
     SpriteRenderer[] sprites;
 
@@ -74,6 +77,11 @@ public class RoomController : MonoBehaviour
     }
     public void UpdateTiles(Room room)
     {
+        foreach(GameObject r in removeOnLoad)
+        {
+            Destroy(r);
+        }
+        removeOnLoad.Clear();
         GridPos p = new GridPos(0, 0);
         staticColliders.Clear();
         int i;
@@ -155,11 +163,13 @@ public class RoomController : MonoBehaviour
         {
             case 0: //nothing
                 break;
-            case 1: //something
-
+            case 1: //fountain
+                GameObject f = Instantiate(roomPrefabs.fountain);
+                removeOnLoad.Add(f);
                 break;
-            case 2: //something else
-
+            case 50: //armShroom
+                GameObject armShroom = Instantiate(roomPrefabs.armShroom);
+                removeOnLoad.Add(armShroom);
                 break;
         }
 

@@ -9,24 +9,6 @@ public class StatusBars : MonoBehaviour
     public SpriteRenderer[] abilities = new SpriteRenderer[4];
     public SpriteRenderer healthBar;
     public SpriteRenderer manaBar;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        for(int i = 0; i < abilities.Length; i++)
-        {
-            //abilities[i].transform.localScale
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        //For Debuging purposes only, delete this entire function when status bars is fully integrated with the player controller
-        Health(GameManager.gMan.playerHealth);
-        Mana(GameManager.gMan.mana);
-    }
 
     /// <summary>
     /// Function for adding or subtracting hp from the players healthbar

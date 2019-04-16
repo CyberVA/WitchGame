@@ -49,14 +49,16 @@ public class Spore : MonoBehaviour
         box.Center += trajectory * speed * Time.deltaTime;
         transform.position = box.Center;
 
-        foreach (IHurtable h in GlobalData.instance.combatTriggers)
+        foreach (IHurtable h in GameController.Main.roomController.enemies)
         {
             if (!h.Friendly && Intersects(box, h.HitBox))
             {
                 //explode? particles? AOE?
-                h.Hurt(3, DamageTypes.Shroom, trajectory);
-                Deactivate();
-                return;
+                if(h.Hurt(3, DamageTypes.Shroom, trajectory))
+                {
+                    Deactivate();
+                    return;
+                }
             }
         }
         foreach(Box b in staticColliders)
