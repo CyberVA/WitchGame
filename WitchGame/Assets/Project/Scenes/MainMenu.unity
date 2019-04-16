@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 442025165}
   - component: {fileID: 442025166}
   - component: {fileID: 442025167}
+  - component: {fileID: 442025168}
   m_Layer: 0
   m_Name: PersistentObjects
   m_TagString: Untagged
@@ -220,7 +221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442025164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4795082, y: 0.4267157, z: -0.027288284}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -259,12 +260,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 1
   mana: 1
-  cooldowns:
+  currentCooldowns:
   - 0
   - 0
   - 0
   - 0
   - 0
+--- !u!114 &442025168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442025164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8d0edad5d232143829af1de6b4931d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493304873
 GameObject:
   m_ObjectHideFlags: 0
