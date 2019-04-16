@@ -30,8 +30,10 @@ public class GameController : MonoBehaviour
     private void LoadMain()
     {
         currentRoom = roomController.LoadRoom(roomName);
+        roomController.gridInfo.SetOffset(currentRoom.width, currentRoom.height);
         roomController.Setup(currentRoom.width, currentRoom.height);
         roomController.UpdateTiles(currentRoom);
+        roomController.Position = Vector2.zero;
     }
 
     private void Load(string lvlName)

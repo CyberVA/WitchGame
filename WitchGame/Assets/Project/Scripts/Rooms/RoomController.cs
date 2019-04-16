@@ -24,8 +24,11 @@ public class RoomController : MonoBehaviour
     public Color glColor;
 
     //Runtime Data
+    [NonSerialized]
     public List<Box> staticColliders = new List<Box>();
+    [NonSerialized]
     public List<IHurtable> enemies = new List<IHurtable>();
+    [NonSerialized]
     public List<GameObject> removeOnLoad = new List<GameObject>();
     [NonSerialized]
     public Box roomBounds = new Box(0f, 0f, 0f, 0f);
@@ -174,15 +177,6 @@ public class RoomController : MonoBehaviour
         }
 
     }
-
-    public void Rotate(GridPos p, Room room)
-    {
-        int r = room.GetValue(p, Layer.Rotation);
-        r = (r + 1) % 4;
-        sprites[p.GetIndex(room.width)].transform.rotation = Quaternion.Euler(0f, 0f, 90f * r);
-        room.SetValue(p, Layer.Rotation, (byte)r);
-    }
-
     //File Management
     public void SaveAs(string fileName, Room room)
     {

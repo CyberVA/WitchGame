@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,16 +9,19 @@ public class LevelEditor : MonoBehaviour
     //Editor References
     public RoomController roomController;
     public SpriteRenderer brushDisplay;
+    public SpriteRenderer highlight;
+    public Transform editorCamera;
 
     //Editor Settings
     public string levelName;
     public int width, height;
+    public float cameraSpeed;
 
     //Auto References
-    SpriteRenderer spriteRenderer;
 
     //Data
     Room loadedRoom;
+    bool setup = false;
     bool roomLoaded = false;
     byte brush;
 
@@ -27,21 +31,11 @@ public class LevelEditor : MonoBehaviour
     //Properties
     GridTransform gridInfo => roomController.gridInfo;
 
-    private void Awake()
-    {
-        //Grab References
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        //Generate Tiles
-        roomController.Setup(width, height);
-    }
-
     private void Start()
     {
         SetBrush(0);
     }
-
-    [ContextMenu("Load File")]
+    
     private void Load()
     {
         loadedRoom = roomController.LoadRoom(levelName);
@@ -71,8 +65,8 @@ public class LevelEditor : MonoBehaviour
             mp = gridInfo.GetGridPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if (roomController.Inbounds(mp))
             {
-                spriteRenderer.enabled = true;
-                transform.position = gridInfo.GetGridVector(mp);
+                highlight.enabled = true;
+                highlight.transform.position = gridInfo.GetGridVector(mp);
 
                 //Commands executed on grid
                 if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && mp != prevMousePos)
@@ -83,10 +77,6 @@ public class LevelEditor : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     SetBrush(loadedRoom.GetValue(mp, Layer.Tex));
-                }
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    roomController.Rotate(mp, loadedRoom);
                 }
                 if (Input.GetKeyDown(KeyCode.Mouse2))
                 {
@@ -104,7 +94,7 @@ public class LevelEditor : MonoBehaviour
             }
             else
             {
-                spriteRenderer.enabled = false;
+                highlight.enabled = false;
             }
 
             if (Input.GetKeyDown(KeyCode.B))
@@ -158,6 +148,23 @@ public class LevelEditor : MonoBehaviour
             Load(loadedRoom.exitEast);
             roomController.UpdateTiles(loadedRoom);
         }
+        //Move Camera
+        if (Input.GetKey(KeyCode.W))
+        {
+            editorCamera.Translate(0f, Time.deltaTime * cameraSpeed, 0f, Space.World);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            editorCamera.Translate(Time.deltaTime * -cameraSpeed, 0f, 0f, Space.World);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            editorCamera.Translate(0f, Time.deltaTime * -cameraSpeed, 0f, Space.World);
+    }
+        if (Input.GetKey(KeyCode.D))
+        {
+            editorCamera.Translate(Time.deltaTime * cameraSpeed, 0f, 0f, Space.World);
+        }
 
         //End of update
         prevMousePos = mp;
@@ -167,31 +174,48 @@ public class LevelEditor : MonoBehaviour
     {
         const int pad = 22;
         int count = 0;
-        GUI.Label(new Rect(10, count++ * pad, 100, 20), "Level Name");
-        levelName  = GUI.TextField(new Rect(10, count++ * 22, 100, 20), levelName, 25);
-        if (roomLoaded)
+        if(setup)
         {
-            GUI.Label(new Rect(10, count++ * pad, 100, 20), "North Exit");
-            loadedRoom.exitNorth = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitNorth, 25);
-            GUI.Label(new Rect(10, count++ * pad, 100, 20), "South Exit");
-            loadedRoom.exitSouth = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitSouth, 25);
-            GUI.Label(new Rect(10, count++ * pad, 100, 20), "East Exit");
-            loadedRoom.exitEast = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitEast, 25);
-            GUI.Label(new Rect(10, count++ * pad, 100, 20), "West Exit");
-            loadedRoom.exitWest = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitWest, 25);
+            GUI.Label(new Rect(10, count++ * pad, 100, 20), "Level Name");
+            levelName = GUI.TextField(new Rect(10, count++ * 22, 100, 20), levelName, 25);
+            if (roomLoaded)
+            {
+                GUI.Label(new Rect(10, count++ * pad, 100, 20), "North Exit");
+                loadedRoom.exitNorth = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitNorth, 25);
+                GUI.Label(new Rect(10, count++ * pad, 100, 20), "South Exit");
+                loadedRoom.exitSouth = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitSouth, 25);
+                GUI.Label(new Rect(10, count++ * pad, 100, 20), "East Exit");
+                loadedRoom.exitEast = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitEast, 25);
+                GUI.Label(new Rect(10, count++ * pad, 100, 20), "West Exit");
+                loadedRoom.exitWest = GUI.TextField(new Rect(10, count++ * pad, 100, 20), loadedRoom.exitWest, 25);
 
-            if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Save"))
-            {
-                Save();
+                if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Save"))
+                {
+                    Save();
+                }
+                if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Reload"))
+                {
+                    roomController.UpdateTiles(loadedRoom);
+                }
             }
-            if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Reload"))
+            if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Load"))
             {
-                roomController.UpdateTiles(loadedRoom);
+                Load();
             }
         }
-        if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Load"))
+        else
         {
-            Load();
+            GUI.Label(new Rect(10, count++ * pad, 100, 20), "Room Width");
+            width = Convert.ToInt32(GUI.TextField(new Rect(10, count++ * pad, 100, 20), width.ToString(), 25));
+            GUI.Label(new Rect(10, count++ * pad, 100, 20), "Room Height");
+            height = Convert.ToInt32(GUI.TextField(new Rect(10, count++ * pad, 100, 20), height.ToString(), 25));
+            if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Create Tiles"))
+            {
+                gridInfo.SetOffset(width, height);
+                roomController.Setup(width, height);
+                roomController.Position = Vector2.zero;
+                setup = true;
+            }
         }
 
     }

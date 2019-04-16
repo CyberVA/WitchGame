@@ -20,7 +20,11 @@ public class GridTransform
         origin = _origin;
         tileSize = _tileSize;
     }
-
+    public void SetOffset(int width, int height)
+    {
+        offset.x = (width - 1) * tileSize *- 0.5f;
+        offset.y = (height - 1) * tileSize * -0.5f;
+    }
     public GridPos GetGridPos(Vector2 v)
     {
         v -= origin + offset;
