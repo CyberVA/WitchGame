@@ -80,7 +80,7 @@ public class Meat : MonoBehaviour, IHurtable, IMover
     }
 
     //Hurtable implementation
-    public bool Hurt(int damage, DamageTypes damageType, Vector2 vector)
+    public bool Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
         if(iTimer <= 0)
         {

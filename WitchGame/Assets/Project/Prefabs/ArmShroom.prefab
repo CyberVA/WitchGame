@@ -149,9 +149,12 @@ MonoBehaviour:
     width: 1
     height: 1
   health: 5
-  inertia: 2
+  inertia: 4
   minVelocity: 0.1
-  iLength: 0.5
+  velocityMultiplierMelee: 4
+  velocityMultiplierRange: 8
+  iLength: 0.25
+  flashLength: 0.25
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   glColor: {r: 0, g: 1, b: 0.030314207, a: 1}
 --- !u!95 &4513494692143990482

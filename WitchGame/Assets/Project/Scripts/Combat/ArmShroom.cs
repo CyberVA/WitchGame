@@ -12,9 +12,11 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
     //Editor Data
     public Box box;
-    public int health;
+    public float health;
     public float inertia;
     public float minVelocity;
+    public float velocityMultiplierMelee = 1f;
+    public float velocityMultiplierRange = 1f;
 
     //Auto Ref
     RoomController roomController;
@@ -25,6 +27,10 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     //i frames
     public float iLength;
     float iTimer;
+
+    //flash
+    public float flashLength = 1f;
+    float flashTimer;
 
     //Data
     bool alive = true;
@@ -73,20 +79,25 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             roomController.enemies.Remove(this);
         }
 
-        movement = Vector2.zero;
-        if(iTimer > 0)
+        //Timers
+        if(iTimer > 0f)
         {
-            flash.color = new Color(1f, 1f, 1f, iTimer / iLength);
             iTimer -= Time.deltaTime;
-            if(iTimer <= 0)
+        }
+        if(flashTimer > 0f)
+        {
+            flash.color = new Color(1f, 1f, 1f, flashTimer / flashLength);
+            flashTimer -= Time.deltaTime; ;
+            if (flashTimer <= 0)
             {
                 flash.enabled = false;
             }
         }
 
         //Calculate movement
+        movement = Vector2.zero;
         //Knockback velocity-
-        if(velocity != Vector2.zero)
+        if (velocity != Vector2.zero)
         {
             movement += velocity * Time.deltaTime;
             velocity *= 1f - (Time.deltaTime * inertia);
@@ -118,26 +129,45 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 #endif
 
     //Hurtable implementation
-    public bool Hurt(int damage, DamageTypes damageType, Vector2 vector)
+    public bool Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
-        if(alive && iTimer <= 0)
+        if(alive)
         {
-            velocity = vector * 2;
-            health -= damage;
-            if (health <= 0)
+            if(damageType == DamageTypes.Melee)
             {
-                StartDying();
-            }
-            flash.enabled = true;
-            flash.color = Color.white;
+                if (iTimer <= 0)
+                {
+                    velocity = vector * 2;
+                    health -= damage;
+                    if (health <= 0)
+                    {
+                        StartDying();
+                    }
+                    flash.enabled = true;
+                    flash.color = Color.white;
+                    flashTimer = flashLength;
 
-            iTimer += iLength;
-            return true;
+                    iTimer = iLength;
+                    return true;
+                }
+            }
+            else if(damageType == DamageTypes.Shroom)
+            {
+                velocity = vector * 3;
+                health -= damage;
+                if (health <= 0)
+                {
+                    StartDying();
+                }
+                flash.enabled = true;
+                flash.color = Color.white;
+                flashTimer = flashLength;
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+
+        //return true before here if attack lands
+        return false;
     }
 
     void StartDying()

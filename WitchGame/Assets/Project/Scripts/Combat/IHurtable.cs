@@ -9,5 +9,5 @@ public interface IHurtable
 {
     Box HitBox { get; }
     bool Friendly { get; }
-    bool Hurt(int damage, DamageTypes damageType, Vector2 vector);
+    bool Hurt(float damage, DamageTypes damageType, Vector2 vector);
 }

@@ -3,6 +3,7 @@ using TwoStepCollision;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using static TwoStepCollision.Func;
 
 public class Player : MonoBehaviour, IMover
@@ -55,15 +56,21 @@ public class Player : MonoBehaviour, IMover
     //Melee Attack
     public float meleeLength = 1f;
     public float meleeCooldown = 1.3f;
+    public float meleeDamage = 1f;
     bool meleeActive;
     float meleeTimer;
     Vector2 meleeVector;
 
     //Shroom Attack
     public float shroomCooldown = 1.3f;
+    public float shroomDamage = 1f;
+    public float shroomCost = 1f;
+    public float shroomSpeed = 5f;
     float shroomTimer;
 
     //Data
+    [NonSerialized]
+    public bool checkWin = false;
     Box attackBox = new Box(0, 0, 1, 1);
 
     //temp var used every frame
@@ -140,8 +147,13 @@ public class Player : MonoBehaviour, IMover
         SuperTranslate(this, movement, roomController.staticColliders);
 
         //Post-Movement
+        //Check for Win-
+        if(checkWin && Intersects(colbox, roomController.win))
+        {
+            Win();
+        }
 
-        //Room travel
+        //Room travel-
         if (pos.x > roomController.roomBounds.Right)
         {
             GameController.Main.LoadEast();
@@ -177,7 +189,7 @@ public class Player : MonoBehaviour, IMover
             }
             GameController.Main.statusBars.CoolDowns(0, meleeTimer / meleeCooldown);
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             meleeActive = true;
             weapon.enabled = true;
@@ -185,6 +197,7 @@ public class Player : MonoBehaviour, IMover
             meleeTimer = 0;
             GameController.Main.statusBars.CoolDowns(0, 0f);
         }
+        //Melee Collision-
         if (meleeActive)
         {
             if(meleeTimer > meleeLength)
@@ -200,9 +213,9 @@ public class Player : MonoBehaviour, IMover
                 {
                     if (!h.Friendly && Intersects(attackBox, h.HitBox))
                     {
-                        if(h.Hurt(1, DamageTypes.Melee, meleeVector))
+                        if(h.Hurt(meleeDamage, DamageTypes.Melee, meleeVector))
                         {
-                            Mana = Mathf.Max(Mana + 0.5f, maxMana);
+                            Mana = Mathf.Min(Mana + 0.5f, maxMana);
                         }
                     }
                 }
@@ -218,16 +231,24 @@ public class Player : MonoBehaviour, IMover
             }
             GameController.Main.statusBars.CoolDowns(1, shroomTimer / shroomCooldown);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && Mana >= 1f)
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && Mana >= shroomCost)
         {
             Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
-            Mana -= 1f;
+            Mana -= shroomCost;
             Spore spore = SporePooler.instance.GetSpore();
-            spore.Activate(colbox.Center, mouseAim, 5f);
+            spore.Activate(colbox.Center, mouseAim, shroomSpeed, shroomDamage);
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
         }
 
+    }
+
+    public void Win()
+    {
+        //fill out later
+        animator.SetBool("isWalking", false);
+        enabled = false;
+        SceneManager.LoadScene("Project/Scenes/WinScene");
     }
 
 #if UNITY_EDITOR

@@ -6,6 +6,7 @@ using static TwoStepCollision.Func;
 public class Spore : MonoBehaviour
 {
     const float lifespan = 10f;
+    float damage;
     float speed;
     float age;
     Box box = new Box(0f, 0f, 1f, 1f);
@@ -22,9 +23,10 @@ public class Spore : MonoBehaviour
     /// </summary>
     /// <param name="position">Position to start at</param>
     /// <param name="direction">Normalized direction the spore will travel</param>
-    public void Activate(Vector2 position, Vector2 direction, float speed)
+    public void Activate(Vector2 position, Vector2 direction, float speed, float damage)
     {
         this.speed = speed;
+        this.damage = damage;
         age = 0f;
         box.Center = position;
         transform.position = position;
