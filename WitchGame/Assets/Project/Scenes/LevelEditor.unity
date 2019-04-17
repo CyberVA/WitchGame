@@ -304,7 +304,7 @@ MonoBehaviour:
     offset: {x: -4.5, y: -3.5}
     tileSize: 1
   tileSet: {fileID: 11400000, guid: 3f452ca554973d9468247cef8586956c, type: 2}
-  roomPrefabs: {fileID: 0}
+  roomPrefabs: {fileID: 11400000, guid: c3d99cea723a23342a29dfb66cacc124, type: 2}
   showBoxes: 0
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   glColor: {r: 0, g: 1, b: 0.034408808, a: 1}
@@ -463,6 +463,8 @@ MonoBehaviour:
   width: 15
   height: 15
   cameraSpeed: 2
+  specialObjects: {fileID: 2100000, guid: 7676a6c707a05b24ea0fdc3c5697999e, type: 2}
+  drawSpecials: 1
 --- !u!4 &1215350866
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using static TwoStepCollision.Func;
 
 public class ArmShroom : MonoBehaviour, IHurtable, IMover
 {
+    public static int layerOrder = 0;
+
     //Editor Ref
     public SpriteRenderer flash;
 
@@ -51,6 +53,11 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteMask = GetComponent<SpriteMask>();
+
+        spriteRenderer.sortingOrder = layerOrder;
+        flash.sortingOrder = layerOrder + 1;
+        spriteMask.frontSortingOrder = layerOrder + 1;
+        layerOrder++;
 
         roomController = GameController.Main.roomController;
 

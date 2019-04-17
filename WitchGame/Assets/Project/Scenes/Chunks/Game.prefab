@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomController: {fileID: 4740797478434751623}
-  roomName: FF1
+  roomName: start
   player: {fileID: 4740797477000799156}
   statusBars: {fileID: 4740797477447942813}
 --- !u!1 &4740797478089869465
@@ -485,13 +485,11 @@ MonoBehaviour:
     origin: {x: 0, y: 0}
     offset: {x: -4.5, y: -3.5}
     tileSize: 1
-  tileSet: {fileID: 11400000, guid: 185be8ab9c6678c419cc10caa8d4437f, type: 2}
-  roomPrefabs: {fileID: 0}
+  tileSet: {fileID: 11400000, guid: 3f452ca554973d9468247cef8586956c, type: 2}
+  roomPrefabs: {fileID: 11400000, guid: c3d99cea723a23342a29dfb66cacc124, type: 2}
   showBoxes: 0
   glMaterial: {fileID: 0}
   glColor: {r: 1, g: 1, b: 1, a: 0}
-  staticColliders: []
-  removeOnLoad: []
 --- !u!1 &4740797478837729381
 GameObject:
   m_ObjectHideFlags: 0

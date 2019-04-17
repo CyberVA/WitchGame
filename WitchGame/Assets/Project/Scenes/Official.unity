@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  scenes: Project/Scenes/Vincent
+  scenes: Project/Scenes/CombatTest
   highlightColor: {r: 1, g: 0.9504018, b: 0, a: 1}
 --- !u!212 &1646478837
 SpriteRenderer:

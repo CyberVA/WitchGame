@@ -25,6 +25,12 @@ public class GridTransform
         offset.x = (width - 1) * tileSize *- 0.5f;
         offset.y = (height - 1) * tileSize * -0.5f;
     }
+    public Rect GetRect(GridPos p)
+    {
+        Rect r = new Rect(0f, 0f, tileSize, tileSize);
+        r.center = GetGridVector(p);
+        return r;
+    }
     public GridPos GetGridPos(Vector2 v)
     {
         v -= origin + offset;

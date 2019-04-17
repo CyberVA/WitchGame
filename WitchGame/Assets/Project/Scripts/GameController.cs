@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         currentRoom = roomController.LoadRoom(roomName);
         roomController.gridInfo.SetOffset(currentRoom.width, currentRoom.height);
         roomController.Setup(currentRoom.width, currentRoom.height);
-        roomController.UpdateTiles(currentRoom);
+        roomController.UpdateTiles(currentRoom, false);
         roomController.Position = Vector2.zero;
     }
 
@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
     {
         roomName = lvlName;
         currentRoom = roomController.LoadRoom(roomName);
-        roomController.UpdateTiles(currentRoom);
+        roomController.UpdateTiles(currentRoom, false);
     }
 
     public void LoadNorth()

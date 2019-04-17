@@ -20,7 +20,7 @@ public class Room : IByteable
     public string exitWest;
 
     //tile data is stored in [layer][grid position]
-    private byte[][] tileData;
+    public byte[][] tileData;
     
     LinkedList<Decoration> decorations;
 

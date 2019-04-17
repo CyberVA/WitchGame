@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Vincent.unity
     guid: c851181d586fe0848828cbcffb27e052
+  - enabled: 1
+    path: Assets/Project/Scenes/CombatTest.unity
+    guid: 6c7b153d7fc231340bf3700de5eb7f1d
   m_configObjects: {}

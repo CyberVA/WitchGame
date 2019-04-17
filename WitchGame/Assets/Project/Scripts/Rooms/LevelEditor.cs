@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class LevelEditor : MonoBehaviour
 {
+    public static int[] spclobj = new int[]
+    {
+        0, 1, 50
+    };
+
     //Editor References
     public RoomController roomController;
     public SpriteRenderer brushDisplay;
@@ -16,14 +21,17 @@ public class LevelEditor : MonoBehaviour
     public string levelName;
     public int width, height;
     public float cameraSpeed;
+    public Material specialObjects;
 
     //Auto References
 
     //Data
     Room loadedRoom;
+    public bool drawSpecials;
     bool setup = false;
     bool roomLoaded = false;
     byte brush;
+    byte spclBrush;
 
     //Update Logic
     GridPos mp, prevMousePos;
@@ -39,7 +47,7 @@ public class LevelEditor : MonoBehaviour
     private void Load()
     {
         loadedRoom = roomController.LoadRoom(levelName);
-        roomController.UpdateTiles(loadedRoom);
+        roomController.UpdateTiles(loadedRoom, true);
         roomLoaded = true;
     }
     private void Load(string lvlName)
@@ -97,10 +105,6 @@ public class LevelEditor : MonoBehaviour
                 highlight.enabled = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                roomController.Position += new Vector2(1, 1);
-            }
         }
 
         //Other Commands
@@ -127,26 +131,39 @@ public class LevelEditor : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, 50);
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, 0);
+        }
+
         //Room travel
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Load(loadedRoom.exitNorth);
-            roomController.UpdateTiles(loadedRoom);
+            roomController.UpdateTiles(loadedRoom, true);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Load(loadedRoom.exitSouth);
-            roomController.UpdateTiles(loadedRoom);
+            roomController.UpdateTiles(loadedRoom, true);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Load(loadedRoom.exitWest);
-            roomController.UpdateTiles(loadedRoom);
+            roomController.UpdateTiles(loadedRoom, true);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Load(loadedRoom.exitEast);
-            roomController.UpdateTiles(loadedRoom);
+            roomController.UpdateTiles(loadedRoom, true);
         }
         //Move Camera
         if (Input.GetKey(KeyCode.W))
@@ -195,7 +212,7 @@ public class LevelEditor : MonoBehaviour
                 }
                 if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Reload"))
                 {
-                    roomController.UpdateTiles(loadedRoom);
+                    roomController.UpdateTiles(loadedRoom, true);
                 }
             }
             if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Load"))
@@ -218,6 +235,45 @@ public class LevelEditor : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnRenderObject()
+    {
+        if(roomLoaded && drawSpecials)
+        {
+            specialObjects.SetPass(0);
+            GL.Begin(GL.QUADS);
+            GridPos p = new GridPos(0, 0);
+            byte value;
+            while (p.y < height)
+            {
+                while (p.x < width)
+                {
+                    value = loadedRoom.GetValue(p, Layer.Other);
+                    if (value != 0)
+                    {
+                        Draw(value, gridInfo.GetRect(p));
+                    }
+                    p.x++;
+                }
+                p.y++;
+                p.x = 0;
+            }
+            GL.End();
+        }
+
+        void Draw(byte v, Rect rect)
+        {
+            switch (v)
+            {
+                case 1: //fountain
+                    SimpGL.DrawSprite(rect, 0.1f, 0f, 0.2f, 0.1f);
+                    break;
+                case 50: //armshroom
+                    SimpGL.DrawSprite(rect, 0f, 0f, 0.1f, 0.1f);
+                    break;
+            }
+        }
     }
 
     public void SetBrush(byte value)

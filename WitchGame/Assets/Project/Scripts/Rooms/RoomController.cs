@@ -78,15 +78,17 @@ public class RoomController : MonoBehaviour
             p.x = 0;
         }
     }
-    public void UpdateTiles(Room room)
+    public void UpdateTiles(Room room, bool inEditor)
     {
-        foreach(GameObject r in removeOnLoad)
+        ArmShroom.layerOrder = 0;
+        staticColliders.Clear();
+        enemies.Clear();
+        foreach (GameObject r in removeOnLoad)
         {
             Destroy(r);
         }
         removeOnLoad.Clear();
         GridPos p = new GridPos(0, 0);
-        staticColliders.Clear();
         int i;
         //counter for colliders placed consecutively
         int colStack;
@@ -102,7 +104,7 @@ public class RoomController : MonoBehaviour
                 //Collision
                 if(room.GetValue(p, Layer.Collision) == 1)
                 {
-                    if(colStack == 0)
+                    if(inEditor || colStack == 0)
                     {
                         staticColliders.Add(new Box(gridInfo.GetGridVector(p), 1f, 1f));
                     }
@@ -120,6 +122,10 @@ public class RoomController : MonoBehaviour
                     colStack = 0;
                 }
                 //Other Objects
+                if(!inEditor)
+                {
+                    AddSpecialObject(p, room.GetValue(p, Layer.Other));
+                }
 
                 //iterate
                 p.x++;
@@ -168,11 +174,13 @@ public class RoomController : MonoBehaviour
                 break;
             case 1: //fountain
                 GameObject f = Instantiate(roomPrefabs.fountain);
+                f.transform.position = gridInfo.GetGridVector(p);
                 removeOnLoad.Add(f);
                 break;
             case 50: //armShroom
-                GameObject armShroom = Instantiate(roomPrefabs.armShroom);
-                removeOnLoad.Add(armShroom);
+                ArmShroom armShroom = Instantiate(roomPrefabs.armShroom).GetComponent<ArmShroom>();
+                armShroom.box.Center = gridInfo.GetGridVector(p);
+                removeOnLoad.Add(armShroom.gameObject);
                 break;
         }
 
