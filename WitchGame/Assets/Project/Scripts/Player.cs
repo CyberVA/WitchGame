@@ -159,7 +159,7 @@ public class Player : MonoBehaviour, IMover
             {
                 animator.SetBool("isWalkingLeft", false);
             }
-            if (movement.x > 0) //Righ
+            if (movement.x > 0) //RIGHT
             {
                 animator.SetBool("isWalkingRight", true);
             }
@@ -274,7 +274,6 @@ public class Player : MonoBehaviour, IMover
     public void Win()
     {
         //fill out later
-        animator.SetBool("isWalking", false);
         enabled = false;
         SceneManager.LoadScene("Project/Scenes/WinScene");
     }

@@ -131,17 +131,17 @@ public class LevelEditor : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             loadedRoom.SetValue(mp, Layer.Other, 1);
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             loadedRoom.SetValue(mp, Layer.Other, 50);
-        }
-        else if (Input.GetKeyDown(KeyCode.T))
-        {
-            loadedRoom.SetValue(mp, Layer.Other, 0);
         }
 
         //Room travel
