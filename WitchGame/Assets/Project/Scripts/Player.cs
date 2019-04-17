@@ -159,6 +159,14 @@ public class Player : MonoBehaviour, IMover
             {
                 animator.SetBool("isWalkingLeft", false);
             }
+            if (movement.x > 0) //Righ
+            {
+                animator.SetBool("isWalkingRight", true);
+            }
+            else
+            {
+                animator.SetBool("isWalkingRight", false);
+            }
         }
 
         //Movement Applied
