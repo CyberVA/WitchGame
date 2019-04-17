@@ -126,13 +126,31 @@ public class Player : MonoBehaviour, IMover
         }
         if (animator != null)
         {
-            if (movement != Vector2.zero)
+            if (movement.y > 0) //UP
             {
-                animator.SetBool("isWalking", true);
+                animator.SetBool("isWalkingUp", true);
             }
             else
             {
-                animator.SetBool("isWalking", false);
+                animator.SetBool("isWalkingUp", false);
+            }
+
+            if (movement.y < 0) //DOWN
+            {
+                animator.SetBool("isWalkingDown", true);
+            }
+            else
+            {
+                animator.SetBool("isWalkingDown", false);
+            }
+
+            if (movement.x < 0) //LEFT
+            {
+                animator.SetBool("isWalkingLeft", true);
+            }
+            else
+            {
+                animator.SetBool("isWalkingLeft", false);
             }
         }
 
@@ -179,8 +197,9 @@ public class Player : MonoBehaviour, IMover
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
+            animator.SetBool("isAttacking", true);
             meleeActive = true;
-            weapon.enabled = true;
+            weapon.enabled = true;          
             meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
             meleeTimer = 0;
             GameController.Main.statusBars.CoolDowns(0, 0f);
@@ -191,6 +210,7 @@ public class Player : MonoBehaviour, IMover
             {
                 meleeActive = false;
                 weapon.enabled = false;
+                animator.SetBool("isAttacking", false);
             }
             else
             {
