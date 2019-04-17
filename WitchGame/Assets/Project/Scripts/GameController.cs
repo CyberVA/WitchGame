@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     #region Room Loading
     private void LoadMain()
     {
+        roomController.Init();
         currentRoom = roomController.LoadRoom(roomName);
         roomController.gridInfo.SetOffset(currentRoom.width, currentRoom.height);
         roomController.Setup(currentRoom.width, currentRoom.height);

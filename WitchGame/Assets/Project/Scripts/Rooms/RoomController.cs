@@ -20,6 +20,7 @@ public class RoomController : MonoBehaviour
     int layerId;
 
     public bool showBoxes;
+    bool init = false;
     public Material glMaterial;
     public Color glColor;
 
@@ -28,6 +29,8 @@ public class RoomController : MonoBehaviour
     public List<Box> staticColliders = new List<Box>();
     [NonSerialized]
     public List<IHurtable> enemies = new List<IHurtable>();
+    [NonSerialized]
+    public Box win = null;
     [NonSerialized]
     public List<GameObject> removeOnLoad = new List<GameObject>();
     [NonSerialized]
@@ -50,6 +53,13 @@ public class RoomController : MonoBehaviour
     }
 
     private void Awake()
+    {
+        if(!init)
+        {
+            Init();
+        }
+    }
+    public void Init()
     {
         layerId = SortingLayer.NameToID("Tiles");
     }
@@ -88,6 +98,10 @@ public class RoomController : MonoBehaviour
             Destroy(r);
         }
         removeOnLoad.Clear();
+        if(!inEditor)
+        {
+            GameController.Main.player.checkWin = false;
+        }
         GridPos p = new GridPos(0, 0);
         int i;
         //counter for colliders placed consecutively
@@ -174,7 +188,10 @@ public class RoomController : MonoBehaviour
                 break;
             case 1: //fountain
                 GameObject f = Instantiate(roomPrefabs.fountain);
-                f.transform.position = gridInfo.GetGridVector(p);
+                Vector2 fp = gridInfo.GetGridVector(p);
+                f.transform.position = fp;
+                win = new Box(fp, 2f, 2f);
+                GameController.Main.player.checkWin = true;
                 removeOnLoad.Add(f);
                 break;
             case 50: //armShroom
