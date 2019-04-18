@@ -332,30 +332,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4740797477000799156, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: colbox.width
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740797477000799156, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: colbox.y
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740797477000799156, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: colbox.x
-      value: -0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740797477000799156, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: boxOffset.x
-      value: -0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 4740797477000799156, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: boxOffset.y
-      value: 0.02
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}

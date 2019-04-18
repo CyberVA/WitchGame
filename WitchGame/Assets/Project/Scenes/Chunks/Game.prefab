@@ -49,10 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 4740797477084611998}
   colbox:
-    x: 0
-    y: 0
-    width: 1
+    x: -0.06
+    y: 0.02
+    width: 0.9
     height: 1
+  boxOffset: {x: -0.06, y: 0.02}
   speed: 2
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   glColor: {r: 0, g: 1, b: 0.10499692, a: 1}
