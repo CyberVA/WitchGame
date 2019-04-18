@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IMover
 
     //Editor Data
     public Box colbox;
+    public Vector2 boxOffset;
     public float speed = 3f;
 
     public Material glMaterial;
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour, IMover
         set
         {
             colbox.Center = value;
-            transform.position = value;
+            transform.position = value - boxOffset;
         }
     }
 
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour, IMover
     {
         roomController = GameController.Main.roomController;
 
-        colbox.Center = transform.position;
+        colbox.Center = (Vector2)transform.position + boxOffset;
         animator = GetComponent<Animator>();
 
         Health = maxHealth;

@@ -6,11 +6,6 @@ using UnityEngine;
 
 public class LevelEditor : MonoBehaviour
 {
-    public static int[] spclobj = new int[]
-    {
-        0, 1, 50
-    };
-
     //Editor References
     public RoomController roomController;
     public SpriteRenderer brushDisplay;
