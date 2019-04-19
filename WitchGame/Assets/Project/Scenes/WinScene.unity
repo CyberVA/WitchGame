@@ -437,7 +437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397649118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9700003, y: 1.9989655, z: 0.083984375}
+  m_LocalPosition: {x: 3.13, y: 1.9989655, z: 0.083984375}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 932362651}
@@ -516,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535976804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.0323625, y: 0.5031524, z: 0.083984375}
+  m_LocalPosition: {x: -4.0323625, y: 0.48, z: 0.083984375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 932362651}
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   scenes: Project/Scenes/MainMenu
-  highlightColor: {r: 0, g: 0, b: 1, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &1061495363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1116,7 +1116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270022885}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.74, y: 1.9989655, z: 0.083984375}
+  m_LocalPosition: {x: 5.66, y: 1.9989655, z: 0.083984375}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 932362651}
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   scenes: Project/Scenes/Credits
-  highlightColor: {r: 0, g: 0, b: 1, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &1514155957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1396,7 +1396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843211336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.35, y: 0.5031524, z: 0.083984375}
+  m_LocalPosition: {x: -2.35, y: 0.48, z: 0.083984375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 932362651}

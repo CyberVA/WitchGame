@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: Melee
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &168858626
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: SpellPri
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &504286908
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: Down
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &549171400
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: Right
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &1068360010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: SpellTer
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &1339501542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   scenes: Project/Scenes/MainMenu
-  highlightColor: {r: 0, g: 1, b: 1, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &1339501546
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1632,7 +1632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: Left
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &1866174095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: SpellSec
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &1883447079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,4 +2149,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   keyToChange: Up
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}

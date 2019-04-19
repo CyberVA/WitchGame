@@ -397,7 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   scenes: Project/Scenes/MainMenu
-  highlightColor: {r: 0, g: 0, b: 1, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &1076273874
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  highlightColor: {r: 1, g: 1, b: 0, a: 1}
+  highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   tog: {fileID: 1468120241}
 --- !u!61 &1236543867
 BoxCollider2D:
