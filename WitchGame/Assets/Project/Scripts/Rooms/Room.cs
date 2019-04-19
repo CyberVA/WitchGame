@@ -78,6 +78,18 @@ public class Room : IByteable
             throw new Exception("Value set outside of grid");
         }
     }
+    public byte GetValue(int x, int y, Layer layer)
+    {
+        if (Inbounds(x, y))
+        {
+            int i = y * width + x;
+            return tileData[(int)layer][i];
+        }
+        else
+        {
+            return 1;
+        }
+    }
     /// <summary>
     /// Initializes decoration in list for efficiency
     /// </summary>
@@ -98,6 +110,10 @@ public class Room : IByteable
     public bool Inbounds(GridPos p)
     {
         return !(p.x < 0 || p.x >= width || p.y < 0 || p.y >= height);
+    }
+    public bool Inbounds(int x, int y)
+    {
+        return !(x < 0 || x >= width || y < 0 || y >= height);
     }
 
     void IByteable.Write(ByteScribe writer)
