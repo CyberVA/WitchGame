@@ -16,7 +16,7 @@ public class StatusBars : MonoBehaviour
     /// <param name="hp"> How much HP we're adding/subtracting</param>
     public void Health(float hp)
     {
-        healthBar.size = new Vector2(hp, 1);
+        healthBar.size = new Vector2(hp * 3.9f, .5f);
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class StatusBars : MonoBehaviour
     /// <param name="hp"> How much MP we're adding/subtracting</param>
     public void Mana(float mp)
     {
-        manaBar.size = new Vector2(mp, 1);
+        manaBar.size = new Vector2(mp * 3.9f, .5f);
     }
 
     /// <summary>

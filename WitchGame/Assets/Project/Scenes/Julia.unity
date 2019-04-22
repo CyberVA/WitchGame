@@ -472,6 +472,26 @@ PrefabInstance:
       propertyPath: showBoxes
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4740797477400385858, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4740797478913155822, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096718438867414058, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 165333233
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096718438867414058, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
 --- !u!1 &2002014303
