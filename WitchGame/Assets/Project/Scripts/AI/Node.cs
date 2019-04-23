@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : Grid
+public class Node
 {
     public bool walkable;
     public Vector3 worldPosition;
