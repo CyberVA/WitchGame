@@ -967,5 +967,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  scenes: Project/Scenes/CombatTest
+  scenes: Project/Scenes/Game
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
