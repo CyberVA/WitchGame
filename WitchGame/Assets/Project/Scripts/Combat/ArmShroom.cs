@@ -12,24 +12,19 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
     //Editor Data
     public Box box;
-    public float health;
-    public float inertia;
-    public float minVelocity;
-    public float velocityMultiplierMelee = 1f;
-    public float velocityMultiplierRange = 1f;
+    float health;
 
     //Auto Ref
+    CombatSettings combatSettings;
     RoomController roomController;
     SpriteRenderer spriteRenderer;
     SpriteMask spriteMask;
     IEnumerable<Box> staticColliders;
 
     //i frames
-    public float iLength;
     float iTimer;
 
     //flash
-    public float flashLength = 1f;
     float flashTimer;
 
     //Data
@@ -66,9 +61,15 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         layerOrder++;
 
         roomController = GameController.Main.roomController;
+        combatSettings = GameController.Main.combatSettings;
 
         staticColliders = roomController.staticColliders;
         roomController.enemies.Add(this);
+    }
+
+    private void Start()
+    {
+        health = combatSettings.armShroom.hp;
     }
 
     private void Update()
@@ -86,7 +87,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         }
         if(flashTimer > 0f)
         {
-            flash.color = new Color(1f, 1f, 1f, flashTimer / flashLength);
+            flash.color = new Color(1f, 1f, 1f, flashTimer / combatSettings.armShroom.flashLength);
             flashTimer -= Time.deltaTime; ;
             if (flashTimer <= 0)
             {
@@ -99,14 +100,18 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         //Knockback velocity-
         if (velocity != Vector2.zero)
         {
+            //Apply velocity to movement
             movement += velocity * Time.deltaTime;
-            velocity *= 1f - (Time.deltaTime * inertia);
-            if(velocity.magnitude < minVelocity)
+            //reduce velocity
+            velocity *= 1f - (Time.deltaTime * combatSettings.armShroom.inertia);
+            //set velocity to zero if below minimum
+            if(velocity.magnitude < combatSettings.minVelocity)
             {
                 velocity = Vector2.zero;
             }
         }
         //Pathfinding-
+        //movement += PATHVECTOR * moveSpeed * Time.deltaTime;
 
         //Apply movement
         SuperTranslate(this, movement, staticColliders);
@@ -145,9 +150,9 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                     }
                     flash.enabled = true;
                     flash.color = Color.white;
-                    flashTimer = flashLength;
+                    flashTimer = combatSettings.armShroom.flashLength;
 
-                    iTimer = iLength;
+                    iTimer = combatSettings.armShroom.invincibleLength;
                     return true;
                 }
             }
@@ -161,7 +166,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                 }
                 flash.enabled = true;
                 flash.color = Color.white;
-                flashTimer = flashLength;
+                flashTimer = combatSettings.armShroom.flashLength;
                 return true;
             }
         }

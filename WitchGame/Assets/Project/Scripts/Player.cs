@@ -22,6 +22,7 @@ public class Player : MonoBehaviour, IMover
     //Auto Ref
     RoomController roomController;
     Animator animator;
+    CombatSettings combatSettings;
 
     //Stats
     public float maxHealth = 1f;
@@ -55,18 +56,11 @@ public class Player : MonoBehaviour, IMover
 
 
     //Melee Attack
-    public float meleeLength = 1f;
-    public float meleeCooldown = 1.3f;
-    public float meleeDamage = 1f;
     bool meleeActive;
     float meleeTimer;
     Vector2 meleeVector;
 
     //Shroom Attack
-    public float shroomCooldown = 1.3f;
-    public float shroomDamage = 1f;
-    public float shroomCost = 1f;
-    public float shroomSpeed = 5f;
     float shroomTimer;
 
     //Data
@@ -207,28 +201,28 @@ public class Player : MonoBehaviour, IMover
         }
 
         //Melee Attack
-        if (meleeTimer < meleeCooldown)
+        if (meleeTimer < combatSettings.playerMelee.cooldown)
         {
             meleeTimer += Time.deltaTime;
-            if(meleeTimer > meleeCooldown)
+            if(meleeTimer > combatSettings.playerMelee.cooldown)
             {
-                meleeTimer = meleeCooldown;
+                meleeTimer = combatSettings.playerMelee.cooldown;
             }
-            GameController.Main.statusBars.CoolDowns(0, meleeTimer / meleeCooldown);
+            GameController.Main.statusBars.CoolDowns(0, meleeTimer / combatSettings.playerMelee.cooldown);
         }
         else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetBool("isAttacking", true);
             meleeActive = true;
             weapon.enabled = true;          
-            meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
+            meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //use this for attack anim
             meleeTimer = 0;
             GameController.Main.statusBars.CoolDowns(0, 0f);
         }
         //Melee Collision-
         if (meleeActive)
         {
-            if(meleeTimer > meleeLength)
+            if(meleeTimer > combatSettings.playerMeleeLength)
             {
                 meleeActive = false;
                 weapon.enabled = false;
@@ -242,7 +236,7 @@ public class Player : MonoBehaviour, IMover
                 {
                     if (!h.Friendly && Intersects(attackBox, h.HitBox))
                     {
-                        if(h.Hurt(meleeDamage, DamageTypes.Melee, meleeVector))
+                        if(h.Hurt(combatSettings.playerMelee.damage, DamageTypes.Melee, meleeVector))
                         {
                             Mana = Mathf.Min(Mana + 0.5f, maxMana);
                         }
@@ -251,21 +245,21 @@ public class Player : MonoBehaviour, IMover
             }
         }
         //Shroomancy
-        if (shroomTimer < shroomCooldown)
+        if (shroomTimer < combatSettings.playerShroom.cooldown)
         {
             shroomTimer += Time.deltaTime;
-            if (shroomTimer > shroomCooldown)
+            if (shroomTimer > combatSettings.playerShroom.cooldown)
             {
-                shroomTimer = shroomCooldown;
+                shroomTimer = combatSettings.playerShroom.cooldown;
             }
-            GameController.Main.statusBars.CoolDowns(1, shroomTimer / shroomCooldown);
+            GameController.Main.statusBars.CoolDowns(1, shroomTimer / combatSettings.playerShroom.cooldown);
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse1) && Mana >= shroomCost)
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && Mana >= combatSettings.playerShroom.cost)
         {
             Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
-            Mana -= shroomCost;
+            Mana -= combatSettings.playerShroom.cooldown;
             Spore spore = SporePooler.instance.GetSpore();
-            spore.Activate(colbox.Center, mouseAim, shroomSpeed, shroomDamage);
+            spore.Activate(colbox.Center, mouseAim, combatSettings.playerShroomSpeed, combatSettings.playerShroom.damage);
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
         }

@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public Room currentRoom;
     public Player player;
     public StatusBars statusBars;
+    public CombatSettings combatSettings;
 
     public void Awake()
     {
