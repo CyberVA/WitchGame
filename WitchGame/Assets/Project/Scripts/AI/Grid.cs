@@ -12,11 +12,6 @@ public class Grid : MonoBehaviour
     Room room;
 
     int gridSizeX, gridSizeY;
-
-    void Start()
-    {
-        //CreateGrid();
-    }
         
     public void CreateGrid()
     {
