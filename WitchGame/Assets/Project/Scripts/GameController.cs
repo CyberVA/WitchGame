@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public Grid grid;
     public RoomController roomController;
     public string roomName;
     public Room currentRoom;
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
         roomController.Setup(currentRoom.width, currentRoom.height);
         roomController.UpdateTiles(currentRoom, false);
         roomController.Position = Vector2.zero;
+        grid.CreateGrid();
     }
 
     private void Load(string lvlName)
@@ -43,6 +45,7 @@ public class GameController : MonoBehaviour
         roomName = lvlName;
         currentRoom = roomController.LoadRoom(roomName);
         roomController.UpdateTiles(currentRoom, false);
+        grid.CreateGrid();
     }
 
     public void LoadNorth()
