@@ -5,15 +5,14 @@ using static TwoStepCollision.Func;
 
 public class ArmShroom : MonoBehaviour, IHurtable, IMover
 {
-    public static int layerOrder = 0;
+    public static int layerOrder = 0; //static counter for consistant layering
 
     //Editor Ref
     public SpriteRenderer flash;
 
-    //Editor Data
+    //Editor Values
     public Box box;
-    float health;
-
+    
     //Auto Ref
     CombatSettings combatSettings;
     RoomController roomController;
@@ -21,13 +20,12 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     SpriteMask spriteMask;
     IEnumerable<Box> staticColliders;
 
-    //i frames
+    //Timers
     float iTimer;
-
-    //flash
     float flashTimer;
 
-    //Data
+    //Runtime Values
+    float health;
     bool alive = true;
     bool deathFlag = false;
     Vector2 velocity = Vector2.zero;
@@ -55,26 +53,31 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteMask = GetComponent<SpriteMask>();
 
+        //Layer management
         spriteRenderer.sortingOrder = layerOrder;
         flash.sortingOrder = layerOrder + 1;
         spriteMask.frontSortingOrder = layerOrder + 1;
         layerOrder++;
+        //-
 
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
 
         staticColliders = roomController.staticColliders;
+
+        //add self to collision list
         roomController.enemies.Add(this);
     }
 
     private void Start()
     {
+        //set starting health
         health = combatSettings.armShroom.hp;
     }
 
     private void Update()
     {
-        if(deathFlag)
+        if(deathFlag) //stuff done next frame after death because of enumeration issues
         {
             deathFlag = false;
             roomController.enemies.Remove(this);
@@ -88,7 +91,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         if(flashTimer > 0f)
         {
             flash.color = new Color(1f, 1f, 1f, flashTimer / combatSettings.armShroom.flashLength);
-            flashTimer -= Time.deltaTime; ;
+            flashTimer -= Time.deltaTime;
             if (flashTimer <= 0)
             {
                 flash.enabled = false;
@@ -102,8 +105,10 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         {
             //Apply velocity to movement
             movement += velocity * Time.deltaTime;
+
             //reduce velocity
             velocity *= 1f - (Time.deltaTime * combatSettings.armShroom.inertia);
+
             //set velocity to zero if below minimum
             if(velocity.magnitude < combatSettings.minVelocity)
             {
@@ -121,6 +126,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
     private void OnAnimatorMove()
     {
+        //update flash mask to match animation frame
         spriteMask.sprite = spriteRenderer.sprite;
     }
 
@@ -133,7 +139,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     }
 #endif
 
-    //Hurtable implementation
+    //Taking damage
     public bool Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
         if(alive)
@@ -142,12 +148,14 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             {
                 if (iTimer <= 0)
                 {
-                    velocity = vector * 2;
+                    //set knockback
+                    velocity = vector * combatSettings.armShroom.vMulitplierMelee;
                     health -= damage;
                     if (health <= 0)
                     {
                         StartDying();
                     }
+                    //start hit flash
                     flash.enabled = true;
                     flash.color = Color.white;
                     flashTimer = combatSettings.armShroom.flashLength;
@@ -158,12 +166,15 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             }
             else if(damageType == DamageTypes.Shroom)
             {
-                velocity = vector * 3;
+                //set knockback
+                velocity = vector * combatSettings.armShroom.vMultiplirRange;
                 health -= damage;
                 if (health <= 0)
                 {
                     StartDying();
                 }
+
+                //start hit flash
                 flash.enabled = true;
                 flash.color = Color.white;
                 flashTimer = combatSettings.armShroom.flashLength;

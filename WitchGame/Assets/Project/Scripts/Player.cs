@@ -9,12 +9,13 @@ using static TwoStepCollision.Func;
 public class Player : MonoBehaviour, IMover
 {
     //Editor Ref
-    public SpriteRenderer weapon;
+    public SpriteRenderer weapon; //spriterenderer for melee hitbox
 
     //Editor Data
     public Box colbox;
     public Vector2 boxOffset;
 
+    //GL
     public Material glMaterial;
     public Color glColor;
 
@@ -53,21 +54,20 @@ public class Player : MonoBehaviour, IMover
         }
     }
 
-
     //Melee Attack
     bool meleeActive;
     float meleeTimer;
-    Vector2 meleeVector;
+    Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
 
     //Shroom Attack
     float shroomTimer;
 
-    //Data
+    //Runtime Values
     [NonSerialized]
-    public bool checkWin = false;
-    Box attackBox = new Box(0, 0, 1, 1);
+    public bool checkWin = false; //is the fountain in this room
+    Box attackBox = new Box(0, 0, 1, 1); //dimensions of melee hitbox
 
-    //temp var used every frame
+    //Movement
     Vector2 movement;
 
     /// <summary>
@@ -169,9 +169,10 @@ public class Player : MonoBehaviour, IMover
 
         //Post-Movement
         //Check for Win-
-        if(checkWin && Intersects(colbox, roomController.win))
+        if(checkWin && Intersects(colbox, roomController.winbox))
         {
             Win();
+            return;
         }
 
         //Room travel-
@@ -203,6 +204,7 @@ public class Player : MonoBehaviour, IMover
         //Melee Attack
         if (meleeTimer < combatSettings.playerMelee.cooldown)
         {
+            //Update Timer
             meleeTimer += Time.deltaTime;
             if(meleeTimer > combatSettings.playerMelee.cooldown)
             {
@@ -212,6 +214,7 @@ public class Player : MonoBehaviour, IMover
         }
         else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            //Activate Attack
             animator.SetBool("isAttacking", true);
             meleeActive = true;
             weapon.enabled = true;          
@@ -222,6 +225,7 @@ public class Player : MonoBehaviour, IMover
         //Melee Collision-
         if (meleeActive)
         {
+            //Manage Melee Hitbox
             if(meleeTimer > combatSettings.playerMeleeLength)
             {
                 meleeActive = false;
@@ -247,6 +251,7 @@ public class Player : MonoBehaviour, IMover
         //ShroomAncy
         if (shroomTimer < combatSettings.playerShroom.cooldown)
         {
+            //Update Timer
             shroomTimer += Time.deltaTime;
             if (shroomTimer > combatSettings.playerShroom.cooldown)
             {
@@ -256,10 +261,11 @@ public class Player : MonoBehaviour, IMover
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1) && Mana >= combatSettings.playerShroom.cost)
         {
-            Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
+            //Activate Ability
+            Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //direction the projectile will move
             Mana -= combatSettings.playerShroom.cost;
-            Spore spore = SporePooler.instance.GetSpore();
-            spore.Activate(colbox.Center, mouseAim, combatSettings.playerShroomSpeed, combatSettings.playerShroom.damage);
+            Spore spore = SporePooler.instance.GetSpore(); //shroomAncy projectiles are pooled. this is used instead of Instantiate 
+            spore.Activate(colbox.Center, mouseAim); //enables pooled projectile
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
         }
@@ -269,7 +275,7 @@ public class Player : MonoBehaviour, IMover
     public void Win()
     {
         enabled = false;
-        SceneManager.LoadScene("Project/Scenes/WinScene");
+        SceneManager.LoadScene("Project/Scenes/WinScene"); //temp win screen
     }
 
 #if UNITY_EDITOR

@@ -10,6 +10,7 @@ public class Room : IByteable
     const byte fileversion = 0;
     const int layerCount = 4;
     const string defExit = "start";
+
     public int width;
     public int height;
     private int arrayLength;
