@@ -305,9 +305,9 @@ MonoBehaviour:
     tileSize: 1
   tileSet: {fileID: 11400000, guid: 3f452ca554973d9468247cef8586956c, type: 2}
   roomPrefabs: {fileID: 11400000, guid: c3d99cea723a23342a29dfb66cacc124, type: 2}
-  showBoxes: 0
+  showBoxes: 1
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  glColor: {r: 0, g: 1, b: 0.034408808, a: 1}
+  glColor: {r: 0, g: 1, b: 0.034408808, a: 0.29411766}
 --- !u!4 &640006767
 Transform:
   m_ObjectHideFlags: 0
