@@ -12,25 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b16b9a7a073c4d85f4be8f5281ed1, type: 3}
   m_Name: CombatSettings
   m_EditorClassIdentifier: 
-  playerMana: 0
-  playerRangeCost: 0
-  playerMeleeCharge: 0
-  minVelocity: 0
   player:
-    hp: 0
-    damage: 0
-    moveSpeed: 0
-    inertia: 0
-    vMulitplierMelee: 0
-    vMultiplirRange: 0
-    flashLength: 0
-    invincibleLength: 0
+    hp: 1
+    moveSpeed: 2
+    inertia: 4
+    vMulitplierMelee: 1
+    vMultiplirRange: 1
+    flashLength: 0.25
+    invincibleLength: 0.25
   armShroom:
-    hp: 0
-    damage: 0
-    moveSpeed: 0
-    inertia: 0
-    vMulitplierMelee: 0
-    vMultiplirRange: 0
-    flashLength: 0
-    invincibleLength: 0
+    hp: 5
+    moveSpeed: 2
+    inertia: 4
+    vMulitplierMelee: 2
+    vMultiplirRange: 3
+    flashLength: 0.25
+    invincibleLength: 0.25
+  playerMana: 2
+  playerMelee:
+    cost: -0.5
+    cooldown: 0.25
+    damage: 0.5
+  playerShroom:
+    cost: 1
+    cooldown: 0.3
+    damage: 3
+  playerMeleeLength: 0.2
+  playerShroomSpeed: 10
+  minVelocity: 0.1
