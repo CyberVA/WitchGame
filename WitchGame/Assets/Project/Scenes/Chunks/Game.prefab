@@ -59,13 +59,6 @@ MonoBehaviour:
   glColor: {r: 0, g: 1, b: 0.10499692, a: 1}
   maxHealth: 1
   maxMana: 2
-  meleeLength: 0.2
-  meleeCooldown: 0.25
-  meleeDamage: 0.5
-  shroomCooldown: 0.3
-  shroomDamage: 3
-  shroomCost: 1
-  shroomSpeed: 10
 --- !u!212 &4740797477000799157
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -259,6 +252,7 @@ MonoBehaviour:
   roomName: start
   player: {fileID: 4740797477000799156}
   statusBars: {fileID: 4740797477447942813}
+  combatSettings: {fileID: 11400000, guid: 983d9f75d4d764d489b5987c287be3e2, type: 2}
 --- !u!1 &4740797478089869465
 GameObject:
   m_ObjectHideFlags: 0

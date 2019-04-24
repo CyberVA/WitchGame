@@ -14,7 +14,6 @@ public class Player : MonoBehaviour, IMover
     //Editor Data
     public Box colbox;
     public Vector2 boxOffset;
-    public float speed = 3f;
 
     public Material glMaterial;
     public Color glColor;
@@ -25,7 +24,7 @@ public class Player : MonoBehaviour, IMover
     CombatSettings combatSettings;
 
     //Stats
-    public float maxHealth = 1f;
+    float maxHealth { get => combatSettings.player.hp; }
     float _health;
     public float Health
     {
@@ -39,7 +38,7 @@ public class Player : MonoBehaviour, IMover
             GameController.Main.statusBars.Health(_health / maxHealth);
         }
     }
-    public float maxMana = 1f;
+    float maxMana { get => combatSettings.playerMana; }
     float _mana;
     public float Mana
     {
@@ -96,6 +95,7 @@ public class Player : MonoBehaviour, IMover
     void Awake()
     {
         roomController = GameController.Main.roomController;
+        combatSettings = GameController.Main.combatSettings;
 
         colbox.Center = (Vector2)transform.position + boxOffset;
         animator = GetComponent<Animator>();
@@ -112,19 +112,19 @@ public class Player : MonoBehaviour, IMover
         movement = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            movement.y += speed * Time.deltaTime;
+            movement.y += combatSettings.player.moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            movement.y -= speed * Time.deltaTime;
+            movement.y -= combatSettings.player.moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            movement.x -= speed * Time.deltaTime;
+            movement.x -= combatSettings.player.moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            movement.x += speed * Time.deltaTime;
+            movement.x += combatSettings.player.moveSpeed * Time.deltaTime;
         }
         if (animator != null)
         {
@@ -244,7 +244,7 @@ public class Player : MonoBehaviour, IMover
                 }
             }
         }
-        //Shroomancy
+        //ShroomAncy
         if (shroomTimer < combatSettings.playerShroom.cooldown)
         {
             shroomTimer += Time.deltaTime;
@@ -257,7 +257,7 @@ public class Player : MonoBehaviour, IMover
         else if (Input.GetKeyDown(KeyCode.Mouse1) && Mana >= combatSettings.playerShroom.cost)
         {
             Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
-            Mana -= combatSettings.playerShroom.cooldown;
+            Mana -= combatSettings.playerShroom.cost;
             Spore spore = SporePooler.instance.GetSpore();
             spore.Activate(colbox.Center, mouseAim, combatSettings.playerShroomSpeed, combatSettings.playerShroom.damage);
             shroomTimer = 0;
@@ -268,7 +268,6 @@ public class Player : MonoBehaviour, IMover
 
     public void Win()
     {
-        //fill out later
         enabled = false;
         SceneManager.LoadScene("Project/Scenes/WinScene");
     }
