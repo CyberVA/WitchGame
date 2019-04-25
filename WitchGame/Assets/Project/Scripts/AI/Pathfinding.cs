@@ -19,7 +19,7 @@ public class Pathfinding : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(target != null && seaker != null) //fuck you vincent
         {
             //continuously finds the path between the seaker and the target
             FindPath(seaker.position, target.position);

@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private static GameController instance;
-    public static GameController Main
+    private static GameController instance; //global instance
+    public static GameController Main //public accessor for global instance
     {
         get
         {
             return instance;
         }
     }
-
-    public Grid grid;
-    public RoomController roomController;
-    public string roomName;
-    public Room currentRoom;
+    
+    //Editor References
     public Player player;
     public StatusBars statusBars;
     public CombatSettings combatSettings;
+    public Grid grid;
+    public RoomController roomController;
+
+    //Runtime References
+    public Room currentRoom;
+
+    //Editor + Runtime values
+    public string roomName;
 
     public void Awake()
     {
@@ -31,19 +36,29 @@ public class GameController : MonoBehaviour
     #region Room Loading
     private void LoadMain()
     {
+        //init roomcontroller first for layering reasons
         roomController.Init();
+
+        //load first level
         currentRoom = roomController.LoadRoom(roomName);
+
+        //Setup room dimensions + renderers for room size
         roomController.gridInfo.SetOffset(currentRoom.width, currentRoom.height);
         roomController.Setup(currentRoom.width, currentRoom.height);
-        roomController.UpdateTiles(currentRoom, false);
         roomController.Position = Vector2.zero;
-        grid.CreateGrid();
+
+        //update renderers + pathfinding
+        UpdateRoom();
     }
 
     private void Load(string lvlName)
     {
         roomName = lvlName;
         currentRoom = roomController.LoadRoom(roomName);
+        UpdateRoom();
+    }
+    private void UpdateRoom()
+    {
         roomController.UpdateTiles(currentRoom, false);
         grid.CreateGrid();
     }

@@ -11,33 +11,54 @@ using static TwoStepCollision.Func;
 /// </summary>
 public class RoomController : MonoBehaviour
 {
-    //Editor Data
+    //Editor Ref
+    public RoomPrefabs roomPrefabs;
+
+    //Editor Values
     public GridTransform gridInfo;
     public TileSet tileSet;
-    public RoomPrefabs roomPrefabs;
+    public bool showBoxes;
+
+    //Runtime Values
     int width;
     int height;
     int layerId;
-
-    public bool showBoxes;
     bool init = false;
-    public Material glMaterial;
-    public Color glColor;
-
-    //Runtime Data
+    /// <summary>
+    /// solid objects in the room
+    /// </summary>
     [NonSerialized]
     public List<Box> staticColliders = new List<Box>();
+    /// <summary>
+    /// enemies in the loaded room
+    /// </summary>
     [NonSerialized]
     public List<IHurtable> enemies = new List<IHurtable>();
+    /// <summary>
+    /// collider for fountain
+    /// </summary>
     [NonSerialized]
-    public Box win = null;
+    public Box winbox = null;
+    /// <summary>
+    /// objects to be deleted when a new room is loaded
+    /// </summary>
     [NonSerialized]
     public List<GameObject> removeOnLoad = new List<GameObject>();
+    /// <summary>
+    /// Box collider used to determine if something is within the room
+    /// </summary>
     [NonSerialized]
     public Box roomBounds = new Box(0f, 0f, 0f, 0f);
     SpriteRenderer[] sprites;
 
+    //Gizmos
+    public Material glMaterial;
+    public Color glColor;
+
     //Properties
+    /// <summary>
+    /// Sets positions all grid related objects/settings
+    /// </summary>
     public Vector2 Position
     {
         get
@@ -54,14 +75,15 @@ public class RoomController : MonoBehaviour
 
     private void Awake()
     {
-        if(!init)
+        if(!init) //init for scenes without GameController
         {
             Init();
         }
     }
     public void Init()
     {
-        layerId = SortingLayer.NameToID("Tiles");
+        layerId = SortingLayer.NameToID("Tiles"); //get layerid used for tiles
+        init = true;
     }
 
     public void Setup(int w, int h)
@@ -70,9 +92,9 @@ public class RoomController : MonoBehaviour
         height = h;
         roomBounds.width = width * gridInfo.tileSize;
         roomBounds.height = height * gridInfo.tileSize;
-        GridPos p = new GridPos(0, 0);
+        GridPos p = new GridPos(0, 0); //used for iteration and placement
         sprites = new SpriteRenderer[width * height];
-        GameObject obj;
+        GameObject obj; //reference for current tile object
         while (p.y < height)
         {
             while (p.x < width)
@@ -90,22 +112,21 @@ public class RoomController : MonoBehaviour
     }
     public void UpdateTiles(Room room, bool inEditor)
     {
-        ArmShroom.layerOrder = 0;
-        staticColliders.Clear();
-        enemies.Clear();
-        foreach (GameObject r in removeOnLoad)
+        ArmShroom.layerOrder = 0; //reset layercounter for armshrooms
+        staticColliders.Clear(); //remove old wall colliders
+        enemies.Clear(); //remove old enemies
+        foreach (GameObject r in removeOnLoad) //destroy other objects in old room
         {
             Destroy(r);
         }
-        removeOnLoad.Clear();
+        removeOnLoad.Clear(); //reset list after objects destroyed
         if(!inEditor)
         {
             GameController.Main.player.checkWin = false;
         }
-        GridPos p = new GridPos(0, 0);
-        int i;
-        //counter for colliders placed consecutively
-        int colStack;
+        GridPos p = new GridPos(0, 0); //iterator/placement position
+        int i; //one-dimensional index of iterator
+        int colStack; //counter for colliders placed consecutively
         while (p.y < height)
         {
             colStack = 0;
@@ -118,11 +139,11 @@ public class RoomController : MonoBehaviour
                 //Collision
                 if(room.GetValue(p, Layer.Collision) == 1)
                 {
-                    if(inEditor || colStack == 0)
+                    if(inEditor || colStack == 0) //new box
                     {
                         staticColliders.Add(new Box(gridInfo.GetGridVector(p), 1f, 1f));
                     }
-                    else
+                    else //extend previous box
                     {
                         //combine consecutive colliders
                         Box box = staticColliders[staticColliders.Count - 1];
@@ -190,7 +211,7 @@ public class RoomController : MonoBehaviour
                 GameObject f = Instantiate(roomPrefabs.fountain);
                 Vector2 fp = gridInfo.GetGridVector(p);
                 f.transform.position = fp;
-                win = new Box(fp, 2f, 2f);
+                winbox = new Box(fp, 2f, 2f);
                 GameController.Main.player.checkWin = true;
                 removeOnLoad.Add(f);
                 break;
