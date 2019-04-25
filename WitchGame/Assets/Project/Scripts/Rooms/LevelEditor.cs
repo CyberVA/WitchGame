@@ -264,6 +264,10 @@ public class LevelEditor : MonoBehaviour
                 case 1: //fountain
                     SimpGL.DrawSprite(rect, 0.1f, 0f, 0.2f, 0.1f);
                     break;
+                case 2: //door
+                    break;
+                case 3: //key
+                    break;
                 case 50: //armshroom
                     SimpGL.DrawSprite(rect, 0f, 0f, 0.1f, 0.1f);
                     break;
