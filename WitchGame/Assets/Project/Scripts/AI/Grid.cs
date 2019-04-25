@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
     
 
 public class Grid : MonoBehaviour
 {
+    public bool OnlyDisplayPath;
+    [Range(0,1)]
+    public int gizmoTransparency;
     Node[,] grid;
-    
     GridTransform gridTransform;
     Room room;
 
     int gridSizeX, gridSizeY;
+
+    public int MaxSize
+    {
+        get { return gridSizeX * gridSizeY; }
+    }
         
     public void CreateGrid()
     {
@@ -67,15 +73,31 @@ public class Grid : MonoBehaviour
     public List<Node> path;
     void OnDrawGizmos()
     {
-        if (grid != null)
+
+        if (OnlyDisplayPath)
         {
-            foreach (Node n in grid)
+            if (path != null)
             {
-                Gizmos.color = (n.walkable) ? Color.white - new Color(0, 0, 0, 0.5f) : Color.red - new Color(0, 0, 0, 0.5f);
-                if (path != null)
-                    if (path.Contains(n))
-                        Gizmos.color = Color.black;
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (1 - .1f));
+                foreach (Node n in path)
+                {
+                    Gizmos.color = Color.black;
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (1 - .1f));
+                }
+            }
+        }
+        else
+        {
+
+            if (grid != null)
+            {
+                foreach (Node n in grid)
+                {
+                    Gizmos.color = (n.walkable) ? Color.white - new Color(0, 0, 0, gizmoTransparency) : Color.red - new Color(0, 0, 0, 0.5f);
+                    if (path != null)
+                        if (path.Contains(n))
+                            Gizmos.color = Color.black;
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (1 - .1f));
+                }
             }
         }
     }
