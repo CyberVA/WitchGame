@@ -299,15 +299,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62aff228362605d42ae7ec9d947a5cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomPrefabs: {fileID: 11400000, guid: c3d99cea723a23342a29dfb66cacc124, type: 2}
   gridInfo:
     origin: {x: 0, y: 0}
     offset: {x: -4.5, y: -3.5}
     tileSize: 1
   tileSet: {fileID: 11400000, guid: 3f452ca554973d9468247cef8586956c, type: 2}
-  roomPrefabs: {fileID: 11400000, guid: c3d99cea723a23342a29dfb66cacc124, type: 2}
   showBoxes: 1
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  glColor: {r: 0, g: 1, b: 0.034408808, a: 0.29411766}
+  glColor: {r: 0, g: 1, b: 0.034408808, a: 0.19607843}
 --- !u!4 &640006767
 Transform:
   m_ObjectHideFlags: 0
