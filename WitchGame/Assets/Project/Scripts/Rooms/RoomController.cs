@@ -22,7 +22,7 @@ public class RoomController : MonoBehaviour
     //Runtime Values
     int width;
     int height;
-    int layerId;
+    int spriteLayerId;
     bool init = false;
     /// <summary>
     /// solid objects in the room
@@ -82,7 +82,7 @@ public class RoomController : MonoBehaviour
     }
     public void Init()
     {
-        layerId = SortingLayer.NameToID("Tiles"); //get layerid used for tiles
+        spriteLayerId = SortingLayer.NameToID("Tiles"); //get layerid used for tiles
         init = true;
     }
 
@@ -103,7 +103,7 @@ public class RoomController : MonoBehaviour
                 obj.transform.SetParent(transform);
                 obj.transform.position = gridInfo.GetGridVector(p);
                 sprites[p.GetIndex(width)] = obj.AddComponent<SpriteRenderer>();
-                sprites[p.GetIndex(width)].sortingLayerID = layerId;
+                sprites[p.GetIndex(width)].sortingLayerID = spriteLayerId;
                 p.x++;
             }
             p.y++;
@@ -205,8 +205,6 @@ public class RoomController : MonoBehaviour
     {
         switch (value)
         {
-            case 0: //nothing
-                break;
             case 1: //fountain
                 GameObject f = Instantiate(roomPrefabs.fountain);
                 Vector2 fp = gridInfo.GetGridVector(p);

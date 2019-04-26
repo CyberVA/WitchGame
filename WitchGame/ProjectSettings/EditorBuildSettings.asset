@@ -14,16 +14,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Credits.unity
     guid: 2a19795098a50fe45b7b5f6759572e50
-  - enabled: 1
+  - enabled: 0
     path: Assets/Project/Scenes/Official.unity
     guid: 2f0f6e7acfd6d1140a7513bdbda14225
   - enabled: 1
     path: Assets/Project/Scenes/WinScene.unity
     guid: 35742c24f7d0b754eb0b59d44401386f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Project/Scenes/Vincent.unity
     guid: c851181d586fe0848828cbcffb27e052
-  - enabled: 1
+  - enabled: 0
     path: Assets/Project/Scenes/CombatTest.unity
     guid: 6c7b153d7fc231340bf3700de5eb7f1d
+  - enabled: 1
+    path: Assets/Project/Scenes/Game.unity
+    guid: c30b17c0dd052db49b51d4ec1bb670b5
+  - enabled: 1
+    path: Assets/Project/Scenes/LevelEditor.unity
+    guid: 8e597bb9f23ee804385dad1159943b7b
   m_configObjects: {}
