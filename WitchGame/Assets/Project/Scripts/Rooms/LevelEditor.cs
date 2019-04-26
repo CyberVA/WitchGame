@@ -146,6 +146,10 @@ public class LevelEditor : MonoBehaviour
         {
             loadedRoom.SetValue(mp, Layer.Other, 3);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, 51);
+        }
 
         //Room travel
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -280,6 +284,9 @@ public class LevelEditor : MonoBehaviour
                     break;
                 case 50: //armshroom
                     SimpGL.DrawSprite(rect, 0f, 0f, 0.1f, 0.1f);
+                    break;
+                case 51: //goblin
+                    SimpGL.DrawSprite(rect, 0.4f, 0f, 0.5f, 0.1f);
                     break;
             }
         }
