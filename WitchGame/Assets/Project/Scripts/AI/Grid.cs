@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-    
+
 
 public class Grid : MonoBehaviour
 {
-    public bool OnlyDisplayPath;
-    [Range(0,1)]
-    public int gizmoTransparency;
+    public bool displayGrid;
+    [Range(0, 1)]
+    public float gizmoTransparency;
     Node[,] grid;
     GridTransform gridTransform;
     Room room;
@@ -18,7 +18,7 @@ public class Grid : MonoBehaviour
     {
         get { return gridSizeX * gridSizeY; }
     }
-        
+
     public void CreateGrid()
     {
         gridTransform = GameController.Main.roomController.gridInfo;
@@ -28,7 +28,7 @@ public class Grid : MonoBehaviour
 
         grid = new Node[gridSizeX, gridSizeY];
 
-        for(int x = 0; x < gridSizeX; x++)
+        for (int x = 0; x < gridSizeX; x++)
         {
             for (int y = 0; y < gridSizeY; y++)
             {
@@ -69,35 +69,14 @@ public class Grid : MonoBehaviour
         GridPos p = gridTransform.GetGridPos(worldPosition);
         return grid[p.x, p.y];
     }
-
-    public List<Node> path;
     void OnDrawGizmos()
     {
-
-        if (OnlyDisplayPath)
+        if (grid != null && displayGrid)
         {
-            if (path != null)
+            foreach (Node n in grid)
             {
-                foreach (Node n in path)
-                {
-                    Gizmos.color = Color.black;
-                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (1 - .1f));
-                }
-            }
-        }
-        else
-        {
-
-            if (grid != null)
-            {
-                foreach (Node n in grid)
-                {
-                    Gizmos.color = (n.walkable) ? Color.white - new Color(0, 0, 0, gizmoTransparency) : Color.red - new Color(0, 0, 0, 0.5f);
-                    if (path != null)
-                        if (path.Contains(n))
-                            Gizmos.color = Color.black;
-                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (1 - .1f));
-                }
+                Gizmos.color = (n.walkable) ? Color.white - new Color(0, 0, 0, gizmoTransparency) : Color.red - new Color(0, 0, 0, gizmoTransparency);
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (1 - .1f));
             }
         }
     }
