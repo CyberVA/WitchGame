@@ -35,6 +35,15 @@ public class RoomController : MonoBehaviour
     [NonSerialized]
     public List<IHurtable> enemies = new List<IHurtable>();
     /// <summary>
+    /// tiles to remove when doors unlocked
+    /// </summary>
+    List<GridPos> doors = new List<GridPos>();
+    /// <summary>
+    /// set of room names where doors have been unlocked
+    /// </summary>
+    HashSet<string> unlockedDoors = new HashSet<string>();
+
+    /// <summary>
     /// collider for fountain
     /// </summary>
     [NonSerialized]
@@ -110,7 +119,7 @@ public class RoomController : MonoBehaviour
             p.x = 0;
         }
     }
-    public void UpdateTiles(Room room, bool inEditor)
+    public void UpdateTiles(Room room, string roomName, bool inEditor)
     {
         ArmShroom.layerOrder = 0; //reset layercounter for armshrooms
         staticColliders.Clear(); //remove old wall colliders
@@ -159,7 +168,7 @@ public class RoomController : MonoBehaviour
                 //Other Objects
                 if(!inEditor)
                 {
-                    AddSpecialObject(p, room.GetValue(p, Layer.Other));
+                    AddSpecialObject(p, room.GetValue(p, Layer.Other), roomName);
                 }
 
                 //iterate
@@ -201,7 +210,7 @@ public class RoomController : MonoBehaviour
         obj.AddComponent<SpriteRenderer>().sprite = tileSet[value];
         obj.transform.position = v;
     }
-    public void AddSpecialObject(GridPos p, byte value)
+    public void AddSpecialObject(GridPos p, byte value, string roomName)
     {
         switch (value)
         {
