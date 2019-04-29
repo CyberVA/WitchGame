@@ -671,7 +671,43 @@ PrefabInstance:
     - target: {fileID: 7096718438867414058, guid: 838483d3ffc8fd646ae79afcd9882b98,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096718438867414058, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b44d4b6d1b566a4a93d3f88288cafa5,
+        type: 3}
+    - target: {fileID: 7096718438867414058, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 232188722086344331, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 232188722086344331, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3884652221515651324, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3884652221515651324, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583314229322710376, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
@@ -805,6 +841,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057347223874692669, guid: d92f5881d56f53d4cb783a6e0ebdf544,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057347223874692669, guid: d92f5881d56f53d4cb783a6e0ebdf544,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92f5881d56f53d4cb783a6e0ebdf544, type: 3}
