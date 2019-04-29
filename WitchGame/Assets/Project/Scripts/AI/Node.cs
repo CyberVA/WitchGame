@@ -53,6 +53,6 @@ public class Node : IHeapItem<Node>
 
     int IComparable<Node>.CompareTo(Node other)
     {
-        throw new NotImplementedException();
+        return CompareTo(other);
     }
 }

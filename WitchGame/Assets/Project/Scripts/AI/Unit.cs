@@ -7,24 +7,28 @@ public class Unit : MonoBehaviour
     // Position of our target
     public Transform target;
     // The units Speed
-    float speed = 5;
+    public float speed = 20;
     // The path associated with this unit
     Vector3[] path;
     //index of our target
     int targetIndex;
 
-    void Start()
+    void Awake()
     {
+        // Applies the player to the target variable
+        target = GameController.Main.player.transform;
         // Requests a path from the PathRequestManager
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccesfull)
     {
         if(pathSuccesfull)
         {
+            //Sets path to the new Path
             path = newPath;
-
+            //Sets the targets index to 0
+            targetIndex = 0;
             // Stops the Coroutine in case it's already running
             StopCoroutine("FollowPath");
             // Starts Coroutine that will get our character to begin following the path
@@ -54,8 +58,40 @@ public class Unit : MonoBehaviour
                 }
                 currentWaypoint = path[targetIndex];
             }
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
+            //Moves the unit towards the waypoint
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Handles drawing the path
+    /// </summary>
+    public void OnDrawGizmos()
+    {
+        //If the path exists and we want to display the grid
+        if (path != null && GameController.Main.grid.displayGrid)
+        {
+            //for every node that is in path
+            for (int i = targetIndex; i < path.Length; i++)
+            {
+                //Sets the color of the path nodes to black
+                Gizmos.color = new Color(255, 255, 255, GameController.Main.grid.gizmoTransparency);
+                //Draws our path nodes as a cube
+                Gizmos.DrawCube(path[i], Vector3.one);
+
+                //If the node is part of the target index
+                if (i == targetIndex)
+                {
+                    //Draws a line to target
+                    Gizmos.DrawLine(transform.position, path[i]);
+                }
+                else
+                {
+                    //Draws a line to the path
+                    Gizmos.DrawLine(path[i - 1], path[i]);
+                }
+            }
         }
     }
 }

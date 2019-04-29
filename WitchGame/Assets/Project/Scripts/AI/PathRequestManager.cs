@@ -22,23 +22,25 @@ public class PathRequestManager : MonoBehaviour
     //tells us if we're currently processing a path
     bool isProcessingPath;
 
-    private void Awake()
+    public void Initialize()
     {
         instance = this;
+        // Sets our reference to reference the pathfinding script
         pathfinding = GetComponent<Pathfinding>();
     }
 
     /// <summary>
     /// Unitys can make a path request when calling this function, this will generate a path for said unit
     /// </summary>
-    /// <param name="pathStart">where the path starts (position of unit)</param>
-    /// <param name="pathEnd">where the path ends (position of target)</param>
-    /// <param name="callback">storing our path to give to the unit for later</param>
+    /// <param name="pathStart"> Where the path starts (position of unit)</param>
+    /// <param name="pathEnd"> Where the path ends (position of target)</param>
+    /// <param name="callback"> Storing our path to give to the unit for later</param>
     public static void RequestPath (Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
     {
         PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
-        //adds newRequest to the instances pathRequestQueue
+        // Adds newRequest to the instances pathRequestQueue
         instance.pathRequestQueue.Enqueue(newRequest);
+        // Attempts to process the next path
         instance.TryProcessNext();
     }
 
@@ -62,10 +64,18 @@ public class PathRequestManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// States that we've finished processing the path
+    /// </summary>
+    /// <param name="path">The path in an array of Vector3's</param>
+    /// <param name="success">Whether processing the path was a success or not</param>
     public void FinishedProcessingPath(Vector3[] path, bool success)
     {
+        //Sets the current path and the success of the path to currentPathRequest
         currentPathRequest.callback(path, success);
+        //Sets that we are currently not processing a path
         isProcessingPath = false;
+        //Attempts to process a new path
         TryProcessNext();
     }
 
@@ -74,7 +84,9 @@ public class PathRequestManager : MonoBehaviour
     /// </summary>
     struct PathRequest
     {
+        //Starting position of our path
         public Vector3 pathStart;
+        //Targets position
         public Vector3 pathEnd;
         public Action<Vector3[], bool> callback;
 

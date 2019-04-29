@@ -73,7 +73,7 @@ public class Player : MonoBehaviour, IMover
     /// <summary>
     /// Shortcut for handling player position
     /// </summary>
-    Vector2 pos
+    public Vector2 pos
     {
         get => colbox.Center;
         set

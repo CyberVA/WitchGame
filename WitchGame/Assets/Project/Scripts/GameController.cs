@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     public StatusBars statusBars;
     public CombatSettings combatSettings;
     public Grid grid;
+    public PathRequestManager requestManager;
+    public Pathfinding pathfinding;
     public RoomController roomController;
 
     //Runtime References
@@ -29,8 +31,10 @@ public class GameController : MonoBehaviour
     public void Awake()
     {
         instance = this;
-
+        pathfinding.Initialize();
+        requestManager.Initialize();
         LoadMain();
+        grid.CreateGrid();
     }
 
     #region Room Loading
@@ -59,8 +63,8 @@ public class GameController : MonoBehaviour
     }
     private void UpdateRoom()
     {
-        roomController.UpdateTiles(currentRoom, false);
         grid.CreateGrid();
+        roomController.UpdateTiles(currentRoom, false);
     }
 
     public void LoadNorth()

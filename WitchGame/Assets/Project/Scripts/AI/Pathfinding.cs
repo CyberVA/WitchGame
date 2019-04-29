@@ -13,7 +13,7 @@ public class Pathfinding : MonoBehaviour
     //Reference to the grid script
     Grid grid;
 
-    void Awake()
+    public void Initialize()
     {
         //defines requestManager as the PathRequestManager
         requestManager = GetComponent<PathRequestManager>();
@@ -33,7 +33,8 @@ public class Pathfinding : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the path between a unit and a target
+    /// Calculates the path between a unit and a target.
+    ///  Can be suspended via IEnumerator
     /// </summary>
     /// <param name="startPos">Position of the unit</param>
     /// <param name="targetPos">Position of the target</param>
@@ -49,7 +50,9 @@ public class Pathfinding : MonoBehaviour
 
         //Defines the units vector2 position and the targets vector2 position as a node position in the grid
         Node startNode = grid.NodeFromWorldPoint(startPos);
+        UnityEngine.Debug.Log("SeakerX: " + startNode.gridX + ", SeakerY: " + startNode.gridY);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
+        UnityEngine.Debug.Log("TargetrX: " + targetNode.gridX + ", TargetY: " + targetNode.gridY);
 
         //Only processes a path if it's possible to make a path.
         if (startNode.walkable && targetNode.walkable)
@@ -77,7 +80,7 @@ public class Pathfinding : MonoBehaviour
                     //stops the stopwatch.
                     sw.Stop();
                     //prints the current time of the stopwatch.
-                    print("Path found: " + sw.ElapsedTicks + "ticks");
+                    print("Path found: " + sw.ElapsedMilliseconds + "ms");
                     //sets that we've completed processing our path.
                     pathSuccess = true;
                     break;
@@ -99,12 +102,18 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
+        //breaks out of the coroutine
         yield return null;
+
         //if finding a path was successfull
         if(pathSuccess)
         {
             //assigns out retraced path to waypoint
             waypoints = RetracePath(startNode, targetNode);
+        }
+        else if(!pathSuccess)
+        {
+            UnityEngine.Debug.Log("A path could not be found");
         }
         //Passes our waypoint into the PathRequestManager, also confirms success in finding a path.
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);
