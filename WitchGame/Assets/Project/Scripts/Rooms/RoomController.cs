@@ -214,8 +214,9 @@ public class RoomController : MonoBehaviour
                 removeOnLoad.Add(f);
                 break;
             case 50: //armShroom
-                ArmShroom armShroom = Instantiate(roomPrefabs.armShroom).GetComponent<ArmShroom>();
-                armShroom.box.Center = gridInfo.GetGridVector(p);
+                Vector2 pos = gridInfo.GetGridVector(p);
+                ArmShroom armShroom = Instantiate(roomPrefabs.armShroom, pos, Quaternion.identity).GetComponent<ArmShroom>();
+                armShroom.box.Center = pos;
                 removeOnLoad.Add(armShroom.gameObject);
                 break;
         }
