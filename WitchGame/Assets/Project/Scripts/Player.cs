@@ -178,26 +178,26 @@ public class Player : MonoBehaviour, IMover
         //Room travel-
         if (pos.x > roomController.roomBounds.Right)
         {
-            GameController.Main.LoadEast();
             pos -= new Vector2(roomController.roomBounds.width, 0f);
+            GameController.Main.LoadEast();
             return;
         }
         else if (pos.x < roomController.roomBounds.Left)
         {
-            GameController.Main.LoadWest();
             pos += new Vector2(roomController.roomBounds.width, 0f);
+            GameController.Main.LoadWest();
             return;
         }
         if (pos.y > roomController.roomBounds.Top)
         {
-            GameController.Main.LoadNorth();
             pos -= new Vector2(0f, roomController.roomBounds.height);
+            GameController.Main.LoadNorth();
             return;
         }
         else if (pos.y < roomController.roomBounds.Bottom)
         {
-            GameController.Main.LoadSouth();
             pos += new Vector2(0f, roomController.roomBounds.height);
+            GameController.Main.LoadSouth();
             return;
         }
 
