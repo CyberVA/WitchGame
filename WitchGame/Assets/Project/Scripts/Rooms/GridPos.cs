@@ -15,7 +15,20 @@ public struct GridPos : IEquatable<GridPos>
     {
         return y * width + x;
     }
-
+    
+    public GridPos Clamp(int width, int height)
+    {
+        GridPos p = new GridPos();
+        if (x < 0)
+            p.x = 0;
+        else if (x >= width)
+            p.x = width - 1;
+        if (y < 0)
+            p.y = 0;
+        else if (y >= height)
+            p.y = height - 1;
+        return p;
+    }
 
     public static bool operator ==(GridPos a, GridPos b)
     {

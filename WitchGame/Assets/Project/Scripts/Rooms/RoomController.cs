@@ -53,6 +53,11 @@ public class RoomController : MonoBehaviour
     [NonSerialized]
     public Box winbox = null;
     /// <summary>
+    /// collider for a key
+    /// </summary>
+    [NonSerialized]
+    public Box keyBox = null;
+    /// <summary>
     /// objects to be deleted when a new room is loaded
     /// </summary>
     [NonSerialized]
@@ -138,6 +143,7 @@ public class RoomController : MonoBehaviour
         if(!inEditor)
         {
             GameController.Main.player.checkWin = false;
+            GameController.Main.player.checkKey = false;
         }
         GridPos p = new GridPos(0, 0); //iterator/placement position
         int i; //one-dimensional index of iterator
@@ -229,14 +235,15 @@ public class RoomController : MonoBehaviour
     public void AddSpecialObject(GridPos p, byte value, string roomName)
     {
         Vector2 v = gridInfo.GetGridVector(p);
+        GameObject go;
         switch (value)
         {
             case 1: //fountain
-                GameObject f = Instantiate(roomPrefabs.fountain);
-                f.transform.position = v;
+                go = Instantiate(roomPrefabs.fountain);
+                go.transform.position = v;
                 winbox = new Box(v, 2f, 2f);
                 GameController.Main.player.checkWin = true;
-                removeOnLoad.Add(f);
+                removeOnLoad.Add(go);
                 break;
             case 2: //door
                 if(!unlockedDoors.Contains(roomName))
@@ -248,6 +255,13 @@ public class RoomController : MonoBehaviour
                 {
                     sprites[p.GetIndex(width)].sprite = tileSet[0];
                 }
+                break;
+            case 3: //key
+                go = Instantiate(roomPrefabs.key);
+                go.transform.position = v;
+                keyBox = new Box(v, 1f, 1f);
+                GameController.Main.player.checkKey = true;
+                removeOnLoad.Add(go);
                 break;
             case 50: //armShroom
                 ArmShroom armShroom = Instantiate(roomPrefabs.armShroom, v, Quaternion.identity).GetComponent<ArmShroom>();

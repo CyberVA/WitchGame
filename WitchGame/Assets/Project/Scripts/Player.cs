@@ -65,6 +65,8 @@ public class Player : MonoBehaviour, IMover
     //Runtime Values
     [NonSerialized]
     public bool checkWin = false; //is the fountain in this room
+    [NonSerialized]
+    public bool checkKey = false; //is a key in this room
     Box attackBox = new Box(0, 0, 1, 1); //dimensions of melee hitbox
 
     //Movement
@@ -172,6 +174,12 @@ public class Player : MonoBehaviour, IMover
         if(checkWin && Intersects(colbox, roomController.winbox))
         {
             Win();
+            return;
+        }
+        //Check for Key-
+        if (checkKey && Intersects(colbox, roomController.keyBox))
+        {
+            Debug.Log("KEY");
             return;
         }
 
