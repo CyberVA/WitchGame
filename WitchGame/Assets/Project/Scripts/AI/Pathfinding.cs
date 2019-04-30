@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-
+    //Reference to the pathRequestManager
     PathRequestManager requestManager;
 
     //Reference to the grid script
@@ -45,7 +45,7 @@ public class Pathfinding : MonoBehaviour
 
         //Array we'll be passing into our FinishedProcessingPath function in PathRequestManager
         Vector3[] waypoints = new Vector3[0];
-        // Confirms if we actually found a path or not
+        //Confirms if we actually found a path or not
         bool pathSuccess = false;
 
         //Defines the units vector2 position and the targets vector2 position as a node position in the grid
@@ -61,7 +61,7 @@ public class Pathfinding : MonoBehaviour
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
             //list of nodes that are already part of the path
             HashSet<Node> closedSet = new HashSet<Node>();
-            //adds startNode to the open list
+            //Adds startNode to the open list
             openSet.Add(startNode);
 
             //loops until all tiles are nolonger in openSet
