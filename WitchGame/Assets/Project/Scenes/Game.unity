@@ -189,6 +189,16 @@ PrefabInstance:
       propertyPath: gizmoTransparency
       value: 0.546
       objectReference: {fileID: 0}
+    - target: {fileID: 4740797477608930932, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: requestManager
+      value: 
+      objectReference: {fileID: 1683881481}
+    - target: {fileID: 4740797477608930932, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: pathfinding
+      value: 
+      objectReference: {fileID: 1683881479}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
 --- !u!1 &1683881477 stripped
