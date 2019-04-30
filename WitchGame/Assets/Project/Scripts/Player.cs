@@ -88,7 +88,7 @@ public class Player : MonoBehaviour, IMover
     Box IMover.box => colbox;
     void IMover.SetPosition(Vector2 position)
     {
-        transform.position = position;
+        pos = position;
     }
     #endregion
 
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour, IMover
         }
 
         //Movement Applied
-        SuperTranslate(this, movement, roomController.staticColliders);
+        SuperTranslate(this, movement, roomController.GetStaticBoxes(true));
 
         //Post-Movement
         //Check for Win-

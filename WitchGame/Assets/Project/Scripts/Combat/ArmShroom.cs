@@ -29,7 +29,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     bool alive = true;
     bool deathFlag = false;
     Vector2 velocity = Vector2.zero;
-    Vector2 movement;
+    public Vector2 movement;
 
     //Gizmos
     public Material glMaterial;
@@ -63,7 +63,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
 
-        staticColliders = roomController.staticColliders;
+        staticColliders = roomController.wallColliders;
 
         //add self to collision list
         roomController.enemies.Add(this);
@@ -99,7 +99,6 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         }
 
         //Calculate movement
-        movement = Vector2.zero;
         //Knockback velocity-
         if (velocity != Vector2.zero)
         {
@@ -120,6 +119,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
         //Apply movement
         SuperTranslate(this, movement, staticColliders);
+        movement = Vector2.zero;
 
         //Post movement
     }

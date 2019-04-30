@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
             return instance;
         }
     }
-    
+
     //Editor References
     public Player player;
     public StatusBars statusBars;
@@ -35,6 +35,15 @@ public class GameController : MonoBehaviour
         requestManager.Initialize();
         LoadMain();
         grid.CreateGrid();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("Door in room " + roomName + " unlocked");
+            roomController.UnlockDoor(roomName);
+        }
     }
 
     #region Room Loading
@@ -63,6 +72,7 @@ public class GameController : MonoBehaviour
     }
     private void UpdateRoom()
     {
+        roomController.UpdateTiles(currentRoom, roomName, false);
         grid.CreateGrid();
         roomController.UpdateTiles(currentRoom, false);
     }

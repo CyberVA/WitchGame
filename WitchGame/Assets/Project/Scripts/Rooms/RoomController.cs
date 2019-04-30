@@ -28,12 +28,25 @@ public class RoomController : MonoBehaviour
     /// solid objects in the room
     /// </summary>
     [NonSerialized]
-    public List<Box> staticColliders = new List<Box>();
+    public List<Box> wallColliders = new List<Box>();
     /// <summary>
     /// enemies in the loaded room
     /// </summary>
     [NonSerialized]
     public List<IHurtable> enemies = new List<IHurtable>();
+    /// <summary>
+    /// tiles to remove when doors unlocked
+    /// </summary>
+    List<GridPos> doors = new List<GridPos>();
+    /// <summary>
+    /// box colliders for doors
+    /// </summary>
+    List<Box> doorBoxes = new List<Box>();
+    /// <summary>
+    /// set of room names where doors have been unlocked
+    /// </summary>
+    HashSet<string> unlockedDoors = new HashSet<string>();
+
     /// <summary>
     /// collider for fountain
     /// </summary>
@@ -110,10 +123,12 @@ public class RoomController : MonoBehaviour
             p.x = 0;
         }
     }
-    public void UpdateTiles(Room room, bool inEditor)
+    public void UpdateTiles(Room room, string roomName, bool inEditor)
     {
         ArmShroom.layerOrder = 0; //reset layercounter for armshrooms
-        staticColliders.Clear(); //remove old wall colliders
+        wallColliders.Clear(); //remove old wall colliders
+        doors.Clear(); //clear old doorlist
+        doorBoxes.Clear(); //remove old door colliders
         enemies.Clear(); //remove old enemies
         foreach (GameObject r in removeOnLoad) //destroy other objects in old room
         {
@@ -141,12 +156,12 @@ public class RoomController : MonoBehaviour
                 {
                     if(inEditor || colStack == 0) //new box
                     {
-                        staticColliders.Add(new Box(gridInfo.GetGridVector(p), 1f, 1f));
+                        wallColliders.Add(new Box(gridInfo.GetGridVector(p), 1f, 1f));
                     }
                     else //extend previous box
                     {
                         //combine consecutive colliders
-                        Box box = staticColliders[staticColliders.Count - 1];
+                        Box box = wallColliders[wallColliders.Count - 1];
                         box.x += 0.5f;
                         box.width = colStack + 1;
                     }
@@ -159,7 +174,7 @@ public class RoomController : MonoBehaviour
                 //Other Objects
                 if(!inEditor)
                 {
-                    AddSpecialObject(p, room.GetValue(p, Layer.Other));
+                    AddSpecialObject(p, room.GetValue(p, Layer.Other), roomName);
                 }
 
                 //iterate
@@ -168,13 +183,14 @@ public class RoomController : MonoBehaviour
             p.y++;
             p.x = 0;
         }
+        /*
         IEnumerator<Decoration> enumerator = room.GetDecorations();
         Decoration dec;
         while(enumerator.MoveNext())
         {
             dec = enumerator.Current;
             CreateDecoration(new Vector2(dec.x, dec.y), dec.value);
-        }
+        }*/
     }
     public bool Inbounds(GridPos p)
     {
@@ -187,12 +203,21 @@ public class RoomController : MonoBehaviour
     }
     public void AddBox(GridPos p)
     {
-        staticColliders.Add(new Box(gridInfo.GetGridVector(p), 1f, 1f));
+        wallColliders.Add(new Box(gridInfo.GetGridVector(p), 1f, 1f));
     }
     public void RemoveBox(GridPos p)
     {
         Box m = new Box(gridInfo.GetGridVector(p), 1f, 1f);
-        staticColliders.Remove(m);
+        wallColliders.Remove(m);
+    }
+    public void UnlockDoor(string roomName)
+    {
+        unlockedDoors.Add(roomName);
+        foreach(GridPos p in doors)
+        {
+            sprites[p.GetIndex(width)].sprite = tileSet[0];
+        }
+        doors.Clear();
     }
 
     public void CreateDecoration(Vector2 v, byte value)
@@ -201,22 +226,32 @@ public class RoomController : MonoBehaviour
         obj.AddComponent<SpriteRenderer>().sprite = tileSet[value];
         obj.transform.position = v;
     }
-    public void AddSpecialObject(GridPos p, byte value)
+    public void AddSpecialObject(GridPos p, byte value, string roomName)
     {
+        Vector2 v = gridInfo.GetGridVector(p);
         switch (value)
         {
             case 1: //fountain
                 GameObject f = Instantiate(roomPrefabs.fountain);
-                Vector2 fp = gridInfo.GetGridVector(p);
-                f.transform.position = fp;
-                winbox = new Box(fp, 2f, 2f);
+                f.transform.position = v;
+                winbox = new Box(v, 2f, 2f);
                 GameController.Main.player.checkWin = true;
                 removeOnLoad.Add(f);
                 break;
+            case 2: //door
+                if(!unlockedDoors.Contains(roomName))
+                {
+                    doors.Add(p);
+                    doorBoxes.Add(new Box(v, 1f, 1f));
+                }
+                else
+                {
+                    sprites[p.GetIndex(width)].sprite = tileSet[0];
+                }
+                break;
             case 50: //armShroom
-                Vector2 pos = gridInfo.GetGridVector(p);
-                ArmShroom armShroom = Instantiate(roomPrefabs.armShroom, pos, Quaternion.identity).GetComponent<ArmShroom>();
-                armShroom.box.Center = pos;
+                ArmShroom armShroom = Instantiate(roomPrefabs.armShroom, v, Quaternion.identity).GetComponent<ArmShroom>();
+                armShroom.box.Center = v;
                 removeOnLoad.Add(armShroom.gameObject);
                 break;
         }
@@ -253,14 +288,26 @@ public class RoomController : MonoBehaviour
         }
     }
 
+    public IEnumerator<Box> GetStaticBoxes(bool doorsAreStatic)
+    {
+        if(doorsAreStatic && doors.Count > 0)
+        {
+            return new MultiEnumerator<Box>(wallColliders, doorBoxes);
+        }
+        else
+        {
+            return wallColliders.GetEnumerator();
+        }
+    }
+
     private void OnRenderObject()
     {
         if(showBoxes)
         {
             BeginBoxesGL(glMaterial, glColor);
-            if (staticColliders != null)
+            if (wallColliders != null)
             {
-                foreach (Box box in staticColliders)
+                foreach (Box box in wallColliders)
                 {
                     DrawBoxGL(box);
                 }

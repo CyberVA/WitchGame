@@ -26,7 +26,6 @@ public class LevelEditor : MonoBehaviour
     bool setup = false;
     bool roomLoaded = false;
     byte brush;
-    byte spclBrush;
 
     //Update Logic
     GridPos mp, prevMousePos;
@@ -42,8 +41,12 @@ public class LevelEditor : MonoBehaviour
     private void Load()
     {
         loadedRoom = roomController.LoadRoom(levelName);
-        roomController.UpdateTiles(loadedRoom, true);
+        UpdateRoom();
         roomLoaded = true;
+    }
+    private void UpdateRoom()
+    {
+        roomController.UpdateTiles(loadedRoom, levelName, true);
     }
     private void Load(string lvlName)
     {
@@ -155,22 +158,22 @@ public class LevelEditor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Load(loadedRoom.exitNorth);
-            roomController.UpdateTiles(loadedRoom, true);
+            UpdateRoom();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Load(loadedRoom.exitSouth);
-            roomController.UpdateTiles(loadedRoom, true);
+            UpdateRoom();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Load(loadedRoom.exitWest);
-            roomController.UpdateTiles(loadedRoom, true);
+            UpdateRoom();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Load(loadedRoom.exitEast);
-            roomController.UpdateTiles(loadedRoom, true);
+            UpdateRoom();
         }
         //Move Camera
         if (Input.GetKey(KeyCode.W))
@@ -219,7 +222,7 @@ public class LevelEditor : MonoBehaviour
                 }
                 if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Reload"))
                 {
-                    roomController.UpdateTiles(loadedRoom, true);
+                    UpdateRoom();
                 }
             }
             if (GUI.Button(new Rect(10, count++ * pad, 100, 20), "Load"))
