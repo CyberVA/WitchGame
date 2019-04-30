@@ -30,7 +30,7 @@ public class SporePooler : MonoBehaviour
             for (int i = 0; i < startingSize; i++)
             {
                 spore = Instantiate(prefab).GetComponent<Spore>();
-                spore.Setup(roomController.staticColliders, GameController.Main.combatSettings);
+                spore.Setup(roomController.wallColliders, GameController.Main.combatSettings);
                 spore.gameObject.SetActive(false);
                 stack.Push(spore);
             }
@@ -42,7 +42,7 @@ public class SporePooler : MonoBehaviour
         if (stack.Count == 0)
         {
             Spore spore = Instantiate(prefab).GetComponent<Spore>();
-            spore.Setup(roomController.staticColliders, GameController.Main.combatSettings);
+            spore.Setup(roomController.wallColliders, GameController.Main.combatSettings);
             return spore;
         }
         else

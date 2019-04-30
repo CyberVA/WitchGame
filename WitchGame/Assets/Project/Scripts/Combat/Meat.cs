@@ -63,7 +63,7 @@ public class Meat : MonoBehaviour, IHurtable, IMover
         }
         if(velocity != Vector2.zero)
         {
-            SuperTranslate(this, velocity * Time.deltaTime, roomController.staticColliders);
+            SuperTranslate(this, velocity * Time.deltaTime, roomController.wallColliders);
             velocity *= 1f - (Time.deltaTime * inertia);
             if(velocity.magnitude < minVelocity)
             {

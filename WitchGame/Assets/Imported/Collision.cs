@@ -29,10 +29,9 @@ namespace TwoStepCollision
         {
             return Contains(a, p.x, p.y);
         }
-        public static void SuperTranslate(IMover mover, Vector2 movement, IEnumerable<Box> boxes)
+        public static void SuperTranslate(IMover mover, Vector2 movement, IEnumerator<Box> boxEnum)
         {
             Box box = mover.box;
-            IEnumerator<Box> boxEnum = boxes.GetEnumerator();
             float f;
             if (movement.y != 0f)
             {
@@ -60,6 +59,10 @@ namespace TwoStepCollision
                 }
             }
             mover.SetPosition(box.Center);
+        }
+        public static void SuperTranslate(IMover mover, Vector2 movement, IEnumerable<Box> boxes)
+        {
+            SuperTranslate(mover, movement, boxes.GetEnumerator());
         }
         public static void BeginBoxesGL(Material mat)
         {

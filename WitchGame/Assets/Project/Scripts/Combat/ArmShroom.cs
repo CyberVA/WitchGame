@@ -63,7 +63,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
 
-        staticColliders = roomController.staticColliders;
+        staticColliders = roomController.wallColliders;
 
         //add self to collision list
         roomController.enemies.Add(this);

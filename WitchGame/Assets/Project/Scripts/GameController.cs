@@ -33,6 +33,15 @@ public class GameController : MonoBehaviour
         LoadMain();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            Debug.Log("Door in room " + roomName + " unlocked");
+            roomController.UnlockDoor(roomName);
+        }
+    }
+
     #region Room Loading
     private void LoadMain()
     {
