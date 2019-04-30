@@ -29,6 +29,7 @@ public class PathRequestManager : MonoBehaviour
         pathfinding = GetComponent<Pathfinding>();
     }
 
+
     /// <summary>
     /// Unitys can make a path request when calling this function, this will generate a path for said unit
     /// </summary>

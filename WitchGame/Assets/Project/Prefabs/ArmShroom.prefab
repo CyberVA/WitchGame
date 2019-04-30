@@ -149,6 +149,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+  movement: {x: 0, y: 0}
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   glColor: {r: 0, g: 1, b: 0.030314207, a: 1}
 --- !u!95 &4513494692143990482
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  speed: 5
 --- !u!1 &4513494692418293228
 GameObject:
   m_ObjectHideFlags: 0

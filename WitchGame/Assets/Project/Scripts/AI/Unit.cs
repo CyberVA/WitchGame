@@ -21,6 +21,14 @@ public class Unit : MonoBehaviour
         PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
+        }
+    }
+
     public void OnPathFound(Vector3[] newPath, bool pathSuccesfull)
     {
         if(pathSuccesfull)
@@ -42,6 +50,7 @@ public class Unit : MonoBehaviour
     /// <returns></returns>
     IEnumerator FollowPath()
     {
+        Debug.Log("test?");
         // Assigns path to currentWaypoint
         Vector3 currentWaypoint = path[0];
         while(true)
@@ -54,6 +63,7 @@ public class Unit : MonoBehaviour
                 // If the targetIndex is greater than the length of our path, exit Coroutine
                 if(targetIndex >= path.Length)
                 {
+                    Debug.Log("Test End?");
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];

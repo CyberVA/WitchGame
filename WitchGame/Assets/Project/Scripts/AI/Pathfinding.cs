@@ -135,9 +135,19 @@ public class Pathfinding : MonoBehaviour
             currentNode = currentNode.parent;
         }
         // Takes the simplified path and applies it to the waypoints
-        Vector3[] waypoints = SimplifyPath(path);
+        Vector3[] waypoints = ComplexifyPath(path);
         // Reverses the waypoints into a usable path
         Array.Reverse(waypoints);
+        return waypoints;
+    }
+
+    Vector3[] ComplexifyPath(List<Node> path)
+    {
+        Vector3[] waypoints = new Vector3[path.Count];
+        for(int i = 0; i < path.Count; i++)
+        {
+            waypoints[i] = path[i].worldPosition;
+        }
         return waypoints;
     }
 

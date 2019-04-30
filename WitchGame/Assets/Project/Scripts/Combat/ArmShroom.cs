@@ -118,7 +118,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         //movement += PATHVECTOR * moveSpeed * Time.deltaTime;
 
         //Apply movement
-        SuperTranslate(this, movement, staticColliders);
+        //SuperTranslate(this, movement, staticColliders);
         movement = Vector2.zero;
 
         //Post movement
