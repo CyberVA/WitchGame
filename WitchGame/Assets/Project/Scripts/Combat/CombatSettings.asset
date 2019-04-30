@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     hp: 1
-    moveSpeed: 2
+    moveSpeed: 2.5
     inertia: 4
     vMulitplierMelee: 1
     vMultiplirRange: 1
