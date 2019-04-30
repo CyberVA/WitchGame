@@ -72,9 +72,8 @@ public class GameController : MonoBehaviour
     }
     private void UpdateRoom()
     {
-        roomController.UpdateTiles(currentRoom, roomName, false);
         grid.CreateGrid();
-        //roomController.UpdateTiles(currentRoom, false);
+        roomController.UpdateTiles(currentRoom, roomName, false);
     }
 
     public void LoadNorth()
