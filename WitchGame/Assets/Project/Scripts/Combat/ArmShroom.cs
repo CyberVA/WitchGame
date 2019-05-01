@@ -25,7 +25,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     float flashTimer;
     float requestPathTimer;
 
-    const float requestPathFreq = 1f;
+    const float requestPathFreq = 0.5f;
 
     //Runtime Values
     float health;
