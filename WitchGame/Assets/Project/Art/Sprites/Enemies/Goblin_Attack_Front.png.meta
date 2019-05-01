@@ -1,13 +1,17 @@
 fileFormatVersion: 2
-guid: bb313e6e8275e744fb9dd8db168457c2
+guid: bdd9681200300c04bbc6f7fe066281de
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Witch_Melee_Right_0
-    21300002: Witch_Melee_Right_1
-    21300004: Witch_Melee_Right_2
-    21300006: Witch_Melee_Right_3
-    21300008: Witch_Melee_Right_4
-    21300010: Witch_Melee_Right_5
+    21300000: Goblin_Attack_Front_0
+    21300002: Goblin_Attack_Front_1
+    21300004: Goblin_Attack_Front_2
+    21300006: Goblin_Attack_Front_3
+    21300008: Goblin_Attack_Front_4
+    21300010: Goblin_Attack_Front_5
+    21300012: Goblin_Attack_Front_6
+    21300014: Goblin_Attack_Front_7
+    21300016: Goblin_Attack_Front_8
+    21300018: Goblin_Attack_Front_9
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -90,13 +94,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Witch_Melee_Right_0
+      name: Goblin_Attack_Front_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 65
-        width: 70
-        height: 65
+        y: 50
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +108,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 563aec74a86e3d04d8ce496394d713ff
+      spriteID: aad7a42e396e8f54686a50d0a6c5f22e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_1
+      name: Goblin_Attack_Front_1
       rect:
         serializedVersion: 2
-        x: 70
-        y: 65
-        width: 70
-        height: 65
+        x: 50
+        y: 50
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +128,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eec878b8d7fe19e4e86a0e8c8f0e8e05
+      spriteID: 738d02cf0e9dd834cb7c3c7216daed05
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_2
+      name: Goblin_Attack_Front_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 65
-        width: 70
-        height: 65
+        x: 100
+        y: 50
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +148,59 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a3dbfce55fe3b54b9b7c126c0d2885f
+      spriteID: 8516ad7f968756047851de7f1ad62495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_3
+      name: Goblin_Attack_Front_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04d4ab25d409ded4ba440f35726390f6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_Front_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2eb445d3b6b83c428d452e838c40c5d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_Front_5
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 70
-        height: 65
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +208,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd25effda85f9b448ad6c5215cd1feb4
+      spriteID: 55dd46091e70a304093af68627984e1f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_4
+      name: Goblin_Attack_Front_6
       rect:
         serializedVersion: 2
-        x: 70
+        x: 50
         y: 0
-        width: 70
-        height: 65
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +228,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 833d29b2dc84087418e7a67680a6b4c2
+      spriteID: 0b3e0b6e1da8e56478da6ad3775a6d1c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_5
+      name: Goblin_Attack_Front_7
       rect:
         serializedVersion: 2
-        x: 140
+        x: 100
         y: 0
-        width: 70
-        height: 65
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +248,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e54e3f6b325d0d40a43c5032643f514
+      spriteID: 104d0b64bfcf782459e745981396339d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_Front_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc2c29779bfdb92488d6eaaa2a5fa4a8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_Front_9
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d8ede53a92baa942bd501be8dadcea0
       vertices: []
       indices: 
       edges: []
@@ -212,7 +296,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5cdd781469a59414e9aaa725de40cf1c
+    spriteID: 3194303e1fc526244a0a9b06cbc7c8b0
     vertices: []
     indices: 
     edges: []

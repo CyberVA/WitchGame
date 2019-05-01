@@ -1,13 +1,17 @@
 fileFormatVersion: 2
-guid: bb313e6e8275e744fb9dd8db168457c2
+guid: a28df3f902999624bbdc8dec9a8cd4dd
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Witch_Melee_Right_0
-    21300002: Witch_Melee_Right_1
-    21300004: Witch_Melee_Right_2
-    21300006: Witch_Melee_Right_3
-    21300008: Witch_Melee_Right_4
-    21300010: Witch_Melee_Right_5
+    21300000: Goblin_Attack_UP_0
+    21300002: Goblin_Attack_UP_1
+    21300004: Goblin_Attack_UP_2
+    21300006: Goblin_Attack_UP_3
+    21300008: Goblin_Attack_UP_4
+    21300010: Goblin_Attack_UP_5
+    21300012: Goblin_Attack_UP_6
+    21300014: Goblin_Attack_UP_7
+    21300016: Goblin_Attack_UP_8
+    21300018: Goblin_Attack_UP_9
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -90,13 +94,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Witch_Melee_Right_0
+      name: Goblin_Attack_UP_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 65
-        width: 70
-        height: 65
+        y: 50
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +108,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 563aec74a86e3d04d8ce496394d713ff
+      spriteID: b0f1f3c280546dc46aa8cd1e7133447d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_1
+      name: Goblin_Attack_UP_1
       rect:
         serializedVersion: 2
-        x: 70
-        y: 65
-        width: 70
-        height: 65
+        x: 50
+        y: 50
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +128,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eec878b8d7fe19e4e86a0e8c8f0e8e05
+      spriteID: bdb1a908323170c408ecf7366e1aeff2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_2
+      name: Goblin_Attack_UP_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 65
-        width: 70
-        height: 65
+        x: 100
+        y: 50
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +148,59 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a3dbfce55fe3b54b9b7c126c0d2885f
+      spriteID: a51d2e8ab5e204d4cb8a5ffcf05f408f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_3
+      name: Goblin_Attack_UP_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e0e3be02124c14e83923d881d95446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_UP_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2260d3e4e66f0741af86016c0b66553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_UP_5
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 70
-        height: 65
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +208,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd25effda85f9b448ad6c5215cd1feb4
+      spriteID: 89eeede912af6e7489deaff9fbbc750a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_4
+      name: Goblin_Attack_UP_6
       rect:
         serializedVersion: 2
-        x: 70
+        x: 50
         y: 0
-        width: 70
-        height: 65
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +228,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 833d29b2dc84087418e7a67680a6b4c2
+      spriteID: 62ecb41fd38478e4bb54a265687ac49d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_5
+      name: Goblin_Attack_UP_7
       rect:
         serializedVersion: 2
-        x: 140
+        x: 100
         y: 0
-        width: 70
-        height: 65
+        width: 50
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +248,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e54e3f6b325d0d40a43c5032643f514
+      spriteID: 054f2281a98e0f048aef339b969c6d88
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_UP_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f5e99d24b8146c4cb9d834bfae5f676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goblin_Attack_UP_9
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f845da2456043b438fd05fd02c490fb
       vertices: []
       indices: 
       edges: []
@@ -212,7 +296,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5cdd781469a59414e9aaa725de40cf1c
+    spriteID: 88d7f5df6a8432d40a271b3d8a67abb7
     vertices: []
     indices: 
     edges: []
