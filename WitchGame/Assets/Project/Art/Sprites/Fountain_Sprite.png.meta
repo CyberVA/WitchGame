@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: bb313e6e8275e744fb9dd8db168457c2
+guid: 4b16c4409afe35d478019c64bc944ed8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Witch_Melee_Right_0
-    21300002: Witch_Melee_Right_1
-    21300004: Witch_Melee_Right_2
-    21300006: Witch_Melee_Right_3
-    21300008: Witch_Melee_Right_4
-    21300010: Witch_Melee_Right_5
+    21300000: Fountain_Sprite_0
+    21300002: Fountain_Sprite_1
+    21300004: Fountain_Sprite_2
+    21300006: Fountain_Sprite_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -90,73 +88,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Witch_Melee_Right_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 65
-        width: 70
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 563aec74a86e3d04d8ce496394d713ff
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Witch_Melee_Right_1
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 65
-        width: 70
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eec878b8d7fe19e4e86a0e8c8f0e8e05
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Witch_Melee_Right_2
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 65
-        width: 70
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a3dbfce55fe3b54b9b7c126c0d2885f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Witch_Melee_Right_3
+      name: Fountain_Sprite_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 70
-        height: 65
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +102,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd25effda85f9b448ad6c5215cd1feb4
+      spriteID: 4cd0160261d8ff54da2a01f0a18dde31
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_4
+      name: Fountain_Sprite_1
       rect:
         serializedVersion: 2
-        x: 70
+        x: 200
         y: 0
-        width: 70
-        height: 65
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +122,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 833d29b2dc84087418e7a67680a6b4c2
+      spriteID: f18e7087a872fe040bafb6ddef55432c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Witch_Melee_Right_5
+      name: Fountain_Sprite_2
       rect:
         serializedVersion: 2
-        x: 140
+        x: 400
         y: 0
-        width: 70
-        height: 65
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +142,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e54e3f6b325d0d40a43c5032643f514
+      spriteID: 32c90499a1eb0d2499ac261841d296b6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fountain_Sprite_3
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b602c62cadd0a949a7298455b7090c1
       vertices: []
       indices: 
       edges: []
@@ -212,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5cdd781469a59414e9aaa725de40cf1c
+    spriteID: 2105697235efc554999804469fc298dd
     vertices: []
     indices: 
     edges: []
