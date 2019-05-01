@@ -60,6 +60,9 @@ public class GameController : MonoBehaviour
         roomController.Setup(currentRoom.width, currentRoom.height);
         roomController.Position = Vector2.zero;
 
+        //Create pathfinding grid
+        grid.CreateGrid();
+
         //update renderers + pathfinding
         UpdateRoom();
     }
@@ -72,8 +75,8 @@ public class GameController : MonoBehaviour
     }
     private void UpdateRoom()
     {
-        grid.CreateGrid();
-        roomController.UpdateTiles(currentRoom, roomName, false);
+        grid.UpdateGrid(); //create pathfinding grid for current room
+        roomController.UpdateTiles(currentRoom, roomName, false); //update tiles, spawn enemies, other shit
     }
 
     public void LoadNorth()
