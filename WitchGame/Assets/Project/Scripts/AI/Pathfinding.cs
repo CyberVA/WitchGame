@@ -86,17 +86,24 @@ public class Pathfinding : MonoBehaviour
                     break;
                 }
 
+                //Runs through every neighbor to the current node
                 foreach (Node neighbour in grid.GetNeighbours(currentNode))
                 {
+                    //skips this iteration of the loop if the currently proccessed node is unwalkable or in the closed set
                     if (!neighbour.walkable || closedSet.Contains(neighbour)) continue;
 
+                    //Creates an integer that is the sum of the currentNodes gCost and the distance to it's neighbour
                     int newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
                     if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                     {
+                        //Sets the neighbors gCost to newCostToNeighbor
                         neighbour.gCost = newCostToNeighbour;
+                        //Sets the gCost of the neighbour to the distance between the neighbour to the target
                         neighbour.hCost = GetDistance(neighbour, targetNode);
+                        //Sets the parent of the neighbour node to the current node
                         neighbour.parent = currentNode;
 
+                        //Adds the neighbor to the openSet
                         if (!openSet.Contains(neighbour)) openSet.Add(neighbour);
                     }
                 }
