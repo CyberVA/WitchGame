@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4513494692143990485}
   - component: {fileID: 4513494692143990486}
   - component: {fileID: 4513494692143990482}
-  - component: {fileID: 4929107820739603969}
   m_Layer: 0
   m_Name: ArmShroom
   m_TagString: Untagged
@@ -71,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -175142735
-  m_SortingLayer: 2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4ad1909ae0b28394cb6c13c0914373c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,8 +124,8 @@ SpriteMask:
   m_MaskAlphaCutoff: 0.1
   m_FrontSortingLayerID: -175142735
   m_BackSortingLayerID: -175142735
-  m_FrontSortingLayer: 2
-  m_BackSortingLayer: 2
+  m_FrontSortingLayer: -3
+  m_BackSortingLayer: -3
   m_FrontSortingOrder: 1
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 1
@@ -150,6 +149,7 @@ MonoBehaviour:
     width: 1
     height: 1
   movement: {x: 0, y: 0}
+  target: {fileID: 0}
   glMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   glColor: {r: 0, g: 1, b: 0.030314207, a: 1}
 --- !u!95 &4513494692143990482
@@ -171,20 +171,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4929107820739603969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4513494692143990489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bce90fa0db3cf00409756ca5421295db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 5
 --- !u!1 &4513494692418293228
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +237,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -175142735
-  m_SortingLayer: 2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 320f7870f451eab4183113a416d519fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}

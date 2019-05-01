@@ -55,7 +55,7 @@ public class Pathfinding : MonoBehaviour
         UnityEngine.Debug.Log("TargetrX: " + targetNode.gridX + ", TargetY: " + targetNode.gridY);
 
         //Only processes a path if it's possible to make a path.
-        if (startNode.walkable && targetNode.walkable)
+        if (startNode.walkable && targetNode.walkable && startNode != targetNode)
         {
             //list of nodes that have yet to be processed as part of the path
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);

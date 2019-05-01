@@ -23,6 +23,9 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     //Timers
     float iTimer;
     float flashTimer;
+    float requestPathTimer;
+
+    const float requestPathFreq = 1f;
 
     //Runtime Values
     float health;
@@ -30,6 +33,14 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     bool deathFlag = false;
     Vector2 velocity = Vector2.zero;
     public Vector2 movement;
+
+    //AI
+    public Transform target; // Position of our target
+    Vector3[] path; // The path associated with this unit
+    Vector2 currentWaypoint;
+    Vector2 pathTrajectory; // normalized direction to path waypoint
+    int targetIndex; //index of our target
+    bool followingPath;
 
     //Gizmos
     public Material glMaterial;
@@ -67,6 +78,13 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
         //add self to collision list
         roomController.enemies.Add(this);
+
+        //AI
+        // Applies the player to the target variable
+        target = GameController.Main.player.transform;
+        // Requests a path from the PathRequestManager
+        PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
+        requestPathTimer = requestPathFreq;
     }
 
     private void Start()
@@ -98,30 +116,87 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             }
         }
 
-        //Calculate movement
-        //Knockback velocity-
-        if (velocity != Vector2.zero)
+        if (alive)
         {
-            //Apply velocity to movement
-            movement += velocity * Time.deltaTime;
-
-            //reduce velocity
-            velocity *= 1f - (Time.deltaTime * combatSettings.armShroom.inertia);
-
-            //set velocity to zero if below minimum
-            if(velocity.magnitude < combatSettings.minVelocity)
+            //Living Timers
+            if (requestPathTimer > 0f)
             {
-                velocity = Vector2.zero;
+                requestPathTimer -= Time.deltaTime;
+                if (requestPathTimer <= 0)
+                {
+                    PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
+                    requestPathTimer += requestPathFreq;
+                }
             }
+
+            //Calculate movement
+            movement = Vector2.zero;
+
+            //Knockback velocity-
+            if (velocity != Vector2.zero)
+            {
+                //Apply velocity to movement
+                movement += velocity;
+
+                //reduce velocity
+                velocity *= 1f - (Time.deltaTime * combatSettings.armShroom.inertia);
+
+                //set velocity to zero if below minimum
+                if (velocity.magnitude < combatSettings.minVelocity)
+                {
+                    velocity = Vector2.zero;
+                }
+            }
+            //Pathfinding-
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
+            }
+
+            //Folow Path--
+            if (followingPath && flashTimer <= 0f)
+            {
+                // If the positon of our unit is the same position as it's target
+                if (Vector2.Distance(box.Center, currentWaypoint) < 0.1f)
+                {
+                    // Increments the target index
+                    targetIndex++;
+                    // If the targetIndex is greater than the length of our path, stop following path
+                    if (targetIndex >= path.Length)
+                    {
+                        followingPath = false;
+                    }
+                    else
+                    {
+                        currentWaypoint = path[targetIndex];
+                    }
+                }
+                if (followingPath)
+                {
+                    //Moves the unit towards the waypoint
+                    movement += (currentWaypoint - box.Center).normalized * combatSettings.armShroom.moveSpeed;
+                }
+            }
+
+            //Apply movement
+            SuperTranslate(this, movement * Time.deltaTime, staticColliders);
+
+            //Post movement
         }
-        //Pathfinding-
-        //movement += PATHVECTOR * moveSpeed * Time.deltaTime;
+    }
 
-        //Apply movement
-        //SuperTranslate(this, movement, staticColliders);
-        movement = Vector2.zero;
-
-        //Post movement
+    public void OnPathFound(Vector3[] newPath, bool pathSuccesfull)
+    {
+        if (pathSuccesfull)
+        {
+            //Sets path to the new Path
+            path = newPath;
+            //Sets the targets index to 0
+            targetIndex = 0;
+            currentWaypoint = path[targetIndex];
+            //make path following run in update
+            followingPath = true;
+        }
     }
 
     private void OnAnimatorMove()
