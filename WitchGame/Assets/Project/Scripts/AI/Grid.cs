@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-
     // Option to display the node grid or not
     public bool displayGrid;
     //Slider for adjusting grid transparency
@@ -30,7 +29,7 @@ public class Grid : MonoBehaviour
     }
 
     /// <summary>
-    /// Function we call to create a new grid
+    /// Function we call to create a new grid for the currently loaded room
     /// </summary>
     public void CreateGrid()
     {
@@ -44,6 +43,22 @@ public class Grid : MonoBehaviour
         gridSizeY = room.height;
 
         grid = new Node[gridSizeX, gridSizeY];
+        //For every point on the grid x axis...
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            //for every point on the grids y axis...
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                grid[x, y] = new Node(false, Vector3.zero, x, y);
+            }
+        }
+    }
+    /// <summary>
+    /// Function called to update grid for a new room
+    /// </summary>
+    public void UpdateGrid()
+    {
+        room = GameController.Main.currentRoom;
 
         //For every point on the grid x axis...
         for (int x = 0; x < gridSizeX; x++)
@@ -52,11 +67,9 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 //Sets the position of the node
-                Vector3 worldPoint = gridTransform.GetGridVector(new GridPos(x, y));
+                grid[x, y].worldPosition = gridTransform.GetGridVector(new GridPos(x, y));
                 //Determines if hte node is walkable
-                bool walkable = room.GetValue(x, y, Layer.Collision) == 0;
-                //Creates a new node and whether it's walkable or not for every point on the grid
-                grid[x, y] = new Node(walkable, worldPoint, x, y);
+                grid[x, y].walkable = room.GetValue(x, y, Layer.Collision) == 0 && room.GetValue(x, y, Layer.Other) != 2; //2 = door
             }
         }
     }
