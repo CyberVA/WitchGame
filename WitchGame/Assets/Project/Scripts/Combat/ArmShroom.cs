@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TwoStepCollision;
 using static TwoStepCollision.Func;
+using System;
 
 public class ArmShroom : MonoBehaviour, IHurtable, IMover
 {
@@ -29,6 +30,8 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     const float requestPathFreq = 0.5f;
 
     //Runtime Values
+    [NonSerialized]
+    public float speedMultiplier = 1f;
     float health;
     bool alive = true;
     bool deathFlag = false;
@@ -41,6 +44,11 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     Vector2 pathTrajectory; // normalized direction to path waypoint
     int targetIndex; //index of our target
     bool followingPath;
+
+    float Speed
+    {
+        get => combatSettings.armShroom.moveSpeed * speedMultiplier;
+    }
     
     #region IHurtable
     public Box HitBox => box;
@@ -178,7 +186,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                 if (followingPath)
                 {
                     //Moves the unit towards the waypoint
-                    movement += (currentWaypoint - box.Center).normalized * combatSettings.armShroom.moveSpeed;
+                    movement += (currentWaypoint - box.Center).normalized * Speed;
                 }
             }
 
