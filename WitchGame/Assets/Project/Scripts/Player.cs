@@ -67,6 +67,9 @@ public class Player : MonoBehaviour, IMover
     public bool checkWin = false; //is the fountain in this room
     [NonSerialized]
     public bool checkKey = false; //is a key in this room
+    [NonSerialized]
+    public bool checkDoor = false; //is a key in this room
+    int keys = 0; 
     Box attackBox = new Box(0, 0, 1, 1); //dimensions of melee hitbox
 
     //Movement
@@ -114,19 +117,19 @@ public class Player : MonoBehaviour, IMover
         movement = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            movement.y += combatSettings.player.moveSpeed * Time.deltaTime;
+            movement.y += combatSettings.player.moveSpeed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            movement.y -= combatSettings.player.moveSpeed * Time.deltaTime;
+            movement.y -= combatSettings.player.moveSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            movement.x -= combatSettings.player.moveSpeed * Time.deltaTime;
+            movement.x -= combatSettings.player.moveSpeed;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            movement.x += combatSettings.player.moveSpeed * Time.deltaTime;
+            movement.x += combatSettings.player.moveSpeed;
         }
         if (animator != null)
         {
@@ -167,7 +170,7 @@ public class Player : MonoBehaviour, IMover
         }
 
         //Movement Applied
-        SuperTranslate(this, movement, roomController.GetStaticBoxes(true));
+        SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
 
         //Post-Movement
         //Check for Win-
@@ -182,7 +185,22 @@ public class Player : MonoBehaviour, IMover
             Destroy(roomController.keyObj);
             roomController.keyObj = null;
             roomController.pickedUpKeys.Add(GameController.Main.roomName);
+            keys++; //ADD UI CODE LATER
             checkKey = false;
+        }
+
+        //Check for Door
+        if(checkDoor && keys > 0)
+        {
+            foreach(Box doorBox in roomController.doorBoxes)
+            {
+                if(Intersects(colbox, doorBox))
+                {
+                    roomController.UnlockDoor(GameController.Main.roomName);
+                    keys--;
+                    break;
+                }
+            }
         }
 
         //Room travel-

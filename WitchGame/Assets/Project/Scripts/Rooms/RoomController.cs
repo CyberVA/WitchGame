@@ -41,7 +41,8 @@ public class RoomController : MonoBehaviour
     /// <summary>
     /// box colliders for doors
     /// </summary>
-    List<Box> doorBoxes = new List<Box>();
+    [NonSerialized]
+    public List<Box> doorBoxes = new List<Box>();
     /// <summary>
     /// set of room names where doors have been unlocked
     /// </summary>
@@ -145,6 +146,7 @@ public class RoomController : MonoBehaviour
         {
             GameController.Main.player.checkWin = false;
             GameController.Main.player.checkKey = false;
+            GameController.Main.player.checkDoor = false;
         }
         if (keyObj != null) Destroy(keyObj);
 
@@ -255,6 +257,7 @@ public class RoomController : MonoBehaviour
                 {
                     doors.Add(p);
                     doorBoxes.Add(new Box(v, 1f, 1f));
+                    GameController.Main.player.checkDoor = true;
                 }
                 else
                 {
