@@ -46,6 +46,7 @@ public class RoomController : MonoBehaviour
     /// set of room names where doors have been unlocked
     /// </summary>
     HashSet<string> unlockedDoors = new HashSet<string>();
+    public HashSet<string> pickedUpKeys = new HashSet<string>();
     /// <summary>
     /// collider for fountain
     /// </summary>
@@ -56,6 +57,8 @@ public class RoomController : MonoBehaviour
     /// </summary>
     [NonSerialized]
     public Box keyBox = null;
+    [NonSerialized]
+    public GameObject keyObj = null;
     /// <summary>
     /// objects to be deleted when a new room is loaded
     /// </summary>
@@ -143,6 +146,8 @@ public class RoomController : MonoBehaviour
             GameController.Main.player.checkWin = false;
             GameController.Main.player.checkKey = false;
         }
+        if (keyObj != null) Destroy(keyObj);
+
         GridPos p = new GridPos(0, 0); //iterator/placement position
         int i; //one-dimensional index of iterator
         int colStack; //counter for colliders placed consecutively
@@ -257,11 +262,14 @@ public class RoomController : MonoBehaviour
                 }
                 break;
             case 3: //key
-                go = Instantiate(roomPrefabs.key);
-                go.transform.position = v;
-                keyBox = new Box(v, 1f, 1f);
-                GameController.Main.player.checkKey = true;
-                removeOnLoad.Add(go);
+                if(!pickedUpKeys.Contains(roomName))
+                {
+                    go = Instantiate(roomPrefabs.key);
+                    keyObj = go;
+                    go.transform.position = v;
+                    keyBox = new Box(v, 1f, 0.5f);
+                    GameController.Main.player.checkKey = true;
+                }
                 break;
             case 50: //armShroom
                 ArmShroom armShroom = Instantiate(roomPrefabs.armShroom, v, Quaternion.identity).GetComponent<ArmShroom>();

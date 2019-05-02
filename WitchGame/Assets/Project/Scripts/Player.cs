@@ -179,8 +179,10 @@ public class Player : MonoBehaviour, IMover
         //Check for Key-
         if (checkKey && Intersects(colbox, roomController.keyBox))
         {
-            Debug.Log("KEY");
-            return;
+            Destroy(roomController.keyObj);
+            roomController.keyObj = null;
+            roomController.pickedUpKeys.Add(GameController.Main.roomName);
+            checkKey = false;
         }
 
         //Room travel-
