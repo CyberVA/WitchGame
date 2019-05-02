@@ -6,6 +6,7 @@ using static TwoStepCollision.Func;
 public class ArmShroom : MonoBehaviour, IHurtable, IMover
 {
     public static int layerOrder = 0; //static counter for consistant layering
+    public static int enemyCount = 0;
 
     //Editor Ref
     public SpriteRenderer flash;
@@ -32,19 +33,14 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     bool alive = true;
     bool deathFlag = false;
     Vector2 velocity = Vector2.zero;
-    public Vector2 movement;
+    Vector2 movement;
 
     //AI
-    public Transform target; // Position of our target
     Vector3[] path; // The path associated with this unit
     Vector2 currentWaypoint;
     Vector2 pathTrajectory; // normalized direction to path waypoint
     int targetIndex; //index of our target
     bool followingPath;
-
-    //Gizmos
-    public Material glMaterial;
-    public Color glColor;
     
     #region IHurtable
     public Box HitBox => box;
@@ -64,6 +60,11 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteMask = GetComponent<SpriteMask>();
 
+        roomController = GameController.Main.roomController;
+        combatSettings = GameController.Main.combatSettings;
+
+        staticColliders = roomController.wallColliders;
+
         //Layer management
         spriteRenderer.sortingOrder = layerOrder;
         flash.sortingOrder = layerOrder + 1;
@@ -71,20 +72,23 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         layerOrder++;
         //-
 
-        roomController = GameController.Main.roomController;
-        combatSettings = GameController.Main.combatSettings;
-
-        staticColliders = roomController.wallColliders;
-
         //add self to collision list
         roomController.enemies.Add(this);
 
         //AI
-        // Applies the player to the target variable
-        target = GameController.Main.player.transform;
         // Requests a path from the PathRequestManager
         PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
-        requestPathTimer = requestPathFreq;
+        requestPathTimer = requestPathFreq + 0.1f * enemyCount++;
+    }
+    private void FirstInit()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteMask = GetComponent<SpriteMask>();
+
+        roomController = GameController.Main.roomController;
+        combatSettings = GameController.Main.combatSettings;
+
+        staticColliders = roomController.wallColliders;
     }
 
     private void Start()
@@ -205,15 +209,6 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         spriteMask.sprite = spriteRenderer.sprite;
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        BeginBoxesGL(glMaterial, glColor);
-        DrawBoxGL(box);
-        EndBoxesGL();
-    }
-#endif
-
     //Taking damage
     public bool Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
@@ -260,6 +255,8 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         //return true before here if attack lands
         return false;
     }
+
+    //static Color fadeColor = new Color(0.25f, 0.25f, 0.25f, 0.5f);
 
     void StartDying()
     {

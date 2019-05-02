@@ -46,7 +46,6 @@ public class RoomController : MonoBehaviour
     /// set of room names where doors have been unlocked
     /// </summary>
     HashSet<string> unlockedDoors = new HashSet<string>();
-
     /// <summary>
     /// collider for fountain
     /// </summary>
@@ -130,7 +129,6 @@ public class RoomController : MonoBehaviour
     }
     public void UpdateTiles(Room room, string roomName, bool inEditor)
     {
-        ArmShroom.layerOrder = 0; //reset layercounter for armshrooms
         wallColliders.Clear(); //remove old wall colliders
         doors.Clear(); //clear old doorlist
         doorBoxes.Clear(); //remove old door colliders
@@ -148,6 +146,8 @@ public class RoomController : MonoBehaviour
         GridPos p = new GridPos(0, 0); //iterator/placement position
         int i; //one-dimensional index of iterator
         int colStack; //counter for colliders placed consecutively
+        ArmShroom.layerOrder = 0; //reset layercounter for armshrooms
+        ArmShroom.enemyCount = 0; //reset counter for armshrooms
         while (p.y < height)
         {
             colStack = 0;
