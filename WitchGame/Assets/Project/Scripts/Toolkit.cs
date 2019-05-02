@@ -10,11 +10,11 @@ public static class Toolkit
 public class Timer
 {
     // Floats
-    public float t;     //current time
-    public float sp;    //speed
+    float t;     //current time
+    float sp;    //speed
 
     //Booleans
-    public bool tog;    //toggle
+    bool tog;    //toggle
 
     /// <summary>
     /// Constructor for the Timer script, define your variables here homie

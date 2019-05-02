@@ -94,6 +94,9 @@ public class Pathfinding : MonoBehaviour
 
                     //Creates an integer that is the sum of the currentNodes gCost and the distance to it's neighbour
                     int newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+
+                    //If the cost to move to that neighbor is less than the neighbors G cost...
+                    // ...Or the neighbor is not part of the open set
                     if (newCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                     {
                         //Sets the neighbors gCost to newCostToNeighbor
@@ -133,9 +136,12 @@ public class Pathfinding : MonoBehaviour
     /// <param name="endNode">The node where the target is </param>
     Vector3[] RetracePath(Node startNode, Node endNode)
     {
+        //Creates a new list of nodes called path
         List<Node> path = new List<Node>();
+        //Sets the current node to the endNode (targets node)
         Node currentNode = endNode;
 
+        //Loop that runs until the current node is the start node (the units node)
         while (currentNode != startNode)
         {
             path.Add(currentNode);
