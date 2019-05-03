@@ -182,7 +182,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                     // Increments the target index
                     targetIndex++;
                     // If the targetIndex is greater than the length of our path, stop following path
-                    if (targetIndex >= path.Length)
+                    if (targetIndex >= path.Length - 5)
                     {
                         followingPath = false;
                     }

@@ -48,7 +48,7 @@ public class Unit : MonoBehaviour
     /// Makes the enemy actually move along the path
     /// </summary>
     /// <returns></returns>
-    IEnumerator FollowPath()
+    /*IEnumerator FollowPath()
     {
         Debug.Log("test?");
         // Assigns path to currentWaypoint
@@ -60,6 +60,7 @@ public class Unit : MonoBehaviour
             {
                 // Increments the target index
                 targetIndex ++;
+
                 // If the targetIndex is greater than the length of our path, exit Coroutine
                 if(targetIndex >= path.Length)
                 {
@@ -72,7 +73,7 @@ public class Unit : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
             yield return null;
         }
-    }
+    }*/
 
     /// <summary>
     /// Handles drawing the path
