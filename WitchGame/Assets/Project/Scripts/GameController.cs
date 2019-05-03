@@ -78,6 +78,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void OnPaused(bool p)
+    {
+
+    }
+
     #region Room Loading
     private void LoadMain()
     {
