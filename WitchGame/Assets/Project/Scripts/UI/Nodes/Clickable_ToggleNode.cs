@@ -8,6 +8,14 @@ public class Clickable_ToggleNode : Clickable
     public GameObject tog;
     bool toggle = true;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            OnClick();
+        }
+    }
+
     public override void OnClick()
     {
         SpriteRenderer sr;

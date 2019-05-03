@@ -7,6 +7,14 @@ public class Clickable_MapNode : Clickable
     public GameObject youAreHere;
     bool toggle = true;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            OnClick();
+        }
+    }
+
     public override void OnClick()
     {
         //getting the transform component on the map indicator
