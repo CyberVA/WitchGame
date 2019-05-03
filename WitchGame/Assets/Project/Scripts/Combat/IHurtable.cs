@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TwoStepCollision;
 
-public enum DamageTypes { Melee, Shroom}
+public enum DamageTypes { Melee, Shroom, Shockwave, Slow, Knife}
 
 public interface IHurtable
 {

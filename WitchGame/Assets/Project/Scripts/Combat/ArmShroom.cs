@@ -21,9 +21,11 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     SpriteRenderer spriteRenderer;
     SpriteMask spriteMask;
     IEnumerable<Box> staticColliders;
+    IHurtable playerHurt;
 
     //Timers
     float iTimer;
+    float attackTimer;
     float flashTimer;
     float requestPathTimer;
 
@@ -70,6 +72,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
+        playerHurt = GameController.Main.player;
 
         staticColliders = roomController.wallColliders;
 
@@ -202,6 +205,10 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             SuperTranslate(this, movement * Time.deltaTime, staticColliders);
 
             //Post movement
+            /*if(attackTimer < combatSettings.armShroomAttackCooldown && Vector2.Distance(box.Center, GameController.Main.player.pos) < combatSettings.armShroomAttackTriggerRange)
+            {
+                followingPath = false;
+            }*/
         }
     }
 

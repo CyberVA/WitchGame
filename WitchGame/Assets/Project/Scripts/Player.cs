@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using static TwoStepCollision.Func;
 
-public class Player : MonoBehaviour, IMover
+public class Player : MonoBehaviour, IMover, IHurtable
 {
     //Editor Ref
     public SpriteRenderer weapon; //spriterenderer for melee hitbox
@@ -88,9 +88,19 @@ public class Player : MonoBehaviour, IMover
         }
     }
 
+    bool IHurtable.Hurt(float damage, DamageTypes damageType, Vector2 vector)
+    {
+        //ouch
+        return true;
+    }
 
+    Box IHurtable.HitBox => colbox;
+
+    bool IHurtable.Friendly => true;
+    
     #region IMover
     Box IMover.box => colbox;
+
     void IMover.SetPosition(Vector2 position)
     {
         pos = position;
