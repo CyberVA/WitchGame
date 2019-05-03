@@ -5,25 +5,20 @@ using UnityEngine.U2D;
 
 public class PixelPerfectUIAnchorManager : MonoBehaviour
 {
+    public PixPerf pp;
     UIAnchor[] uiAnchors;
-    public PixelPerfectCamera ppc;
 
-    private void Awake()
+    public void Init()
     {
         uiAnchors = FindObjectsOfType<UIAnchor>();
-        Debug.Log(uiAnchors.Length);
     }
 
-    private void LateUpdate()
+    public void UpdateAnchors()
     {
-        enabled = false;
+        Vector2 v = new Vector2(Screen.width, Screen.height);
+        v *= pp.f;
 
-        Vector2 v = Vector2.zero;
-        float p = (1f / (ppc.assetsPPU * 2)) / ppc.pixelRatio;
-        v.y = Screen.height * p;
-        v.x = Screen.width * p;
-
-        foreach(UIAnchor anchor in uiAnchors)
+        foreach (UIAnchor anchor in uiAnchors)
         {
             anchor.Position = anchor.anchorScaler * v;
         }

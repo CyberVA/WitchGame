@@ -276,7 +276,12 @@ MonoBehaviour:
   requestManager: {fileID: 1683881481}
   pathfinding: {fileID: 1683881479}
   roomController: {fileID: 4740797478434751623}
+  pixelPerfect: {fileID: 897474175}
+  uiAnchorManager: {fileID: 6517862125233661645}
   roomName: start
+  targetResolutionY: 360
+  scale: 1
+  maxScale: 0
 --- !u!1 &4740797478089869465
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +340,7 @@ GameObject:
   - component: {fileID: 4740797478206798769}
   - component: {fileID: 4740797478206798782}
   - component: {fileID: 4740797478206798783}
-  - component: {fileID: 4740797478206798768}
+  - component: {fileID: 897474175}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -407,7 +412,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4740797478206798780}
   m_Enabled: 1
---- !u!114 &4740797478206798768
+--- !u!114 &897474175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,17 +421,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4740797478206798780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Script: {fileID: 11500000, guid: a95a0a105a6beab4bb045ba9ab44d6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 50
-  m_RefResolutionX: 500
-  m_RefResolutionY: 360
-  m_UpscaleRT: 0
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
+  ppu: 50
 --- !u!1 &4740797478244856981
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,15 +874,14 @@ PrefabInstance:
         type: 3}
       propertyPath: ppc
       value: 
-      objectReference: {fileID: 4740797478206798768}
+      objectReference: {fileID: 897474175}
+    - target: {fileID: 4171137397188153376, guid: 05466ba52735d6440bd1637cebba621c,
+        type: 3}
+      propertyPath: pp
+      value: 
+      objectReference: {fileID: 897474175}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05466ba52735d6440bd1637cebba621c, type: 3}
---- !u!4 &4740797477447942812 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2475977578165531761, guid: 05466ba52735d6440bd1637cebba621c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7176136692921349869}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4740797477447942813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2475977578165531760, guid: 05466ba52735d6440bd1637cebba621c,
@@ -897,6 +894,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984a564acab8f604f92ddbcd27bc0508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6517862125233661645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4171137397188153376, guid: 05466ba52735d6440bd1637cebba621c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7176136692921349869}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec572fb4e4a85ce409cf5fed07b2dd68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &4740797477447942812 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2475977578165531761, guid: 05466ba52735d6440bd1637cebba621c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7176136692921349869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &622239018
 MonoBehaviour:
   m_ObjectHideFlags: 0

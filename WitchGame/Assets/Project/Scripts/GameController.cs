@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     public PathRequestManager requestManager;
     public Pathfinding pathfinding;
     public RoomController roomController;
+    public PixPerf pixelPerfect;
+    public PixelPerfectUIAnchorManager uiAnchorManager;
 
     //Runtime References
     public Room currentRoom;
@@ -28,13 +30,31 @@ public class GameController : MonoBehaviour
     //Editor + Runtime values
     public string roomName;
 
+    //Resolution Settings
+    public int targetResolutionY = 360;
+    public int scale = 1;
+    public int maxScale;
+
     public void Awake()
     {
         instance = this;
+        //initialize pathfinding systems
         pathfinding.Initialize();
         requestManager.Initialize();
+        //Setup Game world
         LoadMain();
-        grid.CreateGrid();
+
+        //Screen Scaling
+        pixelPerfect.Init();
+        uiAnchorManager.Init();
+
+        maxScale = pixelPerfect.GetMaxScale(targetResolutionY); //gets largest viable pixel scaler for current resolution
+        scale = maxScale;
+        pixelPerfect.SetScale(scale); //sets camera size for current scale
+        uiAnchorManager.UpdateAnchors();
+#if UNITY_EDITOR
+        pixelPerfect.FixViewport(); //deal with odd-numbered resolutions if in editor
+#endif
     }
 
     private void Update()
@@ -43,6 +63,18 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Door in room " + roomName + " unlocked");
             roomController.UnlockDoor();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            scale = Mathf.Min(scale + 1, maxScale);
+            pixelPerfect.SetScale(scale);
+            uiAnchorManager.UpdateAnchors();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            scale = Mathf.Max(scale - 1, 1);
+            pixelPerfect.SetScale(scale);
+            uiAnchorManager.UpdateAnchors();
         }
     }
 
