@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UIAnchor : MonoBehaviour
 {
-    public Vector2 Postition
+    public Vector2 Position
     {
         set
         {

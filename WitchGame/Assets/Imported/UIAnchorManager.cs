@@ -13,7 +13,7 @@ public class UIAnchorManager : MonoBehaviour
         Vector2 dim = new Vector2(uiCamera.orthographicSize * uiCamera.aspect, uiCamera.orthographicSize);
         foreach (UIAnchor a in uiAnchors)
         {
-            a.Postition = a.anchorScaler * dim;
+            a.Position = a.anchorScaler * dim;
         }
     }
 
