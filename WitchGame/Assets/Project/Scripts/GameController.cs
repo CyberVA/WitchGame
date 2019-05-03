@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.U))
         {
             Debug.Log("Door in room " + roomName + " unlocked");
-            roomController.UnlockDoor(roomName);
+            roomController.UnlockDoor();
         }
     }
 
@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
     private void UpdateRoom()
     {
         grid.UpdateGrid(); //create pathfinding grid for current room
-        roomController.UpdateTiles(currentRoom, roomName, false); //update tiles, spawn enemies, other shit
+        roomController.UpdateWorld(currentRoom, roomName, false); //update tiles, spawn enemies, other shit
     }
 
     public void LoadNorth()

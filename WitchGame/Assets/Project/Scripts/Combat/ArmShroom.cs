@@ -77,6 +77,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         spriteRenderer.sortingOrder = layerOrder;
         flash.sortingOrder = layerOrder + 1;
         spriteMask.frontSortingOrder = layerOrder + 1;
+        spriteMask.backSortingOrder = layerOrder;
         layerOrder++;
         //-
 
@@ -114,10 +115,6 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         }
 
         //Timers
-        if(iTimer > 0f)
-        {
-            iTimer -= Time.deltaTime;
-        }
         if(flashTimer > 0f)
         {
             flash.color = new Color(1f, 1f, 1f, flashTimer / combatSettings.armShroom.flashLength);
@@ -125,12 +122,23 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             if (flashTimer <= 0)
             {
                 flash.enabled = false;
+                if(!alive)
+                {
+                    spriteRenderer.sortingOrder = -1;
+                    spriteMask.enabled = false;
+                    flash.gameObject.SetActive(false);
+                    enabled = false;
+                }
             }
         }
 
         if (alive)
         {
             //Living Timers
+            if (iTimer > 0f)
+            {
+                iTimer -= Time.deltaTime;
+            }
             if (requestPathTimer > 0f)
             {
                 requestPathTimer -= Time.deltaTime;

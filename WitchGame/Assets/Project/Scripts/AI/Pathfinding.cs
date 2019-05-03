@@ -50,9 +50,7 @@ public class Pathfinding : MonoBehaviour
 
         //Defines the units vector2 position and the targets vector2 position as a node position in the grid
         Node startNode = grid.NodeFromWorldPoint(startPos);
-        UnityEngine.Debug.Log("SeakerX: " + startNode.gridX + ", SeakerY: " + startNode.gridY);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
-        UnityEngine.Debug.Log("TargetrX: " + targetNode.gridX + ", TargetY: " + targetNode.gridY);
 
         //Only processes a path if it's possible to make a path.
         if (startNode.walkable && targetNode.walkable && startNode != targetNode)

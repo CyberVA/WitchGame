@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static SpclObj;
 
 public class LevelEditor : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class LevelEditor : MonoBehaviour
     //Properties
     GridTransform gridInfo => roomController.gridInfo;
 
+    private void Awake()
+    {
+        roomController.Init();
+    }
     private void Start()
     {
         SetBrush(0);
@@ -46,7 +51,7 @@ public class LevelEditor : MonoBehaviour
     }
     private void UpdateRoom()
     {
-        roomController.UpdateTiles(loadedRoom, levelName, true);
+        roomController.UpdateWorld(loadedRoom, levelName, true);
     }
     private void Load(string lvlName)
     {
@@ -131,27 +136,31 @@ public class LevelEditor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            loadedRoom.SetValue(mp, Layer.Other, 0);
+            loadedRoom.SetValue(mp, Layer.Other, NOTHING);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            loadedRoom.SetValue(mp, Layer.Other, 1);
+            loadedRoom.SetValue(mp, Layer.Other, FOUNTAIN);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            loadedRoom.SetValue(mp, Layer.Other, 50);
+            loadedRoom.SetValue(mp, Layer.Other, ARMSHROOM);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            loadedRoom.SetValue(mp, Layer.Other, 2);
+            loadedRoom.SetValue(mp, Layer.Other, DOOR);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            loadedRoom.SetValue(mp, Layer.Other, 3);
+            loadedRoom.SetValue(mp, Layer.Other, KEY);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            loadedRoom.SetValue(mp, Layer.Other, 51);
+            loadedRoom.SetValue(mp, Layer.Other, GEBLIN);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, SPODER);
         }
 
         //Room travel
@@ -276,20 +285,23 @@ public class LevelEditor : MonoBehaviour
         {
             switch (v)
             {
-                case 1: //fountain
+                case FOUNTAIN: //fountain
                     SimpGL.DrawSprite(rect, 0.1f, 0f, 0.2f, 0.1f);
                     break;
-                case 2: //door
+                case DOOR: //door
                     SimpGL.DrawSprite(rect, 0.2f, 0f, 0.3f, 0.1f);
                     break;
-                case 3: //key
+                case KEY: //key
                     SimpGL.DrawSprite(rect, 0.3f, 0f, 0.4f, 0.1f);
                     break;
-                case 50: //armshroom
+                case ARMSHROOM: //armshroom
                     SimpGL.DrawSprite(rect, 0f, 0f, 0.1f, 0.1f);
                     break;
-                case 51: //goblin
+                case GEBLIN: //goblin
                     SimpGL.DrawSprite(rect, 0.4f, 0f, 0.5f, 0.1f);
+                    break;
+                case SPODER: //spider
+                    SimpGL.DrawSprite(rect, 0.5f, 0f, 0.6f, 0.1f);
                     break;
             }
         }

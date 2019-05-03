@@ -182,9 +182,7 @@ public class Player : MonoBehaviour, IMover
         //Check for Key-
         if (checkKey && Intersects(colbox, roomController.keyBox))
         {
-            Destroy(roomController.keyObj);
-            roomController.keyObj = null;
-            roomController.pickedUpKeys.Add(GameController.Main.roomName);
+            roomController.CollectKey();
             keys++; //ADD UI CODE LATER
             checkKey = false;
         }
@@ -196,7 +194,7 @@ public class Player : MonoBehaviour, IMover
             {
                 if(Intersects(colbox, doorBox))
                 {
-                    roomController.UnlockDoor(GameController.Main.roomName);
+                    roomController.UnlockDoor();
                     keys--;
                     break;
                 }

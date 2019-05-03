@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using TwoStepCollision;
 using static TwoStepCollision.Func;
+using static SpclObj;
 
 /// <summary>
 /// Creates and manages the runtime objects of a room
@@ -23,7 +24,6 @@ public class RoomController : MonoBehaviour
     int width;
     int height;
     int spriteLayerId;
-    bool init = false;
     /// <summary>
     /// solid objects in the room
     /// </summary>
@@ -47,7 +47,7 @@ public class RoomController : MonoBehaviour
     /// set of room names where doors have been unlocked
     /// </summary>
     HashSet<string> unlockedDoors = new HashSet<string>();
-    public HashSet<string> pickedUpKeys = new HashSet<string>();
+    HashSet<string> pickedUpKeys = new HashSet<string>();
     /// <summary>
     /// collider for fountain
     /// </summary>
@@ -94,17 +94,9 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        if(!init) //init for scenes without GameController
-        {
-            Init();
-        }
-    }
-    public void Init()
+    public void Init() //called by awake of controller
     {
         spriteLayerId = SortingLayer.NameToID("Tiles"); //get layerid used for tiles
-        init = true;
     }
 
     public void Setup(int w, int h)
@@ -131,12 +123,18 @@ public class RoomController : MonoBehaviour
             p.x = 0;
         }
     }
-    public void UpdateTiles(Room room, string roomName, bool inEditor)
+    /// <summary>
+    /// updates all elements managed by this roomcontroller
+    /// </summary>
+    /// <param name="room"></param>
+    /// <param name="roomName"></param>
+    /// <param name="inEditor"></param>
+    public void UpdateWorld(Room room, string roomName, bool inEditor)
     {
         wallColliders.Clear(); //remove old wall colliders
         doors.Clear(); //clear old doorlist
         doorBoxes.Clear(); //remove old door colliders
-        enemies.Clear(); //remove old enemies
+        enemies.Clear(); //remove old enemy references
         foreach (GameObject r in removeOnLoad) //destroy other objects in old room
         {
             Destroy(r);
@@ -144,6 +142,7 @@ public class RoomController : MonoBehaviour
         removeOnLoad.Clear(); //reset list after objects destroyed
         if(!inEditor)
         {
+            //disable conditional collision checks on player
             GameController.Main.player.checkWin = false;
             GameController.Main.player.checkKey = false;
             GameController.Main.player.checkDoor = false;
@@ -187,7 +186,7 @@ public class RoomController : MonoBehaviour
                 //Other Objects
                 if(!inEditor)
                 {
-                    AddSpecialObject(p, room.GetValue(p, Layer.Other), roomName);
+                    AddSpecialObject(p, room.GetValue(p, Layer.Other));
                 }
 
                 //iterate
@@ -196,7 +195,7 @@ public class RoomController : MonoBehaviour
             p.y++;
             p.x = 0;
         }
-        /*
+        /*//unused object system
         IEnumerator<Decoration> enumerator = room.GetDecorations();
         Decoration dec;
         while(enumerator.MoveNext())
@@ -205,6 +204,9 @@ public class RoomController : MonoBehaviour
             CreateDecoration(new Vector2(dec.x, dec.y), dec.value);
         }*/
     }
+    /// <summary>
+    /// is gridpos p within the room?
+    /// </summary>
     public bool Inbounds(GridPos p)
     {
         return !(p.x < 0 || p.x >= width || p.y < 0 || p.y >= height);
@@ -223,14 +225,26 @@ public class RoomController : MonoBehaviour
         Box m = new Box(gridInfo.GetGridVector(p), 1f, 1f);
         wallColliders.Remove(m);
     }
-    public void UnlockDoor(string roomName)
+    /// <summary>
+    /// Removes door persistantly
+    /// </summary>
+    public void UnlockDoor()
     {
-        unlockedDoors.Add(roomName);
+        unlockedDoors.Add(GameController.Main.roomName);
         foreach(GridPos p in doors)
         {
             sprites[p.GetIndex(width)].sprite = tileSet[0];
         }
         doors.Clear();
+    }
+    /// <summary>
+    /// Removes key item persistantly
+    /// </summary>
+    public void CollectKey()
+    {
+        Destroy(keyObj);
+        keyObj = null;
+        pickedUpKeys.Add(GameController.Main.roomName);
     }
 
     public void CreateDecoration(Vector2 v, byte value)
@@ -239,21 +253,21 @@ public class RoomController : MonoBehaviour
         obj.AddComponent<SpriteRenderer>().sprite = tileSet[value];
         obj.transform.position = v;
     }
-    public void AddSpecialObject(GridPos p, byte value, string roomName)
+    public void AddSpecialObject(GridPos p, byte value)
     {
         Vector2 v = gridInfo.GetGridVector(p);
         GameObject go;
         switch (value)
         {
-            case 1: //fountain
+            case FOUNTAIN: //fountain
                 go = Instantiate(roomPrefabs.fountain);
                 go.transform.position = v;
                 winbox = new Box(v, 2f, 2f);
                 GameController.Main.player.checkWin = true;
                 removeOnLoad.Add(go);
                 break;
-            case 2: //door
-                if(!unlockedDoors.Contains(roomName))
+            case DOOR: //door
+                if(!unlockedDoors.Contains(GameController.Main.roomName))
                 {
                     doors.Add(p);
                     doorBoxes.Add(new Box(v, 1f, 1f));
@@ -264,8 +278,8 @@ public class RoomController : MonoBehaviour
                     sprites[p.GetIndex(width)].sprite = tileSet[0];
                 }
                 break;
-            case 3: //key
-                if(!pickedUpKeys.Contains(roomName))
+            case KEY: //key
+                if(!pickedUpKeys.Contains(GameController.Main.roomName))
                 {
                     go = Instantiate(roomPrefabs.key);
                     keyObj = go;
@@ -274,10 +288,17 @@ public class RoomController : MonoBehaviour
                     GameController.Main.player.checkKey = true;
                 }
                 break;
-            case 50: //armShroom
-                ArmShroom armShroom = Instantiate(roomPrefabs.armShroom, v, Quaternion.identity).GetComponent<ArmShroom>();
+            case ARMSHROOM: //armShroom
+                go = Instantiate(roomPrefabs.armShroom, v, Quaternion.identity);
+                ArmShroom armShroom = go.GetComponent<ArmShroom>();
                 armShroom.box.Center = v;
-                removeOnLoad.Add(armShroom.gameObject);
+                removeOnLoad.Add(go);
+                break;
+            case GEBLIN: //temp placeholder clone of shroom
+                go = Instantiate(roomPrefabs.geblin, v, Quaternion.identity);
+                ArmShroom geblin = go.GetComponentInChildren<ArmShroom>();
+                geblin.box.Center = v;
+                removeOnLoad.Add(go);
                 break;
         }
 
@@ -340,4 +361,15 @@ public class RoomController : MonoBehaviour
             EndBoxesGL();
         }
     }
+}
+
+static class SpclObj
+{
+    public const byte NOTHING = 0;
+    public const byte FOUNTAIN = 1;
+    public const byte DOOR = 2;
+    public const byte KEY = 3;
+    public const byte ARMSHROOM = 50;
+    public const byte GEBLIN = 51;
+    public const byte SPODER = 52;
 }

@@ -6,5 +6,6 @@ public class RoomPrefabs : ScriptableObject
 {
     public GameObject fountain;
     public GameObject armShroom;
+    public GameObject geblin;
     public GameObject key;
 }
