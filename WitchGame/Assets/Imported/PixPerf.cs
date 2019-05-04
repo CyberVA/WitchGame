@@ -8,6 +8,8 @@ public class PixPerf : MonoBehaviour
     public int pixelsPerUnit;
     [NonSerialized]
     public float f;
+    [NonSerialized]
+    public float pixelSize;
     /*
     int lastHeight = -1;
 #if UNITY_EDITOR
@@ -20,6 +22,31 @@ public class PixPerf : MonoBehaviour
     public void Init()
     {
         mainCamera = GetComponent<Camera>();
+        pixelSize = 1f / pixelsPerUnit;
+    }
+    public Vector2 PixSnapped(Vector2 v)
+    {
+        if(v.x < 0)
+        {
+            v.x = -v.x;
+            v.x = v.x - v.x % pixelSize;
+            v.x = -v.x;
+        }
+        else
+        {
+            v.x = v.x - v.x % pixelSize;
+        }
+        if (v.y < 0)
+        {
+            v.y = -v.y;
+            v.y = v.y - v.y % pixelSize;
+            v.y = -v.y;
+        }
+        else
+        {
+            v.y = v.y - v.y % pixelSize;
+        }
+        return v;
     }
 
     public void SetScale(int scale)

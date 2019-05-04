@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flash: {fileID: 4513494692418293226}
+  shockWavePrefab: {fileID: 5702330130063702151, guid: a768ff69d1c4483458e113529e0fe006,
+    type: 3}
   box:
     x: 0
     y: 0

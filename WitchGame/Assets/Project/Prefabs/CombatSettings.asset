@@ -15,8 +15,8 @@ MonoBehaviour:
   player:
     hp: 1
     moveSpeed: 2.5
-    inertia: 4
-    vMulitplierMelee: 1
+    inertia: 7
+    vMulitplierMelee: 4
     vMultiplirRange: 1
     flashLength: 0.25
     invincibleLength: 0.25
@@ -39,4 +39,9 @@ MonoBehaviour:
     damage: 3
   playerMeleeLength: 0.2
   playerShroomSpeed: 10
+  armShroomAttackTriggerRange: 1.8
+  armShroomAttackRange: 2
+  armShroomAttackCooldown: 3
+  armShroomAttackPrep: 0.3
+  armShroomAttackDamage: 0.1
   minVelocity: 0.1

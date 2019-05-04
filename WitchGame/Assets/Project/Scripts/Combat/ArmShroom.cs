@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using TwoStepCollision;
 using static TwoStepCollision.Func;
+using static ArmShroom.AISTATES;
 using System;
 
 public class ArmShroom : MonoBehaviour, IHurtable, IMover
 {
-    public static int layerOrder = 0; //static counter for consistant layering
-    public static int enemyCount = 0;
+    public static int enemyCount = 0; //static counter for consistant layering
 
     //Editor Ref
     public SpriteRenderer flash;
+    public GameObject shockWavePrefab;
 
     //Editor Values
     public Box box;
@@ -26,8 +27,12 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     //Timers
     float iTimer;
     float attackTimer;
+    float attackPrepTimer;
     float flashTimer;
     float requestPathTimer;
+    float shockWaveTimer;
+
+    float shockWaveLength = 0.2f;
 
     const float requestPathFreq = 0.5f;
 
@@ -37,6 +42,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     float health;
     bool alive = true;
     bool deathFlag = false;
+    GameObject shockWave;
     Vector2 velocity = Vector2.zero;
     Vector2 movement;
 
@@ -45,11 +51,29 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
     Vector2 currentWaypoint;
     Vector2 pathTrajectory; // normalized direction to path waypoint
     int targetIndex; //index of our target
-    bool followingPath;
+
+    byte aiState = SEEKING;
+
+    public static class AISTATES
+    {
+        public const byte SEEKING = 0;
+        public const byte FOLLOWING = 1;
+        public const byte ATTACKING = 2;
+    }
+
 
     float Speed
     {
         get => combatSettings.armShroom.moveSpeed * speedMultiplier;
+    }
+    Vector2 pos
+    {
+        get => box.Center;
+        set
+        {
+            box.Center = value;
+            transform.position = value;
+        }
     }
     
     #region IHurtable
@@ -77,11 +101,10 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         staticColliders = roomController.wallColliders;
 
         //Layer management
-        spriteRenderer.sortingOrder = layerOrder;
-        flash.sortingOrder = layerOrder + 1;
-        spriteMask.frontSortingOrder = layerOrder + 1;
-        spriteMask.backSortingOrder = layerOrder;
-        layerOrder++;
+        spriteRenderer.sortingOrder = enemyCount;
+        flash.sortingOrder = enemyCount + 1;
+        spriteMask.frontSortingOrder = enemyCount + 1;
+        spriteMask.backSortingOrder = enemyCount;
         //-
 
         //add self to collision list
@@ -90,9 +113,11 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         //AI
         // Requests a path from the PathRequestManager
         PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
-        requestPathTimer = requestPathFreq + 0.1f * enemyCount++;
+        requestPathTimer = requestPathFreq + 0.1f * enemyCount;
+
+        enemyCount++;
     }
-    private void FirstInit()
+    private void FirstInit() //may be used for pooling in the future
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteMask = GetComponent<SpriteMask>();
@@ -115,6 +140,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         {
             deathFlag = false;
             roomController.enemies.Remove(this);
+            transform.position = GameController.Main.pixelPerfect.PixSnapped(pos);
         }
 
         //Timers
@@ -134,6 +160,14 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                 }
             }
         }
+        if (shockWaveTimer > 0f)
+        {
+            shockWaveTimer -= Time.deltaTime;
+            if (shockWaveTimer <= 0f)
+            {
+                Destroy(shockWave);
+            }
+        }
 
         if (alive)
         {
@@ -142,7 +176,52 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             {
                 iTimer -= Time.deltaTime;
             }
-            if (requestPathTimer > 0f)
+            if(aiState == ATTACKING)
+            {
+                if(attackPrepTimer > 0f)
+                {
+                    attackPrepTimer -= Time.deltaTime;
+                    if(attackPrepTimer <= 0f)
+                    {
+                        TriggerAttack();
+                    }
+                }
+                else if(attackTimer > 0f)
+                {
+                    attackTimer -= Time.deltaTime;
+                    if (attackTimer <= 0)
+                    {
+                        if (PlayerInRange)
+                        {
+                            PrepAttack();
+                        }
+                        else
+                        {
+                            aiState = SEEKING;
+                            PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
+                            requestPathTimer += requestPathFreq;
+                        }
+                    }
+                }
+            }
+            if (aiState == ATTACKING && attackTimer > 0f) //after attacking, the shroom waits, then attacks again or starts following the player again
+            {
+                attackTimer -= Time.deltaTime;
+                if (attackTimer <= 0)
+                {
+                    if (PlayerInRange)
+                    {
+                        TriggerAttack();
+                    }
+                    else
+                    {
+                        aiState = SEEKING;
+                        PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
+                        requestPathTimer += requestPathFreq;
+                    }
+                }
+            }
+            if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
             {
                 requestPathTimer -= Time.deltaTime;
                 if (requestPathTimer <= 0)
@@ -170,14 +249,10 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                     velocity = Vector2.zero;
                 }
             }
-            //Pathfinding-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                PathRequestManager.RequestPath(transform.position, GameController.Main.player.pos, OnPathFound);
-            }
+            //PathFinding
 
             //Folow Path--
-            if (followingPath && flashTimer <= 0f)
+            if (aiState == FOLLOWING && flashTimer <= 0f)
             {
                 // If the positon of our unit is the same position as it's target
                 if (Vector2.Distance(box.Center, currentWaypoint) < 0.1f)
@@ -185,16 +260,16 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                     // Increments the target index
                     targetIndex++;
                     // If the targetIndex is greater than the length of our path, stop following path
-                    if (targetIndex >= path.Length - 5)
+                    if (targetIndex >= path.Length)
                     {
-                        followingPath = false;
+                        aiState = SEEKING;
                     }
                     else
                     {
                         currentWaypoint = path[targetIndex];
                     }
                 }
-                if (followingPath)
+                if (aiState == FOLLOWING)
                 {
                     //Moves the unit towards the waypoint
                     movement += (currentWaypoint - box.Center).normalized * Speed;
@@ -202,27 +277,66 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             }
 
             //Apply movement
-            SuperTranslate(this, movement * Time.deltaTime, staticColliders);
+            if(movement != Vector2.zero)
+            {
+                SuperTranslate(this, movement * Time.deltaTime, staticColliders);
+            }
+            else
+            {
+                transform.position = GameController.Main.pixelPerfect.PixSnapped(pos);
+            }
 
             //Post movement
-            /*if(attackTimer < combatSettings.armShroomAttackCooldown && Vector2.Distance(box.Center, GameController.Main.player.pos) < combatSettings.armShroomAttackTriggerRange)
+            if(aiState != ATTACKING && attackTimer < combatSettings.armShroomAttackCooldown && PlayerInRange)
             {
-                followingPath = false;
-            }*/
+                aiState = ATTACKING;
+                PrepAttack();
+            }
         }
     }
 
+    void PrepAttack()
+    {
+        attackPrepTimer = combatSettings.armShroomAttackPrep;
+    }
+    void TriggerAttack()
+    {
+        Debug.Log("SLAM");
+        if (shockWave != null) Destroy(shockWave);
+
+        shockWave = Instantiate(shockWavePrefab);
+        shockWave.transform.localScale = new Vector3(combatSettings.armShroomAttackRange * 2, combatSettings.armShroomAttackRange * 2, 1f);
+        shockWave.transform.position = pos;
+        shockWaveTimer = shockWaveLength;
+
+        Vector2 toPlayer = playerHurt.HitBox.Center - pos;
+        float mag = toPlayer.magnitude;
+        if (mag < combatSettings.armShroomAttackRange)
+        {
+            playerHurt.Hurt(combatSettings.armShroomAttackDamage, DamageTypes.Shockwave, toPlayer / mag);
+        }
+        attackTimer += combatSettings.armShroomAttackCooldown;
+    }
+
+    bool PlayerInRange => Vector2.Distance(box.Center, playerHurt.HitBox.Center) < combatSettings.armShroomAttackTriggerRange;
+
     public void OnPathFound(Vector3[] newPath, bool pathSuccesfull)
     {
+        if (!alive) return;
         if (pathSuccesfull)
         {
+            if (aiState == SEEKING) aiState = FOLLOWING;
+            else if (aiState == ATTACKING) return;
             //Sets path to the new Path
             path = newPath;
             //Sets the targets index to 0
             targetIndex = 0;
             currentWaypoint = path[targetIndex];
             //make path following run in update
-            followingPath = true;
+        }
+        else
+        {
+            aiState = SEEKING;
         }
     }
 
@@ -241,6 +355,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             {
                 if (iTimer <= 0)
                 {
+                    if(attackPrepTimer > 0) PrepAttack();
                     //set knockback
                     velocity = vector * combatSettings.armShroom.vMulitplierMelee;
                     health -= damage;

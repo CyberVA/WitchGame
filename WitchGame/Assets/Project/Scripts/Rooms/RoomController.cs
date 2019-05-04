@@ -152,8 +152,7 @@ public class RoomController : MonoBehaviour
         GridPos p = new GridPos(0, 0); //iterator/placement position
         int i; //one-dimensional index of iterator
         int colStack; //counter for colliders placed consecutively
-        ArmShroom.layerOrder = 0; //reset layercounter for armshrooms
-        ArmShroom.enemyCount = 0; //reset counter for armshrooms
+        ArmShroom.enemyCount = 0; //reset layercounter for armshrooms
         while (p.y < height)
         {
             colStack = 0;

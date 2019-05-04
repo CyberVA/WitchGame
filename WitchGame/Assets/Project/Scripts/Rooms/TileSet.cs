@@ -11,7 +11,19 @@ public class TileSet : ScriptableObject, IEnumerable<Sprite>
     {
         get
         {
-            return tiles[i];
+#if UNITY_EDITOR
+            try
+            {
+#endif
+                return tiles[i];
+#if UNITY_EDITOR
+            }
+            catch
+            {
+                Debug.LogError("tileid" + i + " not in tileset");
+                return null;
+            }
+#endif
         }
     }
 

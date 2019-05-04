@@ -73,7 +73,14 @@ public class PathRequestManager : MonoBehaviour
     public void FinishedProcessingPath(Vector3[] path, bool success)
     {
         //Sets the current path and the success of the path to currentPathRequest
-        currentPathRequest.callback(path, success);
+        try
+        {
+            currentPathRequest.callback(path, success);
+        }
+        catch
+        {
+            Debug.LogWarning("path processed for nonexistant unit");
+        }
         //Sets that we are currently not processing a path
         isProcessingPath = false;
         //Attempts to process a new path

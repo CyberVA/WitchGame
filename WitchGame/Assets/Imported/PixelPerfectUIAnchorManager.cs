@@ -17,6 +17,12 @@ public class PixelPerfectUIAnchorManager : MonoBehaviour
     {
         Vector2 v = new Vector2(Screen.width, Screen.height);
         v *= pp.f;
+        float minPrecision = 1f / pp.pixelsPerUnit;
+
+        if (minPrecision != 0)
+        {
+            v = new Vector2(v.x - v.x % minPrecision, v.y - v.y % minPrecision);
+        }
 
         foreach (UIAnchor anchor in uiAnchors)
         {

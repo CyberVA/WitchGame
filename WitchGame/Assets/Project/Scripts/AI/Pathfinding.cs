@@ -78,7 +78,10 @@ public class Pathfinding : MonoBehaviour
                     //stops the stopwatch.
                     sw.Stop();
                     //prints the current time of the stopwatch.
-                    print("Path found: " + sw.ElapsedMilliseconds + "ms");
+                    if(sw.ElapsedMilliseconds > 5)
+                    {
+                        print("Path found: " + sw.ElapsedMilliseconds + "ms");
+                    }
                     //sets that we've completed processing our path.
                     pathSuccess = true;
                     break;
@@ -118,10 +121,6 @@ public class Pathfinding : MonoBehaviour
         {
             //assigns out retraced path to waypoint
             waypoints = RetracePath(startNode, targetNode);
-        }
-        else if(!pathSuccess)
-        {
-            UnityEngine.Debug.Log("A path could not be found");
         }
         //Passes our waypoint into the PathRequestManager, also confirms success in finding a path.
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);

@@ -74,6 +74,7 @@ public class Player : MonoBehaviour, IMover, IHurtable
 
     //Movement
     Vector2 movement;
+    Vector2 velocity = Vector2.zero;
 
     /// <summary>
     /// Shortcut for handling player position
@@ -90,8 +91,15 @@ public class Player : MonoBehaviour, IMover, IHurtable
 
     bool IHurtable.Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
-        //ouch
-        return true;
+        if (damageType == DamageTypes.Shockwave)
+        {
+            //set knockback
+            Debug.Log("oof " + damage);
+            velocity = vector * combatSettings.armShroom.vMulitplierMelee;
+            Health -= damage;
+            return true;
+        }
+        return false;
     }
 
     Box IHurtable.HitBox => colbox;
@@ -125,6 +133,23 @@ public class Player : MonoBehaviour, IMover, IHurtable
 
         //Movement Calculation
         movement = Vector2.zero;
+
+        //Knockback velocity-
+        if (velocity != Vector2.zero)
+        {
+            //Apply velocity to movement
+            movement += velocity;
+
+            //reduce velocity
+            velocity *= 1f - (Time.deltaTime * combatSettings.player.inertia);
+
+            //set velocity to zero if below minimum
+            if (velocity.magnitude < combatSettings.minVelocity)
+            {
+                velocity = Vector2.zero;
+            }
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
             movement.y += combatSettings.player.moveSpeed;
