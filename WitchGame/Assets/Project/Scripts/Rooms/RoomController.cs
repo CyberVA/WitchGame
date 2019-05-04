@@ -147,7 +147,6 @@ public class RoomController : MonoBehaviour
             GameController.Main.player.checkKey = false;
             GameController.Main.player.checkDoor = false;
         }
-        if (keyObj != null) Destroy(keyObj);
 
         GridPos p = new GridPos(0, 0); //iterator/placement position
         int i; //one-dimensional index of iterator
@@ -230,9 +229,19 @@ public class RoomController : MonoBehaviour
     public void UnlockDoor()
     {
         unlockedDoors.Add(GameController.Main.roomName);
-        foreach(GridPos p in doors)
+        SpriteRenderer s;
+        int i;
+        foreach (GridPos p in doors)
         {
-            sprites[p.GetIndex(width)].sprite = tileSet[0];
+            s = new GameObject().AddComponent<SpriteRenderer>();
+            s.sortingLayerID = spriteLayerId;
+            s.sortingOrder = 1;
+            i = p.GetIndex(width);
+            s.sprite = sprites[i].sprite;
+            s.transform.position = sprites[i].transform.position;
+            StartCoroutine(Effects.FadeAway(s, 0.5f, new Vector2(0f, 0.5f), null));
+            removeOnLoad.Add(s.gameObject);
+            sprites[i].sprite = tileSet[0];
         }
         doors.Clear();
     }
@@ -241,7 +250,7 @@ public class RoomController : MonoBehaviour
     /// </summary>
     public void CollectKey()
     {
-        Destroy(keyObj);
+        StartCoroutine(Effects.FadeAway(keyObj.GetComponent<SpriteRenderer>(), 0.5f, new Vector2(0f, 0.5f), null));
         keyObj = null;
         pickedUpKeys.Add(GameController.Main.roomName);
     }
@@ -284,6 +293,7 @@ public class RoomController : MonoBehaviour
                     keyObj = go;
                     go.transform.position = v;
                     keyBox = new Box(v, 1f, 0.5f);
+                    removeOnLoad.Add(go);
                     GameController.Main.player.checkKey = true;
                 }
                 break;

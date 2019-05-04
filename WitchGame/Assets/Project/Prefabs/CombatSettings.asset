@@ -39,8 +39,8 @@ MonoBehaviour:
     damage: 3
   playerMeleeLength: 0.2
   playerShroomSpeed: 10
-  armShroomAttackTriggerRange: 1.8
-  armShroomAttackRange: 2
+  armShroomAttackTriggerRange: 1.4
+  armShroomAttackRange: 1.5
   armShroomAttackCooldown: 3
   armShroomAttackPrep: 0.3
   armShroomAttackDamage: 0.1

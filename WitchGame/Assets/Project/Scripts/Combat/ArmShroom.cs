@@ -5,7 +5,7 @@ using static TwoStepCollision.Func;
 using static ArmShroom.AISTATES;
 using System;
 
-public class ArmShroom : MonoBehaviour, IHurtable, IMover
+public class ArmShroom : MonoBehaviour, IHurtable, IMover, ICallbackReciever
 {
     public static int enemyCount = 0; //static counter for consistant layering
 
@@ -140,26 +140,10 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
         {
             deathFlag = false;
             roomController.enemies.Remove(this);
-            transform.position = GameController.Main.pixelPerfect.PixSnapped(pos);
+            //transform.position = GameController.Main.pixelPerfect.PixSnapped(pos);
         }
 
         //Timers
-        if(flashTimer > 0f)
-        {
-            flash.color = new Color(1f, 1f, 1f, flashTimer / combatSettings.armShroom.flashLength);
-            flashTimer -= Time.deltaTime;
-            if (flashTimer <= 0)
-            {
-                flash.enabled = false;
-                if(!alive)
-                {
-                    spriteRenderer.sortingOrder = -1;
-                    spriteMask.enabled = false;
-                    flash.gameObject.SetActive(false);
-                    enabled = false;
-                }
-            }
-        }
         if (shockWaveTimer > 0f)
         {
             shockWaveTimer -= Time.deltaTime;
@@ -176,7 +160,20 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
             {
                 iTimer -= Time.deltaTime;
             }
-            if(aiState == ATTACKING)
+            if (flashTimer > 0f)
+            {
+                flash.color = new Color(1f, 1f, 1f, flashTimer / combatSettings.armShroom.flashLength);
+                flashTimer -= Time.deltaTime;
+                if (flashTimer <= 0)
+                {
+                    flash.enabled = false;
+                    if (!alive)
+                    {
+                        enabled = false;
+                    }
+                }
+            }
+            if (aiState == ATTACKING)
             {
                 if(attackPrepTimer > 0f)
                 {
@@ -361,7 +358,8 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                     health -= damage;
                     if (health <= 0)
                     {
-                        StartDying();
+                        StartDying(vector);
+                        return true;
                     }
                     //start hit flash
                     flash.enabled = true;
@@ -379,7 +377,8 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
                 health -= damage;
                 if (health <= 0)
                 {
-                    StartDying();
+                    StartDying(vector);
+                    return true;
                 }
 
                 //start hit flash
@@ -396,12 +395,22 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover
 
     //static Color fadeColor = new Color(0.25f, 0.25f, 0.25f, 0.5f);
 
-    void StartDying()
+    void StartDying(Vector2 v)
     {
         alive = false;
         deathFlag = true;
-        spriteRenderer.color = Color.black;
+        StartCoroutine(Effects.FadeAway(spriteRenderer, 0.5f, v * 1.5f, this));
         GetComponent<Animator>().enabled = false;
+        spriteRenderer.sortingOrder = -1;
+        spriteMask.enabled = false;
+        flash.gameObject.SetActive(false);
     }
 
+    void ICallbackReciever.Callback(uint callBackCode)
+    {
+        if(callBackCode == Effects.fadeCallback)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
