@@ -4,7 +4,7 @@ using System.Collections;
 [CreateAssetMenu(fileName = "New CombatSettings", menuName = "CombatSettings")]
 public class CombatSettings : ScriptableObject
 {
-    public CombatStats player, armShroom;
+    public CombatStats player, armShroom, geblin;
     public float playerMana;
     public Ability playerMelee, playerShroom;
     public float playerMeleeLength, playerShroomSpeed;

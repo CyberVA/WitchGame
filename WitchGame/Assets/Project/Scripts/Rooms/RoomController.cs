@@ -151,7 +151,7 @@ public class RoomController : MonoBehaviour
         GridPos p = new GridPos(0, 0); //iterator/placement position
         int i; //one-dimensional index of iterator
         int colStack; //counter for colliders placed consecutively
-        ArmShroom.enemyCount = 0; //reset layercounter for armshrooms
+        Enemy.enemyCount = 0; //reset layercounter for armshrooms
         while (p.y < height)
         {
             colStack = 0;
@@ -299,13 +299,13 @@ public class RoomController : MonoBehaviour
                 break;
             case ARMSHROOM: //armShroom
                 go = Instantiate(roomPrefabs.armShroom, v, Quaternion.identity);
-                ArmShroom armShroom = go.GetComponent<ArmShroom>();
+                Enemy armShroom = go.GetComponent<Enemy>();
                 armShroom.box.Center = v;
                 removeOnLoad.Add(go);
                 break;
             case GEBLIN: //temp placeholder clone of shroom
                 go = Instantiate(roomPrefabs.geblin, v, Quaternion.identity);
-                ArmShroom geblin = go.GetComponentInChildren<ArmShroom>();
+                Enemy geblin = go.GetComponent<Enemy>();
                 geblin.box.Center = v;
                 removeOnLoad.Add(go);
                 break;

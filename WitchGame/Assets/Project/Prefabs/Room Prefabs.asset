@@ -16,5 +16,5 @@ MonoBehaviour:
     type: 3}
   armShroom: {fileID: 4513494692143990489, guid: 7946917b20425c04293f86d3453a2d3d,
     type: 3}
-  geblin: {fileID: 5162894646718917555, guid: 90ac7354a46534a40ae65896093b6c07, type: 3}
+  geblin: {fileID: 7952325027085865163, guid: 90ac7354a46534a40ae65896093b6c07, type: 3}
   key: {fileID: 8588608694593213363, guid: d09ec0602443c5649b24923d8689a6c7, type: 3}
