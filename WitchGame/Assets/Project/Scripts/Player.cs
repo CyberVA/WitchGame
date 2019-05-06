@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using static TwoStepCollision.Func;
 
-public class Player : MonoBehaviour, IMover, IHurtable
+public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 {
     //Editor Ref
     public SpriteRenderer weapon; //spriterenderer for melee hitbox
@@ -342,6 +342,11 @@ public class Player : MonoBehaviour, IMover, IHurtable
         SceneManager.LoadScene("Project/Scenes/WinScene"); //temp win screen
     }
 
+    void ICallbackReciever.Callback(uint callBackCode)
+    {
+        
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -354,5 +359,6 @@ public class Player : MonoBehaviour, IMover, IHurtable
         }
         EndBoxesGL();
     }
+
 #endif
 }

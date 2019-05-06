@@ -7,6 +7,14 @@ using System;
 
 public class Geblin : Enemy
 {
+    //Melee Attack
+    float attackDelayTimer;
+    float meleeTimer;
+    Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
+    Vector2 toPlayer;
+    Box attackBox = new Box(Vector2.zero, 1f, 1f);
+
+
     protected override float Speed
     {
         get => combatSettings.geblin.moveSpeed * speedMultiplier;
@@ -47,6 +55,21 @@ public class Geblin : Enemy
                 iTimer -= Time.deltaTime;
             }
             UpdateFlash();
+            if(aiState == ATTACKING)
+            {
+                if(attackDelayTimer > 0f)
+                {
+                    attackDelayTimer -= Time.deltaTime;
+                    if(attackDelayTimer <= 0f)
+                    {
+                        if (Intersects(attackBox, playerHurt.HitBox))
+                        {
+                            playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
+                        }
+                        aiState = SEEKING;
+                    }
+                }
+            }
             if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
             {
                 UpdatePathTimer();
@@ -72,6 +95,20 @@ public class Geblin : Enemy
             else
             {
                 transform.position = GameController.Main.pixelPerfect.PixSnapped(pos);
+            }
+
+            //Post movement
+            if(aiState == FOLLOWING)
+            {
+                toPlayer = playerHurt.HitBox.Center - pos;
+                if (toPlayer.magnitude < 1f)
+                {
+                    //stab
+                    meleeVector = toPlayer.normalized;
+                    attackBox.Center = pos + meleeVector;
+                    attackDelayTimer = combatSettings.geblinStabDelay;
+                    aiState = ATTACKING;
+                }
             }
         }
     }
