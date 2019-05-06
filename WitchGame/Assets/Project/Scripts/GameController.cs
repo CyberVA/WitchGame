@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     public RoomController roomController;
     public PixPerf pixelPerfect;
     public PixelPerfectUIAnchorManager uiAnchorManager;
+    public Pause pause;
 
     //Runtime References
     public Room currentRoom;
@@ -52,6 +53,10 @@ public class GameController : MonoBehaviour
         scale = maxScale;
         pixelPerfect.SetScale(scale); //sets camera size for current scale
         uiAnchorManager.UpdateAnchors();
+
+        //pause script
+        pause.paused = false; //unpauses the game when you start the game
+
 #if UNITY_EDITOR
         pixelPerfect.FixViewport(); //deal with odd-numbered resolutions if in editor
 #endif
