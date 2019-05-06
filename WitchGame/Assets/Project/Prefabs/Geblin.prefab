@@ -100,19 +100,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4513494692143990484, guid: 7946917b20425c04293f86d3453a2d3d,
         type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513494692143990484, guid: 7946917b20425c04293f86d3453a2d3d,
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80c86b6142ddd74488ed33bb4803dc6d,
         type: 3}
-      propertyPath: m_Color.g
-      value: 0.7735849
-      objectReference: {fileID: 0}
-    - target: {fileID: 4513494692143990484, guid: 7946917b20425c04293f86d3453a2d3d,
+    - target: {fileID: 4513494692143990485, guid: 7946917b20425c04293f86d3453a2d3d,
         type: 3}
-      propertyPath: m_Color.b
-      value: 0.18583283
-      objectReference: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 80c86b6142ddd74488ed33bb4803dc6d,
+        type: 3}
+    - target: {fileID: 4513494692143990482, guid: 7946917b20425c04293f86d3453a2d3d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 664f63e469d4e7142a6c9c3417faecd4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7946917b20425c04293f86d3453a2d3d, type: 3}
 --- !u!4 &2425223154962662552 stripped
