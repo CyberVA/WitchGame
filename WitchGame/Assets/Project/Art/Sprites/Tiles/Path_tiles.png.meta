@@ -1,21 +1,17 @@
 fileFormatVersion: 2
-guid: ff4c547e28cb00340b7b3555a0c1964d
+guid: 754a1090b87696f448c289ac0659c243
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Mushroom_Attack2_0
-    21300002: Mushroom_Attack2_1
-    21300004: Mushroom_Attack2_2
-    21300006: Mushroom_Attack2_3
-    21300008: Mushroom_Attack2_4
-    21300010: Mushroom_Attack2_5
-    21300012: Mushroom_Attack2_6
-    21300014: Mushroom_Attack2_7
-    21300016: Mushroom_Attack2_8
-    21300018: Mushroom_Attack2_9
-    21300020: Mushroom_Attack2_10
-    21300022: Mushroom_Attack2_11
-    21300024: Mushroom_Attack2_12
-    21300026: Mushroom_Attack2_13
+    21300000: Path_tiles_0
+    21300002: Path_tiles_1
+    21300004: Path_tiles_2
+    21300006: Path_tiles_3
+    21300008: Path_tiles_4
+    21300010: Path_tiles_5
+    21300012: Path_tiles_6
+    21300014: Path_tiles_7
+    21300016: Path_tiles_8
+    21300018: Path_tiles_9
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -98,281 +94,201 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mushroom_Attack2_0
+      name: Path_tiles_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
+        x: 1
+        y: 154
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c9415705e94a874080d76e03e78c802
+      spriteID: 8f062c5f2538b7049957d910a2997511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_1
+      name: Path_tiles_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 80
+        x: 52
+        y: 154
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed1033215cedd1246916cb1b4279e47e
+      spriteID: 7728d50ca384d334c938d1460e9ab7bf
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_2
+      name: Path_tiles_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 80
+        x: 103
+        y: 154
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43dcd62ea93e44447aaaa4eecad27256
+      spriteID: 4d7672bc6b35fe1448e89575e265c396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_3
+      name: Path_tiles_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 80
+        x: 1
+        y: 103
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5cc7159d3d67044ba13fd78c0907ee6
+      spriteID: bde0f06498b985144876114f95dcaafa
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_4
+      name: Path_tiles_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 80
+        x: 52
+        y: 103
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dbce19e7407e1c4bbd218556403e0db
+      spriteID: 9aa0c22df2c89e346b23b7f61c5805e2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_5
+      name: Path_tiles_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 80
+        x: 103
+        y: 103
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7cfdc07342fc114c8ed5b1e660c6d0f
+      spriteID: 59e95d05348215e40ba5077f887976a0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_6
+      name: Path_tiles_6
       rect:
         serializedVersion: 2
-        x: 300
-        y: 80
+        x: 1
+        y: 52
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 650389904411cf242b3265a68abf7e0e
+      spriteID: c3315649bd92fc24492fcca5ca82c752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_7
+      name: Path_tiles_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 52
+        y: 52
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b7540f19957b3c4f9a99be49049650e
+      spriteID: e7c1bcf30eeac044ab65737a05e9d8c4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_8
+      name: Path_tiles_8
       rect:
         serializedVersion: 2
-        x: 50
-        y: 0
+        x: 103
+        y: 52
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9030e55936a352242a71ad1d44d00b75
+      spriteID: 8afe4e0b2355f3549849a091aabc07c9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mushroom_Attack2_9
+      name: Path_tiles_9
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
+        x: 1
+        y: 1
         width: 50
-        height: 80
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d248aff6977235140ab5fb4e43727a3e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mushroom_Attack2_10
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 0
-        width: 50
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf87dd0c41c334e478889d889a14f1ed
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mushroom_Attack2_11
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 0
-        width: 50
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb846d6e8f0ab9f4a9ee4e8402524c0b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mushroom_Attack2_12
-      rect:
-        serializedVersion: 2
-        x: 250
-        y: 0
-        width: 50
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 807e4498106ef3b44b6251469a926bed
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mushroom_Attack2_13
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 0
-        width: 50
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2764562c5cb8944bb20356a425bd5bf
+      spriteID: bc33fd4b82b4e544c9bc38b105d937d7
       vertices: []
       indices: 
       edges: []
@@ -380,7 +296,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b8aa6ad5ef727d049a97becf03c4ab25
+    spriteID: f6d26434f7297f14183837f687aea458
     vertices: []
     indices: 
     edges: []

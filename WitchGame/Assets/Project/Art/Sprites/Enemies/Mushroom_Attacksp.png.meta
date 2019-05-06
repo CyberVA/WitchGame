@@ -1,17 +1,23 @@
 fileFormatVersion: 2
-guid: bdd9681200300c04bbc6f7fe066281de
+guid: 0f7eface8d8d5f249a020e2eb357b45a
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Goblin_Attack_Front_0
-    21300002: Goblin_Attack_Front_1
-    21300004: Goblin_Attack_Front_2
-    21300006: Goblin_Attack_Front_3
-    21300008: Goblin_Attack_Front_4
-    21300010: Goblin_Attack_Front_5
-    21300012: Goblin_Attack_Front_6
-    21300014: Goblin_Attack_Front_7
-    21300016: Goblin_Attack_Front_8
-    21300018: Goblin_Attack_Front_9
+    21300000: Mushroom_Attacksp_0
+    21300002: Mushroom_Attacksp_1
+    21300004: Mushroom_Attacksp_2
+    21300006: Mushroom_Attacksp_3
+    21300008: Mushroom_Attacksp_4
+    21300010: Mushroom_Attacksp_5
+    21300012: Mushroom_Attacksp_6
+    21300014: Mushroom_Attacksp_7
+    21300016: Mushroom_Attacksp_8
+    21300018: Mushroom_Attacksp_9
+    21300020: Mushroom_Attacksp_10
+    21300022: Mushroom_Attacksp_11
+    21300024: Mushroom_Attacksp_12
+    21300026: Mushroom_Attacksp_13
+    21300028: Mushroom_Attacksp_14
+    21300030: Mushroom_Attacksp_15
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -94,201 +100,321 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin_Attack_Front_0
+      name: Mushroom_Attacksp_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 50
+        y: 80
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.51, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aad7a42e396e8f54686a50d0a6c5f22e
+      spriteID: 6d637b70fba415f4d8644e0cd9f11be9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_1
+      name: Mushroom_Attacksp_1
       rect:
         serializedVersion: 2
         x: 50
-        y: 50
+        y: 80
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.51, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 738d02cf0e9dd834cb7c3c7216daed05
+      spriteID: 28a3886808fbe714b92067a7bf42e1c1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_2
+      name: Mushroom_Attacksp_2
       rect:
         serializedVersion: 2
         x: 100
-        y: 50
+        y: 80
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8516ad7f968756047851de7f1ad62495
+      spriteID: 733cf2d615496b843af77a0e4670f77e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_3
+      name: Mushroom_Attacksp_3
       rect:
         serializedVersion: 2
         x: 150
-        y: 50
+        y: 80
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04d4ab25d409ded4ba440f35726390f6
+      spriteID: a2d697b4f83f37f43afbdf751d2446c5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_4
+      name: Mushroom_Attacksp_4
       rect:
         serializedVersion: 2
         x: 200
-        y: 50
+        y: 80
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2eb445d3b6b83c428d452e838c40c5d
+      spriteID: 1aa9f5cf99668db40b442f0de90aa69e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_5
+      name: Mushroom_Attacksp_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 80
+        width: 50
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c28cfffa2fff8094b97a2afec87c48e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Attacksp_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 80
+        width: 50
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81217ea63486f2f498d9abd72aef1e3d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Attacksp_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 80
+        width: 50
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e65485670d8ca247ab56e70c9483d10
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Attacksp_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55dd46091e70a304093af68627984e1f
+      spriteID: 23a649b3b409e4843ab69a66f278c233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_6
+      name: Mushroom_Attacksp_9
       rect:
         serializedVersion: 2
         x: 50
         y: 0
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b3e0b6e1da8e56478da6ad3775a6d1c
+      spriteID: b5c600612ddf31d4199d5bd8f7e82f34
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_7
+      name: Mushroom_Attacksp_10
       rect:
         serializedVersion: 2
         x: 100
         y: 0
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 104d0b64bfcf782459e745981396339d
+      spriteID: 866916e5b4d8a9245b5cc858d1f8943f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_8
+      name: Mushroom_Attacksp_11
       rect:
         serializedVersion: 2
         x: 150
         y: 0
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc2c29779bfdb92488d6eaaa2a5fa4a8
+      spriteID: 605a892159395934ba43f969f4d49741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Attack_Front_9
+      name: Mushroom_Attacksp_12
       rect:
         serializedVersion: 2
         x: 200
         y: 0
         width: 50
-        height: 50
+        height: 80
       alignment: 9
-      pivot: {x: 0.5, y: 0.65}
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d8ede53a92baa942bd501be8dadcea0
+      spriteID: c64662b577b906b43af2ba67e237a397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Attacksp_13
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 50
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76f76773d9243c344908b6d27a47b033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Attacksp_14
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 50
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e5ada12d4ab5af42bac5b85b14190b5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushroom_Attacksp_15
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 0
+        width: 50
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c4dac8e3d1a1484d8c1920af32c37d0
       vertices: []
       indices: 
       edges: []
@@ -296,7 +422,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3194303e1fc526244a0a9b06cbc7c8b0
+    spriteID: f01d00d2c4c12f942b260b2086072c9e
     vertices: []
     indices: 
     edges: []
