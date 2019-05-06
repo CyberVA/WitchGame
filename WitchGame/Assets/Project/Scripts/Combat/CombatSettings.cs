@@ -15,7 +15,7 @@ public class CombatSettings : ScriptableObject
 [System.Serializable]
 public struct CombatStats
 {
-    public float hp, moveSpeed, inertia, vMulitplierMelee, vMultiplirRange, flashLength, invincibleLength;
+    public float hp, moveSpeed, inertia, vMulitplierMelee, vMultiplierRange, flashLength, invincibleLength;
 }
 
 [System.Serializable]

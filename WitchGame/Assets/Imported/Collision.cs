@@ -93,8 +93,27 @@ namespace TwoStepCollision
         }
     }
 
+    public interface ICollidesWith<T>
+    {
+        bool Intersects(T other);
+    }
+
     [Serializable]
-    public class Box : IEquatable<Box>
+    public class Tri : ICollidesWith<Box>
+    {
+        public Vector2 pos;
+        public float x;
+        public float y;
+
+        bool ICollidesWith<Box>.Intersects(Box other)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    [Serializable]
+    public class Box : IEquatable<Box>, ICollidesWith<Box>, ICollidesWith<Tri>
     {
         public float x, y, width, height;
         public Vector2 Center
@@ -150,6 +169,16 @@ namespace TwoStepCollision
             this.y = v.y;
             this.width = width;
             this.height = height;
+        }
+
+        bool ICollidesWith<Box>.Intersects(Box other)
+        {
+            return Func.Intersects(this, other);
+        }
+
+        bool ICollidesWith<Tri>.Intersects(Tri other)
+        {
+            throw new NotImplementedException();
         }
 
         bool IEquatable<Box>.Equals(Box other)

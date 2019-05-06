@@ -94,9 +94,12 @@ public class Player : MonoBehaviour, IMover, IHurtable
         if (damageType == DamageTypes.Shockwave)
         {
             //set knockback
-            Debug.Log("oof " + damage);
             velocity = vector * combatSettings.armShroom.vMulitplierMelee;
             Health -= damage;
+            if(Health < 0)
+            {
+                Health = 0;
+            }
             return true;
         }
         return false;

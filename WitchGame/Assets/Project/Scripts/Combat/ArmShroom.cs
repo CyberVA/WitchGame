@@ -298,7 +298,6 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover, ICallbackReciever
     }
     void TriggerAttack()
     {
-        Debug.Log("SLAM");
         if (shockWave != null) Destroy(shockWave);
 
         shockWave = Instantiate(shockWavePrefab);
@@ -373,7 +372,7 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover, ICallbackReciever
             else if(damageType == DamageTypes.Shroom)
             {
                 //set knockback
-                velocity = vector * combatSettings.armShroom.vMultiplirRange;
+                velocity = vector * combatSettings.armShroom.vMultiplierRange;
                 health -= damage;
                 if (health <= 0)
                 {
@@ -401,7 +400,6 @@ public class ArmShroom : MonoBehaviour, IHurtable, IMover, ICallbackReciever
         deathFlag = true;
         StartCoroutine(Effects.FadeAway(spriteRenderer, 0.5f, v * 1.5f, this));
         GetComponent<Animator>().enabled = false;
-        spriteRenderer.sortingOrder = -1;
         spriteMask.enabled = false;
         flash.gameObject.SetActive(false);
     }
