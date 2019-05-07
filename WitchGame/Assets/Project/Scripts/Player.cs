@@ -106,6 +106,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             if(Health < 0)
             {
                 Health = 0;
+
+                GameController.Main.Load("start");
+                pos = Vector2.zero;
+                Health = combatSettings.player.hp;
+                Mana = combatSettings.playerMana;
             }
             return true;
         }
@@ -470,6 +475,5 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         }
         EndBoxesGL();
     }
-
 #endif
 }
