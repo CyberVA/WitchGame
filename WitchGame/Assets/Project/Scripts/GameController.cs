@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
     //Editor References
     public Player player;
+    public Clickable_MapNode map;
     public StatusBars statusBars;
     public CombatSettings combatSettings;
     public Grid grid;
@@ -117,6 +118,7 @@ public class GameController : MonoBehaviour
     }
     private void UpdateRoom()
     {
+        map.UpdateMarker();
         grid.UpdateGrid(); //create pathfinding grid for current room
         roomController.UpdateWorld(currentRoom, roomName, false); //update tiles, spawn enemies, other shit
     }

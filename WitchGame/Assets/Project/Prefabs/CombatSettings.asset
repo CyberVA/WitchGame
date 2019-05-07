@@ -52,4 +52,7 @@ MonoBehaviour:
   armShroomAttackCooldown: 3
   armShroomAttackPrep: 0.3
   armShroomAttackDamage: 0.1
+  geblinStabDelay: 0.3
+  geblinStabDamage: 0.1
+  slideSpeed: 0.1
   minVelocity: 0.1
