@@ -10,6 +10,7 @@ public class CombatSettings : ScriptableObject
     public float playerMeleeLength, playerShroomSpeed;
     public float armShroomAttackTriggerRange, armShroomAttackRange, armShroomAttackCooldown, armShroomAttackPrep, armShroomAttackDamage;
     public float geblinStabDelay, geblinStabDamage;
+    public float slideSpeed;
     public float minVelocity;
 }
 

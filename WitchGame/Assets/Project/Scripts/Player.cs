@@ -69,6 +69,8 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     public bool checkKey = false; //is a key in this room
     [NonSerialized]
     public bool checkDoor = false; //is a key in this room
+    bool sliding = false;
+    Direction slidingDir;
     int keys = 0; 
     Box attackBox = new Box(0, 0, 1, 1); //dimensions of melee hitbox
 
@@ -207,10 +209,100 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
         }
 
+        //Movement Mod
+        if (sliding)
+        {
+            switch (slidingDir)
+            {
+                case Direction.Up:
+                    movement.y = Mathf.Max(combatSettings.slideSpeed, movement.y);
+                    break;
+                case Direction.Down:
+                    movement.y = Mathf.Min(-combatSettings.slideSpeed, movement.y);
+                    break;
+                case Direction.Left:
+                    movement.x = Mathf.Min(-combatSettings.slideSpeed, movement.x);
+                    break;
+                case Direction.Right:
+                    movement.x = Mathf.Max(combatSettings.slideSpeed, movement.x);
+                    break;
+            }
+        }
+
         //Movement Applied
         SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
 
+        if (sliding)
+        {
+            sliding = false;
+            foreach (NoMove noMove in roomController.noMoves)
+            {
+                if (Intersects(colbox, noMove.box))
+                {
+                    sliding = true;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            foreach (NoMove noMove in roomController.noMoves)
+            {
+                if (Intersects(colbox, noMove.box))
+                {
+                    switch (noMove.direction)
+                    {
+                        case Direction.Up:
+                            if(movement.y < 0f)
+                            {
+                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                            }
+                            else
+                            {
+                                sliding = true;
+                                slidingDir = noMove.direction;
+                            }
+                            break;
+                        case Direction.Down:
+                            if (movement.y > 0f)
+                            {
+                                pos = new Vector2(pos.x, noMove.box.y - noMove.box.height * 0.5f - colbox.height * 0.5f);
+                            }
+                            else
+                            {
+                                sliding = true;
+                                slidingDir = noMove.direction;
+                            }
+                            break;
+                        case Direction.Left:
+                            if (movement.y < 0)
+                            {
+                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                            }
+                            else
+                            {
+                                sliding = true;
+                                slidingDir = noMove.direction;
+                            }
+                            break;
+                        case Direction.Right:
+                            if (movement.y < 0)
+                            {
+                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                            }
+                            else
+                            {
+                                sliding = true;
+                                slidingDir = noMove.direction;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
         //Post-Movement
+
         //Check for Win-
         if(checkWin && Intersects(colbox, roomController.winbox))
         {

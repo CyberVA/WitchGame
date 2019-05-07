@@ -160,7 +160,19 @@ public class LevelEditor : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            loadedRoom.SetValue(mp, Layer.Other, SPODER);
+            loadedRoom.SetValue(mp, Layer.Other, NOMOVEU);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, NOMOVED);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, NOMOVEL);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            loadedRoom.SetValue(mp, Layer.Other, NOMOVER);
         }
 
         //Room travel
@@ -302,6 +314,18 @@ public class LevelEditor : MonoBehaviour
                     break;
                 case SPODER: //spider
                     SimpGL.DrawSprite(rect, 0.5f, 0f, 0.6f, 0.1f);
+                    break;
+                case NOMOVEU:
+                    SimpGL.DrawSprite(rect, 0.8f, 0f, 0.9f, 0.1f);
+                    break;
+                case NOMOVED:
+                    SimpGL.DrawSprite(rect, 0.6f, 0f, 0.7f, 0.1f);
+                    break;
+                case NOMOVEL:
+                    SimpGL.DrawSprite(rect, 0.7f, 0f, 0.8f, 0.1f);
+                    break;
+                case NOMOVER:
+                    SimpGL.DrawSprite(rect, 0.9f, 0f, 1f, 0.1f);
                     break;
             }
         }

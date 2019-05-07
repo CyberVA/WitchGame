@@ -38,6 +38,7 @@ public class RoomController : MonoBehaviour
     /// tiles to remove when doors unlocked
     /// </summary>
     List<GridPos> doors = new List<GridPos>();
+    public List<NoMove> noMoves = new List<NoMove>();
     /// <summary>
     /// box colliders for doors
     /// </summary>
@@ -135,6 +136,7 @@ public class RoomController : MonoBehaviour
         doors.Clear(); //clear old doorlist
         doorBoxes.Clear(); //remove old door colliders
         enemies.Clear(); //remove old enemy references
+        noMoves.Clear(); //one way doors cleared
         foreach (GameObject r in removeOnLoad) //destroy other objects in old room
         {
             Destroy(r);
@@ -309,6 +311,30 @@ public class RoomController : MonoBehaviour
                 geblin.box.Center = v;
                 removeOnLoad.Add(go);
                 break;
+            case NOMOVEU:
+                NoMove u = new NoMove();
+                u.box = new Box(v, 1f, 1f);
+                u.direction = Direction.Up;
+                noMoves.Add(u);
+                break;
+            case NOMOVED:
+                NoMove d = new NoMove();
+                d.box = new Box(v, 1f, 1f);
+                d.direction = Direction.Down;
+                noMoves.Add(d);
+                break;
+            case NOMOVEL:
+                NoMove l = new NoMove();
+                l.box = new Box(v, 1f, 1f);
+                l.direction = Direction.Left;
+                noMoves.Add(l);
+                break;
+            case NOMOVER:
+                NoMove r = new NoMove();
+                r.box = new Box(v, 1f, 1f);
+                r.direction = Direction.Right;
+                noMoves.Add(r);
+                break;
         }
 
     }
@@ -381,4 +407,8 @@ static class SpclObj
     public const byte ARMSHROOM = 50;
     public const byte GEBLIN = 51;
     public const byte SPODER = 52;
+    public const byte NOMOVEU = 100;
+    public const byte NOMOVED = 101;
+    public const byte NOMOVER = 102;
+    public const byte NOMOVEL = 103;
 }
