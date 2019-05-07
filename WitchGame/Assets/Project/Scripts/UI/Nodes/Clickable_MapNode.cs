@@ -17,6 +17,20 @@ public class Clickable_MapNode : Clickable
 
     public override void OnClick()
     {
+        //copied over from toggle basically with the same function
+        if (toggle == true)
+        {
+            youAreHere.SetActive(true);
+            toggle = false;
+        }
+        else
+        {
+            youAreHere.SetActive(false);
+            toggle = true;
+        }
+    }
+    public void UpdateMarker()
+    {
         //getting the transform component on the map indicator
         Transform transform;
         transform = youAreHere.transform;
@@ -27,7 +41,7 @@ public class Clickable_MapNode : Clickable
             case "start":
                 transform.localPosition = new Vector3(-3.95f, 0.15f, 0);
                 break;
-                //Fungus Forest Coords - DONE
+            //Fungus Forest Coords - DONE
             case "FF2":
                 transform.localPosition = new Vector3(-2.95f, 0.15f, 0);
                 break;
@@ -46,7 +60,7 @@ public class Clickable_MapNode : Clickable
             case "FF7":
                 transform.localPosition = new Vector3(-3.95f, -0.85f, 0);
                 break;
-                //Fountain's Edge Coords - DONE
+            //Fountain's Edge Coords - DONE
             case "FE1":
                 transform.localPosition = new Vector3(2.25f, 0.15f, 0);
                 break;
@@ -56,7 +70,7 @@ public class Clickable_MapNode : Clickable
             case "FE3":
                 transform.localPosition = new Vector3(4.04f, 0.15f, 0);
                 break;
-                //Bramble Maze Coords - DONE
+            //Bramble Maze Coords - DONE
             case "BM1":
                 transform.localPosition = new Vector3(-1.9f, -0.85f, 0);
                 break;
@@ -106,22 +120,10 @@ public class Clickable_MapNode : Clickable
             case "BC6":
                 transform.localPosition = new Vector3(-3.95f, 1.05f, 0);
                 break;
-                //Outside Bounds (Secret Rooms, Glitching into Midquarter Rooms)
+            //Outside Bounds (Secret Rooms, Glitching into Midquarter Rooms)
             default:
                 transform.localPosition = new Vector3(10f, 10f, 0); //Completely off screen
                 break;
-        }
-
-        //copied over from toggle basically with the same function
-        if (toggle == true)
-        {
-            youAreHere.SetActive(true);
-            toggle = false;
-        }
-        else
-        {
-            youAreHere.SetActive(false);
-            toggle = true;
         }
     }
 

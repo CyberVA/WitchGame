@@ -189,11 +189,6 @@ PrefabInstance:
       propertyPath: pixelsPerUnit
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 4740797477608930932, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: pause
-      value: 
-      objectReference: {fileID: 1342721690}
     - target: {fileID: 2972086135985100622, guid: 838483d3ffc8fd646ae79afcd9882b98,
         type: 3}
       propertyPath: pauseButtons.Array.size
@@ -214,6 +209,16 @@ PrefabInstance:
       propertyPath: pauseButtons.Array.data[2]
       value: 
       objectReference: {fileID: 773928345}
+    - target: {fileID: 1221122737804387204, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: highlightColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2403862659799277626, guid: 838483d3ffc8fd646ae79afcd9882b98,
+        type: 3}
+      propertyPath: highlightColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1136442700, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -264,16 +269,6 @@ PrefabInstance:
       propertyPath: pause
       value: 
       objectReference: {fileID: 1342721690}
-    - target: {fileID: 1221122737804387204, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: highlightColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403862659799277626, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: highlightColor.a
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
 --- !u!114 &1342721690 stripped

@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4740797477000799156}
+  map: {fileID: 8693944831741016474}
   statusBars: {fileID: 4740797477447942813}
   combatSettings: {fileID: 11400000, guid: 983d9f75d4d764d489b5987c287be3e2, type: 2}
   grid: {fileID: 3301066631246194268}
@@ -303,7 +304,7 @@ MonoBehaviour:
   roomController: {fileID: 4740797478434751623}
   pixelPerfect: {fileID: 897474175}
   uiAnchorManager: {fileID: 6517862125233661645}
-  pause: {fileID: 0}
+  pause: {fileID: 2972086135985100622}
   roomName: start
   targetResolutionY: 360
   scale: 1
@@ -963,6 +964,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec572fb4e4a85ce409cf5fed07b2dd68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8693944831741016474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1959587617275973495, guid: 05466ba52735d6440bd1637cebba621c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7176136692921349869}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f709c1d7d268bc44a498f8da4de21b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &4829786555023060788 stripped
