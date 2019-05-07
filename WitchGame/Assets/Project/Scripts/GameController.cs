@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,8 @@ public class GameController : MonoBehaviour
 
     //Editor + Runtime values
     public string roomName;
+    [NonSerialized]
+    public bool gamePaused;
     string devLoad = string.Empty;
     bool devLoadEnabled = false;
 
@@ -92,7 +95,7 @@ public class GameController : MonoBehaviour
 
     public void OnPaused(bool p)
     {
-
+        gamePaused = p;
     }
 
     #region Room Loading
