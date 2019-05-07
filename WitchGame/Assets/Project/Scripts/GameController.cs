@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour
 
     //Editor + Runtime values
     public string roomName;
+    string devLoad = string.Empty;
+    bool devLoadEnabled = false;
 
     //Resolution Settings
     public int targetResolutionY = 360;
@@ -81,6 +83,10 @@ public class GameController : MonoBehaviour
             scale = Mathf.Max(scale - 1, 1);
             pixelPerfect.SetScale(scale);
             uiAnchorManager.UpdateAnchors();
+        }
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            devLoadEnabled = !devLoadEnabled;
         }
     }
 
@@ -140,4 +146,16 @@ public class GameController : MonoBehaviour
         Load(currentRoom.exitWest);
     }
     #endregion
+
+    private void OnGUI()
+    {
+        if(devLoadEnabled)
+        {
+            devLoad = GUI.TextField(new Rect(10, 0, 100, 20), devLoad, 25);
+            if (GUI.Button(new Rect(10, 22, 100, 20), "Load"))
+            {
+                Load(devLoad);
+            }
+        }
+    }
 }

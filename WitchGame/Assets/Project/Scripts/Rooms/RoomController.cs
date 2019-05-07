@@ -231,6 +231,7 @@ public class RoomController : MonoBehaviour
     public void UnlockDoor()
     {
         unlockedDoors.Add(GameController.Main.roomName);
+        GameController.Main.player.checkDoor = false;
         SpriteRenderer s;
         int i;
         foreach (GridPos p in doors)
@@ -353,7 +354,6 @@ public class RoomController : MonoBehaviour
         {
             try
             {
-                Debug.Log("Level \"" + fileName + "\" loaded");
                 return Byteable.IO.ReadFromFile<Room>(path);
             }
             catch(ArgumentOutOfRangeException)

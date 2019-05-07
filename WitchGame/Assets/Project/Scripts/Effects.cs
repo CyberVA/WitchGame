@@ -25,6 +25,7 @@ public static class Effects
         while (t > 0f)
         {
             t -= Time.deltaTime;
+            if (spriteRenderer == null) yield break;
             spriteRenderer.transform.position += (Vector3)(vector * Time.deltaTime);
             spriteRenderer.color -= new Color(0f, 0f, 0f, Time.deltaTime / length);
             yield return null;
