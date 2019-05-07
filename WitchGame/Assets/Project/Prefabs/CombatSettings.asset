@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     hp: 1
-    moveSpeed: 2.5
+    moveSpeed: 2.3
     inertia: 7
     vMulitplierMelee: 4
     vMultiplierRange: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     invincibleLength: 0.25
   geblin:
     hp: 1
-    moveSpeed: 1
+    moveSpeed: 3
     inertia: 1
     vMulitplierMelee: 1
     vMultiplierRange: 0
@@ -54,5 +54,8 @@ MonoBehaviour:
   armShroomAttackDamage: 0.1
   geblinStabDelay: 0.3
   geblinStabDamage: 0.1
+  geblinStabRecover: 0.3
+  geblinStabBeginRange: 2
+  geblinStopMoveRange: 0.5
   slideSpeed: 1
   minVelocity: 0.1

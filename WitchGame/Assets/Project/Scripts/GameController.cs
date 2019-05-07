@@ -119,7 +119,7 @@ public class GameController : MonoBehaviour
         UpdateRoom();
     }
 
-    private void Load(string lvlName)
+    public void Load(string lvlName)
     {
         roomName = lvlName;
         currentRoom = roomController.LoadRoom(roomName);

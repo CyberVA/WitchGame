@@ -106,6 +106,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             if(Health < 0)
             {
                 Health = 0;
+
+                GameController.Main.Load("start");
+                pos = Vector2.zero;
+                Health = combatSettings.player.hp;
+                Mana = combatSettings.playerMana;
             }
             return true;
         }
@@ -218,6 +223,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         }
 
         //Movement Mod
+        /*
         if (sliding)
         {
             switch (slidingDir)
@@ -235,7 +241,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                     movement.x = Mathf.Max(combatSettings.slideSpeed, movement.x);
                     break;
             }
-        }
+        }*/
 
         //Movement Applied
         SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
@@ -471,6 +477,5 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         }
         EndBoxesGL();
     }
-
 #endif
 }
