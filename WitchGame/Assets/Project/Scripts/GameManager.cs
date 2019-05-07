@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager gMan;
+    public AudioLibrary audioLibrary;
 
     //Amount of player health
     [Range(0, 1)]
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        audioLibrary = GetComponent<AudioLibrary>();
     }
 
 

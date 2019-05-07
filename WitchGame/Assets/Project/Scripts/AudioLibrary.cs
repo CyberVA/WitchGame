@@ -3,26 +3,61 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
 
-public enum combatEffects { yeet }
-public enum miscEffects { }
-public enum music { }
+public enum playerEffects { Attack, Damaged, Idle, MushMancy, RootWall, Cure }
+public enum mushroomEffects { Attack, Damaged, Idle}
+public enum goblinEffects { Attack, Damage, Idle}
+public enum walk { WalkLight, WalkMedium, WalkHeavy}
+public enum miscEffects { ButtonSelected }
+public enum music { MainMenu, Background, Win, Lose}
 
 public class AudioLibrary : MonoBehaviour
 {
 
-    AudioClip[] combat;
-    AudioClip[] misc;
-    AudioClip[] music;
+    public AudioClip[] player;
+    public AudioClip[] mushroom;
+    public AudioClip[] goblin;
+    public AudioClip[] walk;
+    public AudioClip[] misc;
+    public AudioClip[] music;
+
+    [Range(0, 1)]
+    float volume;
 
     public AudioSource musicPlayer;
+
+    private void Awake()
+    {
+        
+    }
 
     /// <summary>
     /// Plays a combat sound at a certain point
     /// </summary>
     /// <param name="s">Combat sound</param>
-    public void CombatSounds(combatEffects s)
+    public void PlayerSounds(playerEffects s)
     {
-        AudioSource.PlayClipAtPoint(combat[(int)s], Vector3.zero);
+        AudioSource.PlayClipAtPoint(player[(int)s], Vector3.zero);
+    }
+    /// <summary>
+    /// Plays a combat sound at a certain point
+    /// </summary>
+    /// <param name="s">Combat sound</param>
+    public void MushroomSounds(mushroomEffects s)
+    {
+        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero);
+    }
+    /// <summary>
+    /// Plays a combat sound at a certain point
+    /// </summary>
+    /// <param name="s">Combat sound</param>
+    public void GoblinSounds(goblinEffects s)
+    {
+        AudioSource.PlayClipAtPoint(goblin[(int)s], Vector3.zero);
+    }
+
+    public void WalkingSounds(walk s)
+    {
+        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero);
     }
 
     /// <summary>
@@ -50,6 +85,10 @@ public class AudioLibrary : MonoBehaviour
             musicPlayer.volume = volume;
         }
     }
+    /// <summary>
+    /// Pauses the music
+    /// </summary>
+    /// <param name="paused">is thre music paused or not?</param>
     public void musicPause(bool paused)
     {
         if(paused)

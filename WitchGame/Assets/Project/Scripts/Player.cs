@@ -18,11 +18,16 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     //GL
     public Material glMaterial;
     public Color glColor;
+    public float timeToWalk;
 
     //Auto Ref
     RoomController roomController;
     Animator animator;
     CombatSettings combatSettings;
+    AudioLibrary audioLibrary;
+
+    //Timers
+    float t;
 
     //Stats
     float maxHealth { get => combatSettings.player.hp; }
@@ -125,11 +130,14 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
 
+        audioLibrary = GameManager.gMan.audioLibrary;
+
         colbox.Center = (Vector2)transform.position + boxOffset;
         animator = GetComponent<Animator>();
 
         Health = maxHealth;
         Mana = maxMana;
+        t = timeToWalk;
     }
 
     private void Update()
@@ -424,6 +432,16 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             spore.Activate(colbox.Center, mouseAim); //enables pooled projectile
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
+        }
+        //Audio
+        if (movement != Vector2.zero)
+        {
+            t -= Time.deltaTime;
+            if (t < 0)
+            {
+                t = timeToWalk;
+                audioLibrary.WalkingSounds(walk.WalkLight);
+            }
         }
 
     }
