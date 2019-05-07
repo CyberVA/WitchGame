@@ -398,6 +398,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
             else
             {
+                audioLibrary.PlayerSounds(playerEffects.Attack);
                 attackBox.Center = colbox.Center + meleeVector;
                 weapon.transform.position = attackBox.Center;
                 foreach (IHurtable h in roomController.enemies)
@@ -432,6 +433,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             spore.Activate(colbox.Center, mouseAim); //enables pooled projectile
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
+            audioLibrary.PlayerSounds(playerEffects.MushMancy);
         }
         //Audio
         if (movement != Vector2.zero)
