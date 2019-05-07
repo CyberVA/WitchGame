@@ -9,9 +9,9 @@ public class Geblin : Enemy
 {
     //Melee Attack
     float attackDelayTimer;
-    float attackCoolDownTimer;
+    float attackRecoverTimer;
     float meleeTimer;
-    bool attackReady = true;
+    bool attackReady = false;
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
     Vector2 toPlayer;
     float distanceToPlayer;
@@ -58,16 +58,24 @@ public class Geblin : Enemy
                 iTimer -= Time.deltaTime;
             }
             UpdateFlash();
-            if (attackCoolDownTimer > 0f)
+            if (attackRecoverTimer > 0f)
             {
-                attackCoolDownTimer -= Time.deltaTime;
+                attackRecoverTimer -= Time.deltaTime;
             }
             if (aiState == ATTACKING)
             {
-                if(!attackReady && attackCoolDownTimer <= 0f)
+                if(!attackReady && attackRecoverTimer <= 0f)
                 {
-                    attackReady = true;
-                    PrepAttack();
+                    CalculateToPlayer();
+                    if (distanceToPlayer < combatSettings.geblinStabBeginRange)
+                    {
+                        attackReady = true;
+                        PrepAttack();
+                    }
+                    else
+                    {
+                        aiState = SEEKING;
+                    }
                 }
                 if(attackReady && attackDelayTimer > 0f)
                 {
@@ -78,17 +86,8 @@ public class Geblin : Enemy
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
-                        attackDelayTimer += combatSettings.geblinStabRecover;
                         attackReady = false;
-                        CalculateToPlayer();
-                        if(distanceToPlayer < 1f)
-                        {
-
-                        }
-                        else
-                        {
-                            aiState = SEEKING;
-                        }
+                        attackRecoverTimer = combatSettings.geblinStabRecover;
                     }
                 }
             }
@@ -104,7 +103,7 @@ public class Geblin : Enemy
             UpdateVelocity();
 
             //Pathfinding
-            if (aiState == FOLLOWING && flashTimer <= 0f)
+            if ((aiState == FOLLOWING || aiState == ATTACKING && distanceToPlayer > combatSettings.geblinStopMoveRange) && flashTimer <= 0f)
             {
                 FollowPath();
             }
@@ -123,10 +122,9 @@ public class Geblin : Enemy
             if(aiState == FOLLOWING)
             {
                 CalculateToPlayer();
-                if (distanceToPlayer < 1f)
+                if (distanceToPlayer < combatSettings.geblinStabBeginRange)
                 {
                     //stab
-                    attackCoolDownTimer = combatSettings.geblinStabRecover;
                     aiState = ATTACKING;
                 }
             }

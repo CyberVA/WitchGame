@@ -218,6 +218,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         }
 
         //Movement Mod
+        /*
         if (sliding)
         {
             switch (slidingDir)
@@ -235,7 +236,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                     movement.x = Mathf.Max(combatSettings.slideSpeed, movement.x);
                     break;
             }
-        }
+        }*/
 
         //Movement Applied
         SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
