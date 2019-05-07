@@ -54,5 +54,5 @@ MonoBehaviour:
   armShroomAttackDamage: 0.1
   geblinStabDelay: 0.3
   geblinStabDamage: 0.1
-  slideSpeed: 0.1
+  slideSpeed: 1
   minVelocity: 0.1

@@ -9,9 +9,12 @@ public class Geblin : Enemy
 {
     //Melee Attack
     float attackDelayTimer;
+    float attackCoolDownTimer;
     float meleeTimer;
+    bool attackReady = true;
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
     Vector2 toPlayer;
+    float distanceToPlayer;
     Box attackBox = new Box(Vector2.zero, 1f, 1f);
 
 
@@ -55,18 +58,37 @@ public class Geblin : Enemy
                 iTimer -= Time.deltaTime;
             }
             UpdateFlash();
-            if(aiState == ATTACKING)
+            if (attackCoolDownTimer > 0f)
             {
-                if(attackDelayTimer > 0f)
+                attackCoolDownTimer -= Time.deltaTime;
+            }
+            if (aiState == ATTACKING)
+            {
+                if(!attackReady && attackCoolDownTimer <= 0f)
+                {
+                    attackReady = true;
+                    PrepAttack();
+                }
+                if(attackReady && attackDelayTimer > 0f)
                 {
                     attackDelayTimer -= Time.deltaTime;
                     if(attackDelayTimer <= 0f)
                     {
-                        if (Intersects(attackBox, playerHurt.HitBox))
+                        if (Intersects(attackBox, playerHurt.HitBox)) //actual attack
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
-                        aiState = SEEKING;
+                        attackDelayTimer += combatSettings.geblinStabRecover;
+                        attackReady = false;
+                        CalculateToPlayer();
+                        if(distanceToPlayer < 1f)
+                        {
+
+                        }
+                        else
+                        {
+                            aiState = SEEKING;
+                        }
                     }
                 }
             }
@@ -100,17 +122,34 @@ public class Geblin : Enemy
             //Post movement
             if(aiState == FOLLOWING)
             {
-                toPlayer = playerHurt.HitBox.Center - pos;
-                if (toPlayer.magnitude < 1f)
+                CalculateToPlayer();
+                if (distanceToPlayer < 1f)
                 {
                     //stab
-                    meleeVector = toPlayer.normalized;
-                    attackBox.Center = pos + meleeVector;
-                    attackDelayTimer = combatSettings.geblinStabDelay;
+                    attackCoolDownTimer = combatSettings.geblinStabRecover;
                     aiState = ATTACKING;
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// only call if toPlayer has been calculated
+    /// </summary>
+    void PrepAttack()
+    {
+        meleeVector = toPlayer / distanceToPlayer;
+        attackBox.Center = pos + meleeVector;
+        attackDelayTimer = combatSettings.geblinStabDelay;
+    }
+    void TriggerAttack()
+    {
+
+    }
+    void CalculateToPlayer()
+    {
+        toPlayer = playerHurt.HitBox.Center - pos;
+        distanceToPlayer = toPlayer.magnitude;
     }
     
     //Taking damage

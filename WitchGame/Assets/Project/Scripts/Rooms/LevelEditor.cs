@@ -322,10 +322,10 @@ public class LevelEditor : MonoBehaviour
                     SimpGL.DrawSprite(rect, 0.6f, 0f, 0.7f, 0.1f);
                     break;
                 case NOMOVEL:
-                    SimpGL.DrawSprite(rect, 0.7f, 0f, 0.8f, 0.1f);
+                    SimpGL.DrawSprite(rect, 0.9f, 0f, 1f, 0.1f);
                     break;
                 case NOMOVER:
-                    SimpGL.DrawSprite(rect, 0.9f, 0f, 1f, 0.1f);
+                    SimpGL.DrawSprite(rect, 0.7f, 0f, 0.8f, 0.1f);
                     break;
             }
         }

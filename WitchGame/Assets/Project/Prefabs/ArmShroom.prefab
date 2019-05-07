@@ -142,14 +142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1576dee401080fe41818674532c2f0f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flash: {fileID: 4513494692418293226}
-  shockWavePrefab: {fileID: 5702330130063702151, guid: a768ff69d1c4483458e113529e0fe006,
-    type: 3}
   box:
     x: 0
     y: 0
     width: 0.9
     height: 0.9
+  flash: {fileID: 4513494692418293226}
+  shockWavePrefab: {fileID: 5702330130063702151, guid: a768ff69d1c4483458e113529e0fe006,
+    type: 3}
 --- !u!95 &4513494692143990482
 Animator:
   serializedVersion: 3

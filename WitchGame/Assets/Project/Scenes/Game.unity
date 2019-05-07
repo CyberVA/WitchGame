@@ -183,44 +183,14 @@ PrefabInstance:
       propertyPath: pixelsPerUnit
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 2972086135985100622, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: pauseButtons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2972086135985100622, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: pauseButtons.Array.data[0]
-      value:
-      objectReference: {fileID: 1888848398}
-    - target: {fileID: 2972086135985100622, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: pauseButtons.Array.data[1]
-      value:
-      objectReference: {fileID: 1891060020}
-    - target: {fileID: 2972086135985100622, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: pauseButtons.Array.data[2]
-      value:
-      objectReference: {fileID: 773928345}
-    - target: {fileID: 1221122737804387204, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: highlightColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403862659799277626, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: highlightColor.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1136442700, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
       propertyPath: m_Sprite
-      value:
+      value: 
       objectReference: {fileID: 21300004, guid: a0b60f17aa729274da2b583bda2b635b,
         type: 3}
     - target: {fileID: 868441777, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
       propertyPath: m_Sprite
-      value:
+      value: 
       objectReference: {fileID: 21300002, guid: a0b60f17aa729274da2b583bda2b635b,
         type: 3}
     - target: {fileID: 1136442699, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
@@ -261,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1136442701, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
       propertyPath: pause
-      value:
-      objectReference: {fileID: 1342721690}
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}

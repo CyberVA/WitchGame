@@ -93,7 +93,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     bool IHurtable.Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
-        if (damageType == DamageTypes.Shockwave)
+        if (damageType == DamageTypes.Shockwave || damageType == DamageTypes.Knife)
         {
             //set knockback
             velocity = vector * combatSettings.armShroom.vMulitplierMelee;
@@ -275,9 +275,9 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                             }
                             break;
                         case Direction.Left:
-                            if (movement.y < 0)
+                            if (movement.x > 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                                pos = new Vector2(noMove.box.x - noMove.box.width * 0.5f - colbox.width * 0.5f, pos.y);
                             }
                             else
                             {
@@ -286,9 +286,9 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                             }
                             break;
                         case Direction.Right:
-                            if (movement.y < 0)
+                            if (movement.x < 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                                pos = new Vector2(noMove.box.x + noMove.box.width * 0.5f + colbox.width * 0.5f, pos.y);
                             }
                             else
                             {
