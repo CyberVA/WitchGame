@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
   scenes: Project/Scenes/MainMenu
-  highlightColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0.53333336}
+  highlightColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
 --- !u!1 &976347797484964275
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2475977578826852530}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &2475977577324643083
 SpriteRenderer:
@@ -677,7 +677,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2475977578165531767}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -827,11 +827,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2475977577324643082}
+  - {fileID: 4022209974333883554}
   - {fileID: 2475977578960950281}
   - {fileID: 2475977577829853653}
   - {fileID: 2475977578333613380}
-  - {fileID: 4022209974333883554}
+  - {fileID: 2475977577324643082}
   - {fileID: 8335533534494555370}
   - {fileID: 3791934513837701128}
   - {fileID: 455947793274982128}
@@ -1343,7 +1343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5346190799284364705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.025, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 816630092215240553}
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  highlightColor: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 0.4745098}
+  highlightColor: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 1}
 --- !u!61 &6167212973026373199
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1874,7 +1874,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2475977578826852530}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9073211061370407427
 SpriteRenderer:

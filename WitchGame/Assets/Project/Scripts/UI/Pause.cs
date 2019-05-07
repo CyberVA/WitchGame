@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Windows.Input;
 
 public class Pause : MonoBehaviour
 {
-    public bool paused = false;
+    public bool paused;
     GameController gameController;
-    public SpriteRenderer pauseFilter;
-    public SpriteRenderer[] pauseButtons;
+    public GameObject pauseFilter;
+    public GameObject[] pauseButtons;
 
     private void Start()
     {
         gameController = GetComponent<GameController>();
+        paused = false;
         PauseGame(paused);
     }
 
@@ -35,18 +37,19 @@ public class Pause : MonoBehaviour
         if (p)
         {
             Time.timeScale = 0f;
-            pauseFilter.enabled = true;
+            pauseFilter.SetActive(true);
             paused = true;
             gameController.OnPaused(paused);
-            for (int i = 0; i < pauseButtons.Length; i++) pauseButtons[i].enabled = true;
+            for (int i = 0; i < pauseButtons.Length; i++) pauseButtons[i].SetActive(true);
         }
+        
         else
         {
             Time.timeScale = 1f;
-            pauseFilter.enabled = false;
+            pauseFilter.SetActive(false);
             paused = false;
             gameController.OnPaused(paused);
-            for (int i = 0; i < pauseButtons.Length; i++) pauseButtons[i].enabled = false;
+            for (int i = 0; i < pauseButtons.Length; i++) pauseButtons[i].SetActive(false);
         }
     }
 }
