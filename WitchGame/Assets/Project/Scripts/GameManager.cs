@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     //References
     public static GameManager gMan;
     public AudioLibrary audioLibrary;
+    Clickable_SceneNode clickableScene;
 
     //Sprites
     public SpriteRenderer fadeInOut;
@@ -84,5 +85,17 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("Scene 1: " + loadedScene[0].name + ", Scene 2: " + loadedScene[1].name);
         }*/
+
+        if (clickableScene.loaded)
+        {
+            clickableScene.transparent -= 0.2f * Time.deltaTime;
+            Debug.Log(clickableScene.transparent);
+            GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)clickableScene.transparent);
+            if (clickableScene.transparent <= 0)
+            {
+                Debug.Log("loaded");
+                clickableScene.loaded = false;
+            }
+        }
     }
 }
