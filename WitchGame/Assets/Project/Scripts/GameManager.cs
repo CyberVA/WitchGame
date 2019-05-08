@@ -32,19 +32,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        SceneManager.activeSceneChanged += ChangedActiveScene;
-
-        DontDestroyOnLoad(transform.gameObject);
         if (gMan == null)
         {
             gMan = this;
+            DontDestroyOnLoad(transform.gameObject);
+            SceneManager.activeSceneChanged += ChangedActiveScene;
+            audioLibrary = GetComponent<AudioLibrary>();
+            check = true;
         }
         else
         {
             Destroy(gameObject);
         }
-        audioLibrary = GetComponent<AudioLibrary>();
-        check = true;
     }
 
 
@@ -60,50 +59,10 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
 
-        currentScene = SceneManager.GetActiveScene();
-
-        //Audio switching on scenes
-        //name i main check is true
-        /*if (currentScene.name == "MainMenu" && check)
-        {
-            check = false; //checj us fajske
-            audioLibrary.musicSounds(music.MainMenu, true);
-        }
-        else if(currentScene.name != "MainMenu" && !check)
-        {
-            check = true;
-            audioLibrary.musicSounds(music.MainMenu, false);
-        }
-
-        if (currentScene.name == "Game" && check)
-        {
-            check = false;
-            audioLibrary.musicSounds(music.Background, true);
-        }
-        else if (currentScene.name != "Game" && !check)
-        {
-            check = true;
-            audioLibrary.musicSounds(music.Background, false);
-        }*/
-
-        /*if (SceneManager.sceneCount < 2)
-        {
-            
-            countLoaded = SceneManager.sceneCount;
-            loadedScene = new Scene[countLoaded];
-            Debug.Log(countLoaded);
-            for (int i = 0; i < countLoaded; i++)
-            {
-                loadedScene[i] = SceneManager.GetSceneAt(i);
-            }
-            Debug.Log("Scene 1: " + loadedScene[0].name + ", Scene 2: " + loadedScene[1].name);
-        }*/
-
-
         //Fade out
         if (loaded)
         {
-            transparent -= 0.8f * Time.deltaTime;
+            transparent -= 0.8f * Time.unscaledDeltaTime;
             //Debug.Log(transparent);
             fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
             //Debug.Log(fadeInOut.color.a);
@@ -125,6 +84,12 @@ public class GameManager : MonoBehaviour
                 break;
             case "Game":
                 audioLibrary.musicSounds(music.Background, true);
+                break;
+            case "Win":
+                audioLibrary.musicSounds(music.Win, true);
+                break;
+            case "Lose":
+                audioLibrary.musicSounds(music.Lose, true);
                 break;
             default:
                 audioLibrary.musicSounds(music.MainMenu, true);

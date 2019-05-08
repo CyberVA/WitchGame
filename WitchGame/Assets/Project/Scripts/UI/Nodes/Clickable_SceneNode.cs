@@ -14,12 +14,13 @@ public class Clickable_SceneNode : Clickable
 
     public string scenes;
     public Color highlightColor;
+    public float fadeSpeed = 0.8f;
 
     private void Update()
     {
         if (sceneChange)
         {
-            transparent +=  0.8f * Time.deltaTime;
+            transparent +=  fadeSpeed * Time.unscaledDeltaTime;
             GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
             if (transparent >= 1)
             {
