@@ -1,0 +1,7 @@
+Credits:
+
+These AI scripts heavily reference the source code from a youtuber called SebLague who does a tutorial series on A* pathfinding.
+The code was heavily adapted to work with our project and specific needs, so the code on our project is not identical to the code presented by SebLague.
+You can find the original code on SebLagues youtube channel or on his git repository at: https://github.com/SebLague/Pathfinding.
+
+~ Vincent A.
