@@ -202,6 +202,7 @@ public class ArmShroom : Enemy
             playerHurt.Hurt(combatSettings.armShroomAttackDamage, DamageTypes.Shockwave, toPlayer / mag);
         }
         attackTimer += combatSettings.armShroomAttackCooldown;
+        GameManager.gMan.audioLibrary.MushroomSounds(mushroomEffects.Attack);
     }
 
     bool PlayerInRange => Vector2.Distance(box.Center, playerHurt.HitBox.Center) < combatSettings.armShroomAttackTriggerRange;
