@@ -57,7 +57,7 @@ public class AudioLibrary : MonoBehaviour
 
     public void WalkingSounds(walk s)
     {
-        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero);
+        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero, 0.1f);
     }
 
     /// <summary>
@@ -88,7 +88,6 @@ public class AudioLibrary : MonoBehaviour
         {
             musicPlayer.Stop();
         }
-        else musicPlayer.Stop();
     }
     /// <summary>
     /// Pauses the music

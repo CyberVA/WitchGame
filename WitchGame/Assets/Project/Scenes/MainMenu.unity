@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  transparent: 0
   scenes: Project/Scenes/Credits
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &516363208
@@ -397,6 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  transparent: 0
   scenes: Project/Scenes/Options
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &648591846
@@ -883,6 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  transparent: 0
   scenes: Project/Scenes/Game
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!1 &1972289451
@@ -1030,18 +1033,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 377774511, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 165333233
-      objectReference: {fileID: 0}
-    - target: {fileID: 377774511, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 377774511, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}

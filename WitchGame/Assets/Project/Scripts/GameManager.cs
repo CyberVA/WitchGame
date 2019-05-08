@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        SceneManager.activeSceneChanged += ChangedActiveScene;
 
         DontDestroyOnLoad(transform.gameObject);
         if (gMan == null)
@@ -61,9 +62,11 @@ public class GameManager : MonoBehaviour
 
         currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == "MainMenu" && check)
+        //Audio switching on scenes
+        //name i main check is true
+        /*if (currentScene.name == "MainMenu" && check)
         {
-            check = false;
+            check = false; //checj us fajske
             audioLibrary.musicSounds(music.MainMenu, true);
         }
         else if(currentScene.name != "MainMenu" && !check)
@@ -72,8 +75,16 @@ public class GameManager : MonoBehaviour
             audioLibrary.musicSounds(music.MainMenu, false);
         }
 
-        /*if (SceneManager.GetSceneByName("Game") != null && SceneManager.GetSceneByName("MainMenu") == null) audioLibrary.musicSounds(music.Background, true, false);
-        else audioLibrary.musicSounds(music.Background, false, true);*/
+        if (currentScene.name == "Game" && check)
+        {
+            check = false;
+            audioLibrary.musicSounds(music.Background, true);
+        }
+        else if (currentScene.name != "Game" && !check)
+        {
+            check = true;
+            audioLibrary.musicSounds(music.Background, false);
+        }*/
 
         /*if (SceneManager.sceneCount < 2)
         {
@@ -88,18 +99,37 @@ public class GameManager : MonoBehaviour
             Debug.Log("Scene 1: " + loadedScene[0].name + ", Scene 2: " + loadedScene[1].name);
         }*/
 
+
+        //Fade out
         if (loaded)
         {
-            transparent -= 0.2f * Time.deltaTime;
+            transparent -= 0.8f * Time.deltaTime;
             //Debug.Log(transparent);
             fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
-            Debug.Log(fadeInOut.color.a);
+            //Debug.Log(fadeInOut.color.a);
             if (transparent <= 0)
             {
                 Debug.Log("loaded");
-                transparent = 0;
+                transparent = 1;
                 loaded = false;
             }
         }
+    }
+
+    private void ChangedActiveScene(Scene current, Scene next)
+    {
+        switch(next.name)
+        {
+            case "MainMenu":
+                audioLibrary.musicSounds(music.MainMenu, true);
+                break;
+            case "Game":
+                audioLibrary.musicSounds(music.Background, true);
+                break;
+            default:
+                audioLibrary.musicSounds(music.MainMenu, true);
+                break;
+        }
+        Debug.Log("Current: " + current.name + ", Next: " + next.name);
     }
 }
