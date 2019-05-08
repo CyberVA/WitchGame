@@ -17,6 +17,7 @@ public class ArmShroom : Enemy
     float attackTimer;
     float attackPrepTimer;
     float shockWaveTimer;
+    float slowTime;
 
     float shockWaveLength = 1f;
 
@@ -63,6 +64,15 @@ public class ArmShroom : Enemy
             if (iTimer > 0f)
             {
                 iTimer -= Time.deltaTime;
+            }
+            if (slowTime > 0f)
+            {
+                slowTime -= Time.deltaTime;
+                speedMultiplier = combatSettings.slowEffectMultiplier;
+            }
+            else
+            {
+                speedMultiplier = 1f;
             }
             UpdateFlash();
             if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
@@ -249,6 +259,10 @@ public class ArmShroom : Enemy
                 //start hit flash
                 TriggerFlash();
                 return true;
+            }
+            else if(damageType == DamageTypes.Slow)
+            {
+                slowTime = combatSettings.slowEffectLength;
             }
         }
 
