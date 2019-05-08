@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 3041750433022535937}
   - component: {fileID: 3041750433022535966}
   - component: {fileID: 2047350381}
+  - component: {fileID: 3376440835032951087}
   m_Layer: 0
   m_Name: PersistentObjects
   m_TagString: Untagged
@@ -252,8 +253,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02c3f32f187bb934987f868014f531ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   mainCam: {fileID: 0}
   mousePos: {x: 0, y: 0}
   clickables:
@@ -271,8 +272,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14bf53db1e432414682b0407ef5dc1e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   audioLibrary: {fileID: 2047350381}
   fadeInOut: {fileID: 377774511}
   playerHealth: 1
@@ -293,8 +294,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e8d0edad5d232143829af1de6b4931d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &2047350381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,8 +306,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5adcaff326034f544b5abdd529425a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   player:
   - {fileID: 0}
   - {fileID: 0}
@@ -334,3 +335,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   musicPlayer: {fileID: 1016127822}
+--- !u!81 &3376440835032951087
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041750433022535938}
+  m_Enabled: 1

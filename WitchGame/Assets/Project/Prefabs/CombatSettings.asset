@@ -50,12 +50,12 @@ MonoBehaviour:
   armShroomAttackTriggerRange: 1.4
   armShroomAttackRange: 1.5
   armShroomAttackCooldown: 3
-  armShroomAttackPrep: 0.3
+  armShroomAttackPrep: 0.5
   armShroomAttackDamage: 0.1
   geblinStabDelay: 0.3
   geblinStabDamage: 0.1
-  geblinStabRecover: 0.3
+  geblinStabRecover: 3
   geblinStabBeginRange: 2
-  geblinStopMoveRange: 0.5
+  geblinStopMoveRange: 0.8
   slideSpeed: 1
   minVelocity: 0.1

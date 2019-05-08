@@ -36,7 +36,7 @@ public class AudioLibrary : MonoBehaviour
     /// <param name="s">Combat sound</param>
     public void PlayerSounds(playerEffects s)
     {
-        AudioSource.PlayClipAtPoint(player[(int)s], Vector3.zero);
+        if (player[(int)s] != null) AudioSource.PlayClipAtPoint(player[(int)s], Vector3.zero);
     }
     /// <summary>
     /// Plays a combat sound at a certain point

@@ -22,6 +22,7 @@ public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackRecieve
     protected RoomController roomController;
     protected SpriteRenderer spriteRenderer;
     protected SpriteMask spriteMask;
+    protected Animator animator;
     protected IEnumerable<Box> staticColliders;
     protected IHurtable playerHurt;
 
@@ -76,6 +77,7 @@ public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackRecieve
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteMask = GetComponent<SpriteMask>();
+        animator = GetComponent<Animator>();
 
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
@@ -118,7 +120,7 @@ public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackRecieve
                 currentWaypoint = path[targetIndex];
             }
         }
-        if (aiState == FOLLOWING)
+        if (aiState != SEEKING)
         {
             //Moves the unit towards the waypoint
             movement += (currentWaypoint - box.Center).normalized * Speed;
