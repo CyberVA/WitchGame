@@ -257,12 +257,38 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         //Movement Applied
         SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
 
+        //Room travel-
+        if (pos.x > roomController.roomBounds.Right)
+        {
+            pos -= new Vector2(roomController.roomBounds.width, 0f);
+            GameController.Main.LoadEast();
+            return;
+        }
+        else if (pos.x < roomController.roomBounds.Left)
+        {
+            pos += new Vector2(roomController.roomBounds.width, 0f);
+            GameController.Main.LoadWest();
+            return;
+        }
+        if (pos.y > roomController.roomBounds.Top)
+        {
+            pos -= new Vector2(0f, roomController.roomBounds.height);
+            GameController.Main.LoadNorth();
+            return;
+        }
+        else if (pos.y < roomController.roomBounds.Bottom)
+        {
+            pos += new Vector2(0f, roomController.roomBounds.height);
+            GameController.Main.LoadSouth();
+            return;
+        }
+
         if (sliding)
         {
             sliding = false;
             foreach (NoMove noMove in roomController.noMoves)
             {
-                if (Intersects(colbox, noMove.box))
+                if (Contains(noMove.box, pos))
                 {
                     sliding = true;
                     break;
@@ -273,14 +299,14 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         {
             foreach (NoMove noMove in roomController.noMoves)
             {
-                if (Intersects(colbox, noMove.box))
+                if (Contains(noMove.box, pos))
                 {
                     switch (noMove.direction)
                     {
                         case Direction.Up:
                             if(movement.y < 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f);
                             }
                             else
                             {
@@ -291,7 +317,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                         case Direction.Down:
                             if (movement.y > 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y - noMove.box.height * 0.5f - colbox.height * 0.5f);
+                                pos = new Vector2(pos.x, noMove.box.y - noMove.box.height * 0.5f);
                             }
                             else
                             {
@@ -302,7 +328,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                         case Direction.Left:
                             if (movement.x > 0f)
                             {
-                                pos = new Vector2(noMove.box.x - noMove.box.width * 0.5f - colbox.width * 0.5f, pos.y);
+                                pos = new Vector2(noMove.box.x - noMove.box.width * 0.5f, pos.y);
                             }
                             else
                             {
@@ -313,7 +339,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                         case Direction.Right:
                             if (movement.x < 0f)
                             {
-                                pos = new Vector2(noMove.box.x + noMove.box.width * 0.5f + colbox.width * 0.5f, pos.y);
+                                pos = new Vector2(noMove.box.x + noMove.box.width * 0.5f, pos.y);
                             }
                             else
                             {
@@ -356,31 +382,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
         }
 
-        //Room travel-
-        if (pos.x > roomController.roomBounds.Right)
-        {
-            pos -= new Vector2(roomController.roomBounds.width, 0f);
-            GameController.Main.LoadEast();
-            return;
-        }
-        else if (pos.x < roomController.roomBounds.Left)
-        {
-            pos += new Vector2(roomController.roomBounds.width, 0f);
-            GameController.Main.LoadWest();
-            return;
-        }
-        if (pos.y > roomController.roomBounds.Top)
-        {
-            pos -= new Vector2(0f, roomController.roomBounds.height);
-            GameController.Main.LoadNorth();
-            return;
-        }
-        else if (pos.y < roomController.roomBounds.Bottom)
-        {
-            pos += new Vector2(0f, roomController.roomBounds.height);
-            GameController.Main.LoadSouth();
-            return;
-        }
 
         //Melee Attack
         if (meleeTimer < combatSettings.playerMelee.cooldown)
