@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SpclObj;
 
 
 public class Grid : MonoBehaviour
@@ -69,7 +70,11 @@ public class Grid : MonoBehaviour
                 //Sets the position of the node
                 grid[x, y].worldPosition = gridTransform.GetGridVector(new GridPos(x, y));
                 //Determines if hte node is walkable
-                grid[x, y].walkable = room.GetValue(x, y, Layer.Collision) == 0 && room.GetValue(x, y, Layer.Other) != 2; //2 = door
+                grid[x, y].walkable = room.GetValue(x, y, Layer.Collision) == 0 && room.GetValue(x, y, Layer.Other) != 2
+                    && room.GetValue(x, y, Layer.Other) != NOMOVEU
+                     && room.GetValue(x, y, Layer.Other) != NOMOVED
+                      && room.GetValue(x, y, Layer.Other) != NOMOVEL
+                       && room.GetValue(x, y, Layer.Other) != NOMOVER; //2 = door
             }
         }
     }
