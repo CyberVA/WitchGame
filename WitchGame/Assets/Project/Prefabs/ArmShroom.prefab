@@ -148,6 +148,7 @@ MonoBehaviour:
     width: 0.9
     height: 0.9
   flash: {fileID: 4513494692418293226}
+  spriteMask: {fileID: 4513494692143990485}
   shockWavePrefab: {fileID: 5702330130063702151, guid: a768ff69d1c4483458e113529e0fe006,
     type: 3}
 --- !u!95 &4513494692143990482

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7952325026786073599}
   - component: {fileID: 7952325026786073592}
+  - component: {fileID: 2133619694252288965}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -79,6 +80,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
+--- !u!331 &2133619694252288965
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952325026786073598}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 80c86b6142ddd74488ed33bb4803dc6d, type: 3}
+  m_MaskAlphaCutoff: 0.1
+  m_FrontSortingLayerID: -175142735
+  m_BackSortingLayerID: -175142735
+  m_FrontSortingLayer: -3
+  m_BackSortingLayer: -3
+  m_FrontSortingOrder: 1
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &7952325027085865163
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +138,6 @@ GameObject:
   - component: {fileID: 7952325027085865157}
   - component: {fileID: 7952325027085865158}
   - component: {fileID: 9049978916697559302}
-  - component: {fileID: 7952325027085865159}
   - component: {fileID: 7952325027085865152}
   m_Layer: 0
   m_Name: Geblin
@@ -180,53 +227,7 @@ MonoBehaviour:
     width: 0.8
     height: 0.9
   flash: {fileID: 7952325026786073592}
---- !u!331 &7952325027085865159
-SpriteMask:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7952325027085865163}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 80c86b6142ddd74488ed33bb4803dc6d, type: 3}
-  m_MaskAlphaCutoff: 0.1
-  m_FrontSortingLayerID: -175142735
-  m_BackSortingLayerID: -175142735
-  m_FrontSortingLayer: -3
-  m_BackSortingLayer: -3
-  m_FrontSortingOrder: 1
-  m_BackSortingOrder: 0
-  m_IsCustomRangeActive: 1
-  m_SpriteSortPoint: 0
+  spriteMask: {fileID: 2133619694252288965}
 --- !u!95 &7952325027085865152
 Animator:
   serializedVersion: 3

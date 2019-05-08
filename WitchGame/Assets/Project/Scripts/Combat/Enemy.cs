@@ -16,12 +16,12 @@ public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackRecieve
 
     //Editor Ref
     public SpriteRenderer flash;
+    public SpriteMask spriteMask;
 
     //Auto Ref
     protected CombatSettings combatSettings;
     protected RoomController roomController;
     protected SpriteRenderer spriteRenderer;
-    protected SpriteMask spriteMask;
     protected Animator animator;
     protected IEnumerable<Box> staticColliders;
     protected IHurtable playerHurt;
@@ -76,7 +76,6 @@ public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackRecieve
     protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteMask = GetComponent<SpriteMask>();
         animator = GetComponent<Animator>();
 
         roomController = GameController.Main.roomController;

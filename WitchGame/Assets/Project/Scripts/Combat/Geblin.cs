@@ -8,7 +8,6 @@ using System;
 public class Geblin : Enemy
 {
     //Melee Attack
-    public Sprite knife;
     float attackDelayTimer;
     float attackRecoverTimer;
     float meleeTimer;
@@ -114,31 +113,38 @@ public class Geblin : Enemy
             {
                 movement += meleeVector * Speed;
             }
-
-            animator.SetBool("isWalkingUp", false);
-            animator.SetBool("isWalkingDown", false);
-            animator.SetBool("isWalkingSide", false);
+            
             if (movement != Vector2.zero)
             {
+                animator.SetBool("isWalking", true);
                 switch (Utils.GetDirection(movement))
                 {
                     case Direction.Up:
-                        animator.SetBool("isWalkingUp", true);
+                        animator.SetTrigger("walkUp");
                         spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
                         break;
                     case Direction.Down:
-                        animator.SetBool("isWalkingDown", true);
+                        animator.SetBool("walkDown", true);
                         spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
                         break;
                     case Direction.Left:
-                        animator.SetBool("isWalkingSide", true);
+                        animator.SetBool("walkSide", true);
                         spriteRenderer.flipX = true;
+                        spriteMask.transform.localScale = new Vector3(-1f, 1f, 1f);
                         break;
                     case Direction.Right:
-                        animator.SetBool("isWalkingSide", true);
+                        animator.SetBool("walkSide", true);
                         spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
                         break;
                 }
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+                spriteRenderer.flipX = false;
             }
 
             //Apply movement
@@ -180,18 +186,22 @@ public class Geblin : Enemy
             case Direction.Up:
                 animator.SetTrigger("stabbyUp");
                 spriteRenderer.flipX = false;
+                spriteMask.transform.localScale = Vector3.one;
                 break;
             case Direction.Down:
                 animator.SetTrigger("stabbyDown");
                 spriteRenderer.flipX = false;
+                spriteMask.transform.localScale = Vector3.one;
                 break;
             case Direction.Left:
                 animator.SetTrigger("stabbySide");
                 spriteRenderer.flipX = true;
+                spriteMask.transform.localScale = new Vector3(-1f, 1f, 1f);
                 break;
             case Direction.Right:
                 animator.SetTrigger("stabbySide");
                 spriteRenderer.flipX = false;
+                spriteMask.transform.localScale = Vector3.one;
                 break;
         }
     }
