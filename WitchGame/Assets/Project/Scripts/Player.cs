@@ -460,6 +460,21 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         {
             //Activate Ability
             Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //direction the projectile will move
+            switch (Utils.GetDirection(mouseAim))
+            {
+                case Direction.Up:
+                    animator.SetTrigger("magicUp");
+                    break;
+                case Direction.Down:
+                    animator.SetTrigger("magicDown");
+                    break;
+                case Direction.Left:
+                    animator.SetTrigger("magicLeft");
+                    break;
+                case Direction.Right:
+                    animator.SetTrigger("magicRight");
+                    break;
+            }
             Mana -= combatSettings.playerShroom.cost;
             Spore spore = SporePooler.instance.GetSpore(); //shroomAncy projectiles are pooled. this is used instead of Instantiate 
             spore.Activate(colbox.Center, mouseAim); //enables pooled projectile
