@@ -85,7 +85,6 @@ public class Geblin : Enemy
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
-                        animator.SetBool("isStabbyDown", false);
                         attackReady = false;
                         attackRecoverTimer = combatSettings.geblinStabRecover;
                     }
@@ -121,10 +120,10 @@ public class Geblin : Enemy
                 if (distanceToPlayer < combatSettings.geblinStabBeginRange)
                 {
                     //stab
-                    Debug.Log("lunge");
+                    //Debug.Log("lunge");
                     aiState = ATTACKING;
                     attackReady = true;
-                    animator.SetBool("isStabbyDown", true);
+                    animator.SetTrigger("stabbyDown");
                 }
             }
         }
