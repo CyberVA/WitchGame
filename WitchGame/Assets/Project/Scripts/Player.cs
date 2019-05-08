@@ -10,6 +10,8 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 {
     //Editor Ref
     public SpriteRenderer weapon; //spriterenderer for melee hitbox
+    public SpriteRenderer flash;
+    public SpriteMask spriteMask;
 
     //Editor Data
     public Box colbox;
@@ -23,11 +25,13 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     //Auto Ref
     RoomController roomController;
     Animator animator;
+    SpriteRenderer spriteRenderer;
     CombatSettings combatSettings;
     AudioLibrary audioLibrary;
 
     //Timers
     float t;
+    float flashTimer;
 
     //Stats
     float maxHealth { get => combatSettings.player.hp; }
@@ -75,13 +79,14 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     [NonSerialized]
     public bool checkDoor = false; //is a key in this room
     bool sliding = false;
+    bool devSuperSpeed = false;
     Direction slidingDir;
     int keys = 0; 
     Box attackBox = new Box(0, 0, 1, 1); //dimensions of melee hitbox
 
     //Movement
     Vector2 movement;
-    float speedModifier;
+    float speedModifier = 3f;
     Vector2 velocity = Vector2.zero;
 
     /// <summary>
@@ -97,12 +102,26 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         }
     }
 
-    float Speed { get => speedModifier * combatSettings.player.moveSpeed; }
+    float Speed
+    {
+        get
+        {
+            if(!devSuperSpeed)
+            {
+                return combatSettings.player.moveSpeed;
+            }
+            else
+            {
+                return speedModifier * combatSettings.player.moveSpeed;
+            }
+        }
+    }
 
     bool IHurtable.Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
         if (damageType == DamageTypes.Shockwave || damageType == DamageTypes.Knife)
         {
+            TriggerFlash();
             //set knockback
             velocity = vector * combatSettings.armShroom.vMulitplierMelee;
             Health -= damage;
@@ -135,6 +154,8 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
 
@@ -156,6 +177,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         }
 
         //Pre-movement
+        UpdateFlash();
 
         //Movement Calculation
         movement = Vector2.zero;
@@ -192,14 +214,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         {
             movement.x += Speed;
         }
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speedModifier = 3f;
+            devSuperSpeed = !devSuperSpeed;
         }
-        else
-        {
-            speedModifier = 1f;
-        }
+        
         if (animator != null)
         {
             if (movement.y > 0) //UP
@@ -498,6 +517,31 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
         }
 
+    }
+
+    protected virtual void OnAnimatorMove()
+    {
+        //update flash mask to match animation frame
+        spriteMask.sprite = spriteRenderer.sprite;
+    }
+
+    protected void TriggerFlash()
+    {
+        flash.enabled = true;
+        flash.color = Color.white;
+        flashTimer = combatSettings.player.flashLength;
+    }
+    protected void UpdateFlash()
+    {
+        if (flashTimer > 0f)
+        {
+            flash.color = new Color(1f, 1f, 1f, flashTimer / combatSettings.player.flashLength);
+            flashTimer -= Time.deltaTime;
+            if (flashTimer <= 0)
+            {
+                flash.enabled = false;
+            }
+        }
     }
 
     public void Win()

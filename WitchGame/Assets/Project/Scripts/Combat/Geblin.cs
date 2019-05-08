@@ -16,9 +16,6 @@ public class Geblin : Enemy
     Vector2 toPlayer;
     float distanceToPlayer;
     Box attackBox = new Box(Vector2.zero, 1f, 1f);
-
-    //anim
-    string walkAnimBool = string.Empty;
     
     protected override float Speed
     {
