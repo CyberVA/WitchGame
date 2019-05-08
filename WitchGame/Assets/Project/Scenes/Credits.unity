@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 268542584}
   - component: {fileID: 268542583}
-  - component: {fileID: 268542582}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -130,14 +129,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &268542582
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268542581}
-  m_Enabled: 1
 --- !u!20 &268542583
 Camera:
   m_ObjectHideFlags: 0
@@ -305,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  transparent: 0
   scenes: Project/Scenes/MainMenu
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &1076273874

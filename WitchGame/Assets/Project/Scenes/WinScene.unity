@@ -9676,7 +9676,6 @@ GameObject:
   m_Component:
   - component: {fileID: 107771365}
   - component: {fileID: 107771364}
-  - component: {fileID: 107771363}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9684,14 +9683,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &107771363
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107771362}
-  m_Enabled: 1
 --- !u!20 &107771364
 Camera:
   m_ObjectHideFlags: 0
@@ -9728,7 +9719,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -15394,11 +15385,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9057347223874692659, guid: d92f5881d56f53d4cb783a6e0ebdf544,
-        type: 3}
-      propertyPath: m_Name
-      value: Fireflies
-      objectReference: {fileID: 0}
     - target: {fileID: 9057347223874692670, guid: d92f5881d56f53d4cb783a6e0ebdf544,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15453,6 +15439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057347223874692659, guid: d92f5881d56f53d4cb783a6e0ebdf544,
+        type: 3}
+      propertyPath: m_Name
+      value: Fireflies
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92f5881d56f53d4cb783a6e0ebdf544, type: 3}
@@ -15567,6 +15558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  transparent: 0
   scenes: Project/Scenes/Credits
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &773108218
@@ -15689,6 +15681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
+  transparent: 0
   scenes: Project/Scenes/MainMenu
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
 --- !u!61 &818249941

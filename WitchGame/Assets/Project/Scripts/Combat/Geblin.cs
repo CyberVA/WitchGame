@@ -8,10 +8,11 @@ using System;
 public class Geblin : Enemy
 {
     //Melee Attack
+    public Sprite knife;
     float attackDelayTimer;
     float attackRecoverTimer;
     float meleeTimer;
-    bool attackReady = false;
+    bool charging = false;
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
     Vector2 toPlayer;
     float distanceToPlayer;
@@ -57,40 +58,36 @@ public class Geblin : Enemy
                 iTimer -= Time.deltaTime;
             }
             UpdateFlash();
-            if (attackRecoverTimer > 0f)
+            if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
             {
-                attackRecoverTimer -= Time.deltaTime;
+                UpdatePathTimer();
             }
-            if (aiState == ATTACKING)
+            if(aiState == ATTACKING)
             {
-                if(!attackReady && attackRecoverTimer <= 0f)
-                {
-                    CalculateToPlayer();
-                    if (distanceToPlayer < combatSettings.geblinStabBeginRange)
-                    {
-                        attackReady = true;
-                        PrepAttack();
-                    }
-                    else
-                    {
-                        aiState = SEEKING;
-                    }
-                }
-                if(attackReady && attackDelayTimer > 0f)
+                if(attackDelayTimer > 0f)
                 {
                     attackDelayTimer -= Time.deltaTime;
                     if(attackDelayTimer <= 0f)
                     {
-                        if (Intersects(attackBox, playerHurt.HitBox)) //actual attack
+                        if(Intersects(attackBox, playerHurt.HitBox))
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
-                        attackReady = false;
+                        charging = false;
+                        velocity = meleeVector;
                         attackRecoverTimer = combatSettings.geblinStabRecover;
                     }
                 }
+                else
+                {
+                    attackRecoverTimer -= Time.deltaTime;
+                    if(attackRecoverTimer <= 0f)
+                    {
+                        aiState = SEEKING;
+                    }
+                }
             }
-            UpdatePathTimer();
+
             //Calculate movement
             movement = Vector2.zero;
 
@@ -98,13 +95,17 @@ public class Geblin : Enemy
             UpdateVelocity();
 
             //Pathfinding
-            if ((aiState == FOLLOWING || (aiState == ATTACKING && distanceToPlayer > combatSettings.geblinStopMoveRange)) && flashTimer <= 0f)
+            if (aiState == FOLLOWING && flashTimer <= 0f)
             {
                 FollowPath();
             }
+            else if(charging)
+            {
+                movement += meleeVector * Speed;
+            }
 
             //Apply movement
-            if(movement != Vector2.zero)
+            if (movement != Vector2.zero)
             {
                 SuperTranslate(this, movement * Time.deltaTime, staticColliders);
             }
@@ -122,7 +123,9 @@ public class Geblin : Enemy
                     //stab
                     //Debug.Log("lunge");
                     aiState = ATTACKING;
-                    attackReady = true;
+                    charging = true;
+                    meleeVector = toPlayer / distanceToPlayer;
+                    PrepAttack();
                     animator.SetTrigger("stabbyDown");
                 }
             }
@@ -134,7 +137,6 @@ public class Geblin : Enemy
     /// </summary>
     void PrepAttack()
     {
-        meleeVector = toPlayer / distanceToPlayer;
         attackBox.Center = pos + meleeVector;
         attackDelayTimer = combatSettings.geblinStabDelay;
     }
