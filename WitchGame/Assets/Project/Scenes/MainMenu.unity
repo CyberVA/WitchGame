@@ -901,14 +901,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 377774510, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 377774510, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3041750433022535966, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
+    - target: {fileID: 2047350381, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}
+      propertyPath: music.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d26a03fbfc29c794e86464a5a386a512, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b6b949522c4024692c1fe38deee55d, type: 3}

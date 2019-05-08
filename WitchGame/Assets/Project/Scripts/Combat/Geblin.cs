@@ -184,27 +184,30 @@ public class Geblin : Enemy
                 animator.SetTrigger("stabbyUp");
                 spriteRenderer.flipX = false;
                 spriteMask.transform.localScale = Vector3.one;
+                GameManager.gMan.audioLibrary.GoblinSounds(goblinEffects.Attack, 0.05f);
                 break;
             case Direction.Down:
                 animator.SetTrigger("stabbyDown");
                 spriteRenderer.flipX = false;
                 spriteMask.transform.localScale = Vector3.one;
+                GameManager.gMan.audioLibrary.GoblinSounds(goblinEffects.Attack, 0.05f);
                 break;
             case Direction.Left:
                 animator.SetTrigger("stabbySide");
                 spriteRenderer.flipX = true;
                 spriteMask.transform.localScale = new Vector3(-1f, 1f, 1f);
+                GameManager.gMan.audioLibrary.GoblinSounds(goblinEffects.Attack, 0.05f);
                 break;
             case Direction.Right:
                 animator.SetTrigger("stabbySide");
                 spriteRenderer.flipX = false;
                 spriteMask.transform.localScale = Vector3.one;
+                GameManager.gMan.audioLibrary.GoblinSounds(goblinEffects.Attack, 0.05f);
                 break;
         }
     }
     void TriggerAttack()
     {
-
     }
     void CalculateToPlayer()
     {

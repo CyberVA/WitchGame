@@ -513,7 +513,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             if (t < 0)
             {
                 t = timeToWalk;
-                audioLibrary.WalkingSounds(walk.WalkLight, 0.1f);
+                audioLibrary.WalkingSounds(walk.WalkLight, 0.01f);
             }
         }
 

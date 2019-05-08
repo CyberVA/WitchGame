@@ -80,16 +80,16 @@ public class GameManager : MonoBehaviour
         switch(next.name)
         {
             case "MainMenu":
-                audioLibrary.musicSounds(music.MainMenu, true);
+                audioLibrary.musicSounds(music.MainMenu, true, 0.5f);
                 break;
             case "Game":
-                audioLibrary.musicSounds(music.Background, true);
+                audioLibrary.musicSounds(music.Background, true, 0.3f);
                 break;
             case "Win":
-                audioLibrary.musicSounds(music.Win, true);
+                audioLibrary.musicSounds(music.Win, true, 0.6f);  
                 break;
             default:
-                audioLibrary.musicSounds(music.MainMenu, true);
+                audioLibrary.musicSounds(music.MainMenu, true, 0.5f);
                 break;
         }
         Debug.Log("Current: " + current.name + ", Next: " + next.name);
