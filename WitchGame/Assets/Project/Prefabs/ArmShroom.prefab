@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4513494692143990487}
   - component: {fileID: 4513494692143990484}
-  - component: {fileID: 4513494692143990485}
   - component: {fileID: 4513494692143990486}
   - component: {fileID: 4513494692143990482}
   m_Layer: 0
@@ -83,53 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!331 &4513494692143990485
-SpriteMask:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4513494692143990489}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4ad1909ae0b28394cb6c13c0914373c9, type: 3}
-  m_MaskAlphaCutoff: 0.1
-  m_FrontSortingLayerID: -175142735
-  m_BackSortingLayerID: -175142735
-  m_FrontSortingLayer: -3
-  m_BackSortingLayer: -3
-  m_FrontSortingOrder: 1
-  m_BackSortingOrder: 0
-  m_IsCustomRangeActive: 1
-  m_SpriteSortPoint: 0
 --- !u!114 &4513494692143990486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +100,7 @@ MonoBehaviour:
     width: 0.9
     height: 0.9
   flash: {fileID: 4513494692418293226}
+  spriteMask: {fileID: 8677530578172600120}
   shockWavePrefab: {fileID: 5702330130063702151, guid: a768ff69d1c4483458e113529e0fe006,
     type: 3}
 --- !u!95 &4513494692143990482
@@ -160,7 +113,7 @@ Animator:
   m_GameObject: {fileID: 4513494692143990489}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 16158052938b35f4fb2277a1e3c40032, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7c5cdbcc2b40c7144b509f455edce805, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -179,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4513494692418293229}
   - component: {fileID: 4513494692418293226}
+  - component: {fileID: 8677530578172600120}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -247,4 +201,51 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
+  m_SpriteSortPoint: 0
+--- !u!331 &8677530578172600120
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513494692418293228}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 4ad1909ae0b28394cb6c13c0914373c9, type: 3}
+  m_MaskAlphaCutoff: 0.1
+  m_FrontSortingLayerID: -175142735
+  m_BackSortingLayerID: -175142735
+  m_FrontSortingLayer: -3
+  m_BackSortingLayer: -3
+  m_FrontSortingOrder: 1
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0

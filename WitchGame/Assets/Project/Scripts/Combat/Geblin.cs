@@ -11,11 +11,14 @@ public class Geblin : Enemy
     float attackDelayTimer;
     float attackRecoverTimer;
     float meleeTimer;
-    bool attackReady = false;
+    bool charging = false;
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
     Vector2 toPlayer;
     float distanceToPlayer;
     Box attackBox = new Box(Vector2.zero, 1f, 1f);
+
+    //anim
+    string walkAnimBool = string.Empty;
     
     protected override float Speed
     {
@@ -57,40 +60,44 @@ public class Geblin : Enemy
                 iTimer -= Time.deltaTime;
             }
             UpdateFlash();
-            if (attackRecoverTimer > 0f)
+            if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
             {
-                attackRecoverTimer -= Time.deltaTime;
+                UpdatePathTimer();
             }
-            if (aiState == ATTACKING)
+            if(aiState == ATTACKING)
             {
-                if(!attackReady && attackRecoverTimer <= 0f)
-                {
-                    CalculateToPlayer();
-                    if (distanceToPlayer < combatSettings.geblinStabBeginRange)
-                    {
-                        attackReady = true;
-                        PrepAttack();
-                    }
-                    else
-                    {
-                        aiState = SEEKING;
-                    }
-                }
-                if(attackReady && attackDelayTimer > 0f)
+                if(attackDelayTimer > 0f)
                 {
                     attackDelayTimer -= Time.deltaTime;
                     if(attackDelayTimer <= 0f)
                     {
-                        if (Intersects(attackBox, playerHurt.HitBox)) //actual attack
+                        if(Intersects(attackBox, playerHurt.HitBox))
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
-                        attackReady = false;
+                        charging = false;
+                        velocity += meleeVector;
                         attackRecoverTimer = combatSettings.geblinStabRecover;
                     }
                 }
+                else
+                {
+                    attackRecoverTimer -= Time.deltaTime;
+                    if(attackRecoverTimer <= 0f)
+                    {
+                        CalculateToPlayer();
+                        if (distanceToPlayer < combatSettings.geblinStabBeginRange)
+                        {
+                            PrepAttack();
+                        }
+                        else
+                        {
+                            aiState = SEEKING;
+                        }
+                    }
+                }
             }
-            UpdatePathTimer();
+
             //Calculate movement
             movement = Vector2.zero;
 
@@ -98,13 +105,50 @@ public class Geblin : Enemy
             UpdateVelocity();
 
             //Pathfinding
-            if ((aiState == FOLLOWING || (aiState == ATTACKING && distanceToPlayer > combatSettings.geblinStopMoveRange)) && flashTimer <= 0f)
+            if (aiState == FOLLOWING && flashTimer <= 0f)
             {
                 FollowPath();
             }
+            else if(charging)
+            {
+                movement += meleeVector * Speed;
+            }
+            
+            if (movement.magnitude > 0.3f * Time.deltaTime)
+            {
+                animator.SetBool("isWalking", true);
+                switch (Utils.GetDirection(movement))
+                {
+                    case Direction.Up:
+                        animator.SetTrigger("walkUp");
+                        spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
+                        break;
+                    case Direction.Down:
+                        animator.SetBool("walkDown", true);
+                        spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
+                        break;
+                    case Direction.Left:
+                        animator.SetBool("walkSide", true);
+                        spriteRenderer.flipX = true;
+                        spriteMask.transform.localScale = new Vector3(-1f, 1f, 1f);
+                        break;
+                    case Direction.Right:
+                        animator.SetBool("walkSide", true);
+                        spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
+                        break;
+                }
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+                spriteRenderer.flipX = false;
+            }
 
             //Apply movement
-            if(movement != Vector2.zero)
+            if (movement != Vector2.zero)
             {
                 SuperTranslate(this, movement * Time.deltaTime, staticColliders);
             }
@@ -122,8 +166,7 @@ public class Geblin : Enemy
                     //stab
                     //Debug.Log("lunge");
                     aiState = ATTACKING;
-                    attackReady = true;
-                    animator.SetTrigger("stabbyDown");
+                    PrepAttack();
                 }
             }
         }
@@ -137,6 +180,30 @@ public class Geblin : Enemy
         meleeVector = toPlayer / distanceToPlayer;
         attackBox.Center = pos + meleeVector;
         attackDelayTimer = combatSettings.geblinStabDelay;
+        charging = true;
+        switch (Utils.GetDirection(meleeVector))
+        {
+            case Direction.Up:
+                animator.SetTrigger("stabbyUp");
+                spriteRenderer.flipX = false;
+                spriteMask.transform.localScale = Vector3.one;
+                break;
+            case Direction.Down:
+                animator.SetTrigger("stabbyDown");
+                spriteRenderer.flipX = false;
+                spriteMask.transform.localScale = Vector3.one;
+                break;
+            case Direction.Left:
+                animator.SetTrigger("stabbySide");
+                spriteRenderer.flipX = true;
+                spriteMask.transform.localScale = new Vector3(-1f, 1f, 1f);
+                break;
+            case Direction.Right:
+                animator.SetTrigger("stabbySide");
+                spriteRenderer.flipX = false;
+                spriteMask.transform.localScale = Vector3.one;
+                break;
+        }
     }
     void TriggerAttack()
     {

@@ -18,18 +18,16 @@ public class Clickable_ToggleNode : Clickable
 
     public override void OnClick()
     {
-        SpriteRenderer sr;
-        sr = tog.GetComponent<SpriteRenderer>();
         if (toggle == true)
         {
             //Debug.Log("i got pressed as true and am now turning false");
-            sr.enabled = true;
+            tog.SetActive(true);
             toggle = false;
         }
         else
         {
             //Debug.Log("i got pressed as false and am now turning true");
-            sr.enabled = false;
+            tog.SetActive(false);
             toggle = true;
         }
     }

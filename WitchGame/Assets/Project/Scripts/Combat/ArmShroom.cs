@@ -18,7 +18,7 @@ public class ArmShroom : Enemy
     float attackPrepTimer;
     float shockWaveTimer;
 
-    float shockWaveLength = 0.2f;
+    float shockWaveLength = 1f;
 
     protected override float Speed
     {
@@ -127,6 +127,39 @@ public class ArmShroom : Enemy
                 FollowPath();
             }
 
+            if (movement != Vector2.zero)
+            {
+                animator.SetBool("isWalking", true);
+                switch (Utils.GetDirection(movement))
+                {
+                    case Direction.Up:
+                        animator.SetTrigger("walkUp");
+                        spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
+                        break;
+                    case Direction.Down:
+                        animator.SetBool("walkDown", true);
+                        spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
+                        break;
+                    case Direction.Left:
+                        animator.SetBool("walkSide", true);
+                        spriteRenderer.flipX = true;
+                        spriteMask.transform.localScale = new Vector3(-1f, 1f, 1f);
+                        break;
+                    case Direction.Right:
+                        animator.SetBool("walkSide", true);
+                        spriteRenderer.flipX = false;
+                        spriteMask.transform.localScale = Vector3.one;
+                        break;
+                }
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+                spriteRenderer.flipX = false;
+            }
+
             //Apply movement
             if (movement != Vector2.zero)
             {
@@ -149,6 +182,8 @@ public class ArmShroom : Enemy
     void PrepAttack()
     {
         animator.SetTrigger("attack");
+        spriteRenderer.flipX = false;
+        spriteMask.transform.localScale = Vector3.one;
         attackPrepTimer = combatSettings.armShroomAttackPrep;
     }
     void TriggerAttack()
@@ -157,7 +192,7 @@ public class ArmShroom : Enemy
 
         shockWave = Instantiate(shockWavePrefab);
         shockWave.transform.localScale = new Vector3(combatSettings.armShroomAttackRange * 2, combatSettings.armShroomAttackRange * 2, 1f);
-        shockWave.transform.position = pos;
+        shockWave.transform.position = GameController.Main.pixelPerfect.PixSnapped(pos);
         shockWaveTimer = shockWaveLength;
 
         Vector2 toPlayer = playerHurt.HitBox.Center - pos;
