@@ -8,7 +8,7 @@ public class Clickable_SceneNode : Clickable
 
     GameManager gMan;
 
-    public double transparent;
+    double transparent;
 
     bool sceneChange;
 
@@ -19,7 +19,7 @@ public class Clickable_SceneNode : Clickable
     {
         if (sceneChange)
         {
-            transparent +=  0.2 * Time.deltaTime;
+            transparent +=  0.8f * Time.deltaTime;
             GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
             if (transparent >= 1)
             {
