@@ -8,7 +8,7 @@ public class Clickable_SceneNode : Clickable
 
     GameManager gMan;
 
-    double transparent;
+    public double transparent;
 
     bool sceneChange;
 
@@ -24,12 +24,9 @@ public class Clickable_SceneNode : Clickable
             if (transparent >= 1)
             {
                 sceneChange = false;
-                transparent = 0;
                 SceneManager.LoadScene(scenes);
-                /*if (gMan.currentScene.name == "Game")
-                {
-                    GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
-                }*/
+                transparent = 0;
+                GameManager.gMan.loaded = true;
             }
         }
     }

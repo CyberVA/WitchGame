@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     //References
     public static GameManager gMan;
     public AudioLibrary audioLibrary;
+    Clickable_SceneNode clickableScene;
 
     //Sprites
     public SpriteRenderer fadeInOut;
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Scene currentScene;
 
     bool check;
+    public bool loaded = false;
+    double transparent = 1;
 
     // Start is called before the first frame update
     void Awake()
@@ -84,5 +87,19 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("Scene 1: " + loadedScene[0].name + ", Scene 2: " + loadedScene[1].name);
         }*/
+
+        if (loaded)
+        {
+            transparent -= 0.2f * Time.deltaTime;
+            //Debug.Log(transparent);
+            fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
+            Debug.Log(fadeInOut.color.a);
+            if (transparent <= 0)
+            {
+                Debug.Log("loaded");
+                transparent = 0;
+                loaded = false;
+            }
+        }
     }
 }
