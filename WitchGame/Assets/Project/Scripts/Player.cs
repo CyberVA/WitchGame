@@ -439,7 +439,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                     {
                         if(h.Hurt(combatSettings.playerMelee.damage, DamageTypes.Melee, meleeVector))
                         {
-                            Mana = Mathf.Min(Mana + 0.5f, maxMana);
+                            Mana = Mathf.Min(Mana - combatSettings.playerMelee.cost, maxMana);
                         }
                     }
                 }
