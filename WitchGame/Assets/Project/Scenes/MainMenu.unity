@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBox: {fileID: 0}
-  scenes: Project/Scenes/Game
+  scenes: Project/Scenes/Tutorial
   highlightColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   fadeSpeed: 0.4
 --- !u!1 &1972289451
