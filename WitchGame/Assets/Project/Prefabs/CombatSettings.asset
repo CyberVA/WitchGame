@@ -54,7 +54,7 @@ MonoBehaviour:
   armShroomAttackDamage: 0.1
   geblinStabDelay: 0.3
   geblinStabDamage: 0.1
-  geblinStabRecover: 3
+  geblinStabRecover: 1
   geblinStabBeginRange: 2
   geblinStopMoveRange: 0.8
   slideSpeed: 1

@@ -17,6 +17,9 @@ public class Geblin : Enemy
     Vector2 toPlayer;
     float distanceToPlayer;
     Box attackBox = new Box(Vector2.zero, 1f, 1f);
+
+    //anim
+    string walkAnimBool = string.Empty;
     
     protected override float Speed
     {
@@ -83,7 +86,15 @@ public class Geblin : Enemy
                     attackRecoverTimer -= Time.deltaTime;
                     if(attackRecoverTimer <= 0f)
                     {
-                        aiState = SEEKING;
+                        CalculateToPlayer();
+                        if (distanceToPlayer < combatSettings.geblinStabBeginRange)
+                        {
+                            PrepAttack();
+                        }
+                        else
+                        {
+                            aiState = SEEKING;
+                        }
                     }
                 }
             }
@@ -102,6 +113,32 @@ public class Geblin : Enemy
             else if(charging)
             {
                 movement += meleeVector * Speed;
+            }
+
+            animator.SetBool("isWalkingUp", false);
+            animator.SetBool("isWalkingDown", false);
+            animator.SetBool("isWalkingSide", false);
+            if (movement != Vector2.zero)
+            {
+                switch (Utils.GetDirection(movement))
+                {
+                    case Direction.Up:
+                        animator.SetBool("isWalkingUp", true);
+                        spriteRenderer.flipX = false;
+                        break;
+                    case Direction.Down:
+                        animator.SetBool("isWalkingDown", true);
+                        spriteRenderer.flipX = false;
+                        break;
+                    case Direction.Left:
+                        animator.SetBool("isWalkingSide", true);
+                        spriteRenderer.flipX = true;
+                        break;
+                    case Direction.Right:
+                        animator.SetBool("isWalkingSide", true);
+                        spriteRenderer.flipX = false;
+                        break;
+                }
             }
 
             //Apply movement
@@ -123,10 +160,7 @@ public class Geblin : Enemy
                     //stab
                     //Debug.Log("lunge");
                     aiState = ATTACKING;
-                    charging = true;
-                    meleeVector = toPlayer / distanceToPlayer;
                     PrepAttack();
-                    animator.SetTrigger("stabbyDown");
                 }
             }
         }
@@ -137,8 +171,29 @@ public class Geblin : Enemy
     /// </summary>
     void PrepAttack()
     {
+        meleeVector = toPlayer / distanceToPlayer;
         attackBox.Center = pos + meleeVector;
         attackDelayTimer = combatSettings.geblinStabDelay;
+        charging = true;
+        switch (Utils.GetDirection(meleeVector))
+        {
+            case Direction.Up:
+                animator.SetTrigger("stabbyUp");
+                spriteRenderer.flipX = false;
+                break;
+            case Direction.Down:
+                animator.SetTrigger("stabbyDown");
+                spriteRenderer.flipX = false;
+                break;
+            case Direction.Left:
+                animator.SetTrigger("stabbySide");
+                spriteRenderer.flipX = true;
+                break;
+            case Direction.Right:
+                animator.SetTrigger("stabbySide");
+                spriteRenderer.flipX = false;
+                break;
+        }
     }
     void TriggerAttack()
     {
