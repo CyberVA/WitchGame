@@ -29,11 +29,11 @@ MonoBehaviour:
     flashLength: 0.25
     invincibleLength: 0.25
   geblin:
-    hp: 1
+    hp: 3
     moveSpeed: 3
-    inertia: 1
-    vMulitplierMelee: 1
-    vMultiplierRange: 0
+    inertia: 3
+    vMulitplierMelee: 7
+    vMultiplierRange: 4
     flashLength: 1
     invincibleLength: 1
   playerMana: 2

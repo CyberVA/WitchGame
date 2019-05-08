@@ -76,7 +76,7 @@ public class Geblin : Enemy
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
                         charging = false;
-                        velocity = meleeVector;
+                        velocity += meleeVector;
                         attackRecoverTimer = combatSettings.geblinStabRecover;
                     }
                 }
@@ -114,7 +114,7 @@ public class Geblin : Enemy
                 movement += meleeVector * Speed;
             }
             
-            if (movement != Vector2.zero)
+            if (movement.magnitude > 0.3f * Time.deltaTime)
             {
                 animator.SetBool("isWalking", true);
                 switch (Utils.GetDirection(movement))

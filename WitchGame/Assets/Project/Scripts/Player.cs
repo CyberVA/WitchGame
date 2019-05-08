@@ -150,6 +150,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     private void Update()
     {
+        if(GameController.Main.gamePaused)
+        {
+            return;
+        }
+
         //Pre-movement
 
         //Movement Calculation
