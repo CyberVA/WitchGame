@@ -504,7 +504,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             spore.Activate(colbox.Center, mouseAim); //enables pooled projectile
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
-            audioLibrary.PlayerSounds(playerEffects.MushMancy);
+            audioLibrary.PlayerSounds(playerEffects.MushMancy, 0.1f);
         }
         //Audio
         if (movement != Vector2.zero)
@@ -513,7 +513,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             if (t < 0)
             {
                 t = timeToWalk;
-                audioLibrary.WalkingSounds(walk.WalkLight);
+                audioLibrary.WalkingSounds(walk.WalkLight, 0.1f);
             }
         }
 
