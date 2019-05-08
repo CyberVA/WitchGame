@@ -81,6 +81,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     //Movement
     Vector2 movement;
+    float speedModifier;
     Vector2 velocity = Vector2.zero;
 
     /// <summary>
@@ -95,6 +96,8 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             transform.position = value - boxOffset;
         }
     }
+
+    float Speed { get => speedModifier * combatSettings.player.moveSpeed; }
 
     bool IHurtable.Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
@@ -170,19 +173,27 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
         if (Input.GetKey(KeyCode.W))
         {
-            movement.y += combatSettings.player.moveSpeed;
+            movement.y += Speed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            movement.y -= combatSettings.player.moveSpeed;
+            movement.y -= Speed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            movement.x -= combatSettings.player.moveSpeed;
+            movement.x -= Speed;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            movement.x += combatSettings.player.moveSpeed;
+            movement.x += Speed;
+        }
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            speedModifier = 3f;
+        }
+        else
+        {
+            speedModifier = 1f;
         }
         if (animator != null)
         {
@@ -456,6 +467,10 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     public void Win()
     {
+        animator.SetBool("isWalkingUp", false);
+        animator.SetBool("isWalkingDown", false);
+        animator.SetBool("isWalkingLeft", false);
+        animator.SetBool("isWalkingRight", false);
         enabled = false;
         SceneManager.LoadScene("Project/Scenes/WinScene"); //temp win screen
     }
