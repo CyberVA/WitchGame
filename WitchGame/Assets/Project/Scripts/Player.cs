@@ -396,10 +396,25 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //Activate Attack
-            animator.SetBool("isAttacking", true);
             meleeActive = true;
             weapon.enabled = true;          
             meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //use this for attack anim
+            switch (Utils.GetDirection(meleeVector))
+            {
+                case Direction.Up:
+                    animator.SetTrigger("attackUp");
+                    break;
+                case Direction.Down:
+                    animator.SetTrigger("attackDown");
+                    break;
+                case Direction.Left:
+                    animator.SetTrigger("attackLeft");
+                    break;
+                case Direction.Right:
+                    animator.SetTrigger("attackRight");
+                    break;
+            }
+
             meleeTimer = 0;
             GameController.Main.statusBars.CoolDowns(0, 0f);
         }
@@ -411,7 +426,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             {
                 meleeActive = false;
                 weapon.enabled = false;
-                animator.SetBool("isAttacking", false);
             }
             else
             {
