@@ -16,8 +16,7 @@ public class Geblin : Enemy
     Vector2 toPlayer;
     float distanceToPlayer;
     Box attackBox = new Box(Vector2.zero, 1f, 1f);
-
-
+    
     protected override float Speed
     {
         get => combatSettings.geblin.moveSpeed * speedMultiplier;
@@ -86,16 +85,13 @@ public class Geblin : Enemy
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);
                         }
+                        animator.SetBool("isStabbyDown", false);
                         attackReady = false;
                         attackRecoverTimer = combatSettings.geblinStabRecover;
                     }
                 }
             }
-            if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
-            {
-                UpdatePathTimer();
-            }
-
+            UpdatePathTimer();
             //Calculate movement
             movement = Vector2.zero;
 
@@ -103,7 +99,7 @@ public class Geblin : Enemy
             UpdateVelocity();
 
             //Pathfinding
-            if ((aiState == FOLLOWING || aiState == ATTACKING && distanceToPlayer > combatSettings.geblinStopMoveRange) && flashTimer <= 0f)
+            if ((aiState == FOLLOWING || (aiState == ATTACKING && distanceToPlayer > combatSettings.geblinStopMoveRange)) && flashTimer <= 0f)
             {
                 FollowPath();
             }
@@ -125,7 +121,10 @@ public class Geblin : Enemy
                 if (distanceToPlayer < combatSettings.geblinStabBeginRange)
                 {
                     //stab
+                    Debug.Log("lunge");
                     aiState = ATTACKING;
+                    attackReady = true;
+                    animator.SetBool("isStabbyDown", true);
                 }
             }
         }

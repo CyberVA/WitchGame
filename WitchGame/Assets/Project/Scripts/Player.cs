@@ -81,6 +81,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     //Movement
     Vector2 movement;
+    float speedModifier;
     Vector2 velocity = Vector2.zero;
 
     /// <summary>
@@ -95,6 +96,8 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             transform.position = value - boxOffset;
         }
     }
+
+    float Speed { get => speedModifier * combatSettings.player.moveSpeed; }
 
     bool IHurtable.Hurt(float damage, DamageTypes damageType, Vector2 vector)
     {
@@ -170,19 +173,27 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
         if (Input.GetKey(KeyCode.W))
         {
-            movement.y += combatSettings.player.moveSpeed;
+            movement.y += Speed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            movement.y -= combatSettings.player.moveSpeed;
+            movement.y -= Speed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            movement.x -= combatSettings.player.moveSpeed;
+            movement.x -= Speed;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            movement.x += combatSettings.player.moveSpeed;
+            movement.x += Speed;
+        }
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            speedModifier = 3f;
+        }
+        else
+        {
+            speedModifier = 1f;
         }
         if (animator != null)
         {
@@ -246,12 +257,38 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         //Movement Applied
         SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
 
+        //Room travel-
+        if (pos.x > roomController.roomBounds.Right)
+        {
+            pos -= new Vector2(roomController.roomBounds.width, 0f);
+            GameController.Main.LoadEast();
+            return;
+        }
+        else if (pos.x < roomController.roomBounds.Left)
+        {
+            pos += new Vector2(roomController.roomBounds.width, 0f);
+            GameController.Main.LoadWest();
+            return;
+        }
+        if (pos.y > roomController.roomBounds.Top)
+        {
+            pos -= new Vector2(0f, roomController.roomBounds.height);
+            GameController.Main.LoadNorth();
+            return;
+        }
+        else if (pos.y < roomController.roomBounds.Bottom)
+        {
+            pos += new Vector2(0f, roomController.roomBounds.height);
+            GameController.Main.LoadSouth();
+            return;
+        }
+
         if (sliding)
         {
             sliding = false;
             foreach (NoMove noMove in roomController.noMoves)
             {
-                if (Intersects(colbox, noMove.box))
+                if (Contains(noMove.box, pos))
                 {
                     sliding = true;
                     break;
@@ -262,14 +299,14 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         {
             foreach (NoMove noMove in roomController.noMoves)
             {
-                if (Intersects(colbox, noMove.box))
+                if (Contains(noMove.box, pos))
                 {
                     switch (noMove.direction)
                     {
                         case Direction.Up:
                             if(movement.y < 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
+                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f);
                             }
                             else
                             {
@@ -280,7 +317,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                         case Direction.Down:
                             if (movement.y > 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y - noMove.box.height * 0.5f - colbox.height * 0.5f);
+                                pos = new Vector2(pos.x, noMove.box.y - noMove.box.height * 0.5f);
                             }
                             else
                             {
@@ -291,7 +328,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                         case Direction.Left:
                             if (movement.x > 0f)
                             {
-                                pos = new Vector2(noMove.box.x - noMove.box.width * 0.5f - colbox.width * 0.5f, pos.y);
+                                pos = new Vector2(noMove.box.x - noMove.box.width * 0.5f, pos.y);
                             }
                             else
                             {
@@ -302,7 +339,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                         case Direction.Right:
                             if (movement.x < 0f)
                             {
-                                pos = new Vector2(noMove.box.x + noMove.box.width * 0.5f + colbox.width * 0.5f, pos.y);
+                                pos = new Vector2(noMove.box.x + noMove.box.width * 0.5f, pos.y);
                             }
                             else
                             {
@@ -345,31 +382,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
         }
 
-        //Room travel-
-        if (pos.x > roomController.roomBounds.Right)
-        {
-            pos -= new Vector2(roomController.roomBounds.width, 0f);
-            GameController.Main.LoadEast();
-            return;
-        }
-        else if (pos.x < roomController.roomBounds.Left)
-        {
-            pos += new Vector2(roomController.roomBounds.width, 0f);
-            GameController.Main.LoadWest();
-            return;
-        }
-        if (pos.y > roomController.roomBounds.Top)
-        {
-            pos -= new Vector2(0f, roomController.roomBounds.height);
-            GameController.Main.LoadNorth();
-            return;
-        }
-        else if (pos.y < roomController.roomBounds.Bottom)
-        {
-            pos += new Vector2(0f, roomController.roomBounds.height);
-            GameController.Main.LoadSouth();
-            return;
-        }
 
         //Melee Attack
         if (meleeTimer < combatSettings.playerMelee.cooldown)
@@ -385,10 +397,25 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //Activate Attack
-            animator.SetBool("isAttacking", true);
             meleeActive = true;
             weapon.enabled = true;          
             meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //use this for attack anim
+            switch (Utils.GetDirection(meleeVector))
+            {
+                case Direction.Up:
+                    animator.SetTrigger("attackUp");
+                    break;
+                case Direction.Down:
+                    animator.SetTrigger("attackDown");
+                    break;
+                case Direction.Left:
+                    animator.SetTrigger("attackLeft");
+                    break;
+                case Direction.Right:
+                    animator.SetTrigger("attackRight");
+                    break;
+            }
+
             meleeTimer = 0;
             GameController.Main.statusBars.CoolDowns(0, 0f);
         }
@@ -400,7 +427,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             {
                 meleeActive = false;
                 weapon.enabled = false;
-                animator.SetBool("isAttacking", false);
             }
             else
             {
@@ -456,6 +482,10 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
 
     public void Win()
     {
+        animator.SetBool("isWalkingUp", false);
+        animator.SetBool("isWalkingDown", false);
+        animator.SetBool("isWalkingLeft", false);
+        animator.SetBool("isWalkingRight", false);
         enabled = false;
         SceneManager.LoadScene("Project/Scenes/WinScene"); //temp win screen
     }

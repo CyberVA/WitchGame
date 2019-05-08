@@ -104,7 +104,7 @@ public class ArmShroom : Enemy
                 {
                     if (PlayerInRange)
                     {
-                        TriggerAttack();
+                        PrepAttack();
                     }
                     else
                     {
@@ -148,6 +148,7 @@ public class ArmShroom : Enemy
 
     void PrepAttack()
     {
+        animator.SetTrigger("attack");
         attackPrepTimer = combatSettings.armShroomAttackPrep;
     }
     void TriggerAttack()
