@@ -391,6 +391,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //use this for attack anim
             meleeTimer = 0;
             GameController.Main.statusBars.CoolDowns(0, 0f);
+            audioLibrary.PlayerSounds(playerEffects.Attack);
         }
         //Melee Collision-
         if (meleeActive)
@@ -404,7 +405,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
             else
             {
-                audioLibrary.PlayerSounds(playerEffects.Attack);
                 attackBox.Center = colbox.Center + meleeVector;
                 weapon.transform.position = attackBox.Center;
                 foreach (IHurtable h in roomController.enemies)

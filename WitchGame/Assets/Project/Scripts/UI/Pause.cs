@@ -9,6 +9,7 @@ public class Pause : MonoBehaviour
     GameController gameController;
     public GameObject pauseFilter;
     public GameObject[] pauseButtons;
+    GameManager gMan;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class Pause : MonoBehaviour
             paused = true;
             gameController.OnPaused(paused);
             for (int i = 0; i < pauseButtons.Length; i++) pauseButtons[i].SetActive(true);
+            //gMan.audioLibrary.musicPlayer.volume = 0.5f;
         }
         
         else

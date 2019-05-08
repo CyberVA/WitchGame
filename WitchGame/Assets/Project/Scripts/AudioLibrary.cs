@@ -75,15 +75,20 @@ public class AudioLibrary : MonoBehaviour
     /// <param name="s">What clip are we playing</param>
     /// <param name="playing">Is the clip playing</param>
     /// <param name="volume">What is the audio sources volume</param>
-    public void musicSounds(music s, bool playing, float volume)
+    public void musicSounds(music s, bool playing)
     {
         musicPlayer.clip = music[(int)s];
         Debug.Log("current s: " + s.ToString() + ", music player: " + musicPlayer.name);
-        if (playing && s.ToString() == musicPlayer.name)
+        if (playing && !musicPlayer.isPlaying)
         {
             musicPlayer.Play();
-            musicPlayer.volume = volume;
+            Debug.Log("is playing");
         }
+        else if (!playing)
+        {
+            musicPlayer.Stop();
+        }
+        else musicPlayer.Stop();
     }
     /// <summary>
     /// Pauses the music

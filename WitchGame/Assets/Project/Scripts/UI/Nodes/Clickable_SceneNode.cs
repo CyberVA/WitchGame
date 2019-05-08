@@ -6,14 +6,39 @@ using UnityEngine.SceneManagement;
 public class Clickable_SceneNode : Clickable
 {
 
+    GameManager gMan;
+
+    double transparent;
+
+    bool sceneChange;
+
     public string scenes;
     public Color highlightColor;
+
+    private void Update()
+    {
+        if (sceneChange)
+        {
+            transparent +=  0.2 * Time.deltaTime;
+            GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
+            if (transparent >= 1)
+            {
+                sceneChange = false;
+                transparent = 0;
+                SceneManager.LoadScene(scenes);
+                /*if (gMan.currentScene.name == "Game")
+                {
+                    GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
+                }*/
+            }
+        }
+    }
 
     public override void OnClick()
     {
         if (scenes != null)
         {
-            SceneManager.LoadScene(scenes);
+            sceneChange = true;
         }
         else
         {
