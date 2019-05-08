@@ -11,7 +11,6 @@ public class Clickable_SceneNode : Clickable
     public double transparent;
 
     bool sceneChange;
-    public bool loaded = false;
 
     public string scenes;
     public Color highlightColor;
@@ -26,7 +25,8 @@ public class Clickable_SceneNode : Clickable
             {
                 sceneChange = false;
                 SceneManager.LoadScene(scenes);
-                loaded = true;
+                transparent = 0;
+                GameManager.gMan.loaded = true;
             }
         }
     }

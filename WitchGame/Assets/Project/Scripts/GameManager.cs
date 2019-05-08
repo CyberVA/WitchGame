@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Scene currentScene;
 
     bool check;
+    public bool loaded = false;
+    double transparent = 1;
 
     // Start is called before the first frame update
     void Awake()
@@ -86,15 +88,17 @@ public class GameManager : MonoBehaviour
             Debug.Log("Scene 1: " + loadedScene[0].name + ", Scene 2: " + loadedScene[1].name);
         }*/
 
-        if (clickableScene.loaded)
+        if (loaded)
         {
-            clickableScene.transparent -= 0.2f * Time.deltaTime;
-            Debug.Log(clickableScene.transparent);
-            GameManager.gMan.fadeInOut.color = new Color(0f, 0f, 0f, (float)clickableScene.transparent);
-            if (clickableScene.transparent <= 0)
+            transparent -= 0.2f * Time.deltaTime;
+            //Debug.Log(transparent);
+            fadeInOut.color = new Color(0f, 0f, 0f, (float)transparent);
+            Debug.Log(fadeInOut.color.a);
+            if (transparent <= 0)
             {
                 Debug.Log("loaded");
-                clickableScene.loaded = false;
+                transparent = 0;
+                loaded = false;
             }
         }
     }
