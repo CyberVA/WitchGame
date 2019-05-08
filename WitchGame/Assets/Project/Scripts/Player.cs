@@ -32,6 +32,9 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     //Timers
     float t;
     float flashTimer;
+    float shroomTimer;
+    float healTimer;
+    float cloudTimer;
 
     //Stats
     float maxHealth { get => combatSettings.player.hp; }
@@ -69,7 +72,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
 
     //Shroom Attack
-    float shroomTimer;
 
     //Runtime Values
     [NonSerialized]
@@ -214,11 +216,16 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         {
             movement.x += Speed;
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        //DEV CHEATS
+        if(Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            Mana = maxMana;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad7))
         {
             devSuperSpeed = !devSuperSpeed;
         }
-        
+
         if (animator != null)
         {
             if (movement.y > 0) //UP
@@ -504,7 +511,64 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             spore.Activate(colbox.Center, mouseAim); //enables pooled projectile
             shroomTimer = 0;
             GameController.Main.statusBars.CoolDowns(1, 0f);
-            audioLibrary.PlayerSounds(playerEffects.MushMancy);
+            audioLibrary.PlayerSounds(playerEffects.MushMancy, 0.1f);
+        }
+        //cloud
+        if (cloudTimer < combatSettings.playerCloud.cooldown)
+        {
+            //Update Timer
+            cloudTimer += Time.deltaTime;
+            if (cloudTimer > combatSettings.playerCloud.cooldown)
+            {
+                cloudTimer = combatSettings.playerCloud.cooldown;
+            }
+            GameController.Main.statusBars.CoolDowns(2, cloudTimer / combatSettings.playerCloud.cooldown);
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && Mana >= combatSettings.playerCloud.cost)
+        {
+            Vector2 mouseAim = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //direction the projectile will move
+            switch (Utils.GetDirection(mouseAim))
+            {
+                case Direction.Up:
+                    animator.SetTrigger("magicUp");
+                    break;
+                case Direction.Down:
+                    animator.SetTrigger("magicDown");
+                    break;
+                case Direction.Left:
+                    animator.SetTrigger("magicLeft");
+                    break;
+                case Direction.Right:
+                    animator.SetTrigger("magicRight");
+                    break;
+            }
+            //poof here later
+            Mana -= combatSettings.playerCloud.cost;
+            cloudTimer = 0;
+            GameController.Main.statusBars.CoolDowns(2, 0f);
+            Cloud cloud = CloudPooler.instance.GetCloud(); //cloud projectiles are pooled. this is used instead of Instantiate 
+            cloud.Activate(colbox.Center, mouseAim); //enables pooled projectile
+            audioLibrary.PlayerSounds(playerEffects.RootWall);
+        }
+        if (healTimer < combatSettings.playerHeal.cooldown)
+        {
+            //Update Timer
+            healTimer += Time.deltaTime;
+            if (healTimer > combatSettings.playerHeal.cooldown)
+            {
+                healTimer = combatSettings.playerHeal.cooldown;
+            }
+            GameController.Main.statusBars.CoolDowns(3, healTimer / combatSettings.playerHeal.cooldown);
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && Mana >= combatSettings.playerHeal.cost)
+        {
+            animator.SetTrigger("magicDown");
+            //poof here later
+            Health = Mathf.Min(maxHealth, Health + combatSettings.playerHeal.damage);
+            Mana -= combatSettings.playerHeal.cost;
+            healTimer = 0;
+            GameController.Main.statusBars.CoolDowns(3, 0f);
+            audioLibrary.PlayerSounds(playerEffects.Cure);
         }
         //Audio
         if (movement != Vector2.zero)
@@ -513,7 +577,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             if (t < 0)
             {
                 t = timeToWalk;
-                audioLibrary.WalkingSounds(walk.WalkLight);
+                audioLibrary.WalkingSounds(walk.WalkLight, 0.1f);
             }
         }
 

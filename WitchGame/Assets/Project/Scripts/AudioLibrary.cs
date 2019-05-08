@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
 
-public enum playerEffects { Attack, Damaged, Idle, MushMancy, RootWall, Cure }
-public enum mushroomEffects { Attack, Damaged, Idle}
-public enum goblinEffects { Attack, Damage, Idle}
-public enum walk { WalkLight, WalkMedium, WalkHeavy}
-public enum miscEffects { ButtonSelected }
-public enum music { MainMenu, Background, Win, Lose}
+public enum playerEffects { Attack, Damaged, MushMancy, RootWall, Cure }
+public enum mushroomEffects { Attack, Damaged}
+public enum goblinEffects { Attack, Damage}
+public enum walk { WalkLight}
+public enum miscEffects {  }
+public enum music { MainMenu, Background, Win}
 
 public class AudioLibrary : MonoBehaviour
 {
@@ -34,6 +34,10 @@ public class AudioLibrary : MonoBehaviour
     /// Plays a combat sound at a certain point
     /// </summary>
     /// <param name="s">Combat sound</param>
+    public void PlayerSounds(playerEffects s, float volume)
+    {
+        if (player[(int)s] != null) AudioSource.PlayClipAtPoint(player[(int)s], Vector3.zero, volume);
+    }
     public void PlayerSounds(playerEffects s)
     {
         if (player[(int)s] != null) AudioSource.PlayClipAtPoint(player[(int)s], Vector3.zero);
@@ -42,28 +46,44 @@ public class AudioLibrary : MonoBehaviour
     /// Plays a combat sound at a certain point
     /// </summary>
     /// <param name="s">Combat sound</param>
+    public void MushroomSounds(mushroomEffects s, float volume)
+    {
+        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero, volume);
+    }
     public void MushroomSounds(mushroomEffects s)
     {
-        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero);
+        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero, 0.1f);
     }
     /// <summary>
     /// Plays a combat sound at a certain point
     /// </summary>
     /// <param name="s">Combat sound</param>
+    public void GoblinSounds(goblinEffects s, float volume)
+    {
+        AudioSource.PlayClipAtPoint(goblin[(int)s], Vector3.zero, volume);
+    }
     public void GoblinSounds(goblinEffects s)
     {
         AudioSource.PlayClipAtPoint(goblin[(int)s], Vector3.zero);
     }
 
+    public void WalkingSounds(walk s, float volume)
+    {
+        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero, volume);
+    }
     public void WalkingSounds(walk s)
     {
-        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero, 0.1f);
+        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero);
     }
 
     /// <summary>
     /// Plays a miscelanious sound at a certain point
     /// </summary>
     /// <param name="s">Miscelanious sound</param>
+    public void miscSounds(miscEffects s, float volume)
+    {
+        AudioSource.PlayClipAtPoint(misc[(int)s], Vector3.zero, volume);
+    }
     public void miscSounds(miscEffects s)
     {
         AudioSource.PlayClipAtPoint(misc[(int)s], Vector3.zero);
@@ -89,6 +109,7 @@ public class AudioLibrary : MonoBehaviour
             musicPlayer.Stop();
         }
     }
+
     /// <summary>
     /// Pauses the music
     /// </summary>

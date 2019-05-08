@@ -88,9 +88,6 @@ public class GameManager : MonoBehaviour
             case "Win":
                 audioLibrary.musicSounds(music.Win, true);
                 break;
-            case "Lose":
-                audioLibrary.musicSounds(music.Lose, true);
-                break;
             default:
                 audioLibrary.musicSounds(music.MainMenu, true);
                 break;

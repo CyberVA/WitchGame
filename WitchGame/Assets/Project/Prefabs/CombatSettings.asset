@@ -45,8 +45,19 @@ MonoBehaviour:
     cost: 1
     cooldown: 0.3
     damage: 3
+  playerHeal:
+    cost: 1
+    cooldown: 1
+    damage: 1
+  playerCloud:
+    cost: 1
+    cooldown: 1
+    damage: 1
   playerMeleeLength: 0.2
   playerShroomSpeed: 10
+  playerCloudLife: 5
+  playerCloudMoveTime: 1
+  playerCloudSpeed: 3
   armShroomAttackTriggerRange: 1.4
   armShroomAttackRange: 1.5
   armShroomAttackCooldown: 3
@@ -58,4 +69,6 @@ MonoBehaviour:
   geblinStabBeginRange: 2
   geblinStopMoveRange: 0.8
   slideSpeed: 1
+  slowEffectLength: 3
+  slowEffectMultiplier: 0.3
   minVelocity: 0.1

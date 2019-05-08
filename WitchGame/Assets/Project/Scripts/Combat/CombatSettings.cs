@@ -6,11 +6,13 @@ public class CombatSettings : ScriptableObject
 {
     public CombatStats player, armShroom, geblin;
     public float playerMana;
-    public Ability playerMelee, playerShroom, playerHeal;
-    public float playerMeleeLength, playerShroomSpeed;
+    public Ability playerMelee, playerShroom, playerHeal, playerCloud;
+    public float playerMeleeLength, playerShroomSpeed, playerCloudLife, playerCloudMoveTime, playerCloudSpeed;
     public float armShroomAttackTriggerRange, armShroomAttackRange, armShroomAttackCooldown, armShroomAttackPrep, armShroomAttackDamage;
     public float geblinStabDelay, geblinStabDamage, geblinStabRecover, geblinStabBeginRange, geblinStopMoveRange;
     public float slideSpeed;
+    public float slowEffectLength;
+    public float slowEffectMultiplier;
     public float minVelocity;
 }
 

@@ -16,6 +16,8 @@ public class Geblin : Enemy
     Vector2 toPlayer;
     float distanceToPlayer;
     Box attackBox = new Box(Vector2.zero, 1f, 1f);
+
+    float slowTime;
     
     protected override float Speed
     {
@@ -55,6 +57,15 @@ public class Geblin : Enemy
             if (iTimer > 0f)
             {
                 iTimer -= Time.deltaTime;
+            }
+            if (slowTime > 0f)
+            {
+                slowTime -= Time.deltaTime;
+                speedMultiplier = combatSettings.slowEffectMultiplier;
+            }
+            else
+            {
+                speedMultiplier = 1f;
             }
             UpdateFlash();
             if ((aiState == FOLLOWING || aiState == SEEKING) && requestPathTimer > 0f) //if enemy is looking for or following player, request a path at a regular interval
@@ -249,6 +260,10 @@ public class Geblin : Enemy
                 //start hit flash
                 TriggerFlash();
                 return true;
+            }
+            else if (damageType == DamageTypes.Slow)
+            {
+                slowTime = combatSettings.slowEffectLength;
             }
         }
 
