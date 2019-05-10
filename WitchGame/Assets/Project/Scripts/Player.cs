@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     public SpriteRenderer weapon; //spriterenderer for melee hitbox
     public SpriteRenderer flash;
     public SpriteMask spriteMask;
+    public GameObject keyUI;
 
     //Editor Data
     public Box colbox;
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     SpriteRenderer spriteRenderer;
     CombatSettings combatSettings;
     AudioLibrary audioLibrary;
+    TextMesh keyText;
 
     //Timers
     float t;
@@ -157,6 +159,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        keyText = keyUI.GetComponentInChildren<TextMesh>();
 
         roomController = GameController.Main.roomController;
         combatSettings = GameController.Main.combatSettings;
@@ -396,6 +399,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
         {
             roomController.CollectKey();
             keys++; //ADD UI CODE LATER
+            if(keys == 1)
+            {
+                keyUI.SetActive(true);
+            }
+            keyText.text = keys.ToString();
             checkKey = false;
         }
 
@@ -408,6 +416,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                 {
                     roomController.UnlockDoor();
                     keys--;
+                    if (keys == 0)
+                    {
+                        keyUI.SetActive(false);
+                    }
+                    keyText.text = keys.ToString();
                     break;
                 }
             }

@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 450021296}
   - component: {fileID: 450021295}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: ManaText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,7 +635,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450021294}
-  m_Text: Use Mana to cast spells
+  m_Text: 'Use Mana to cast spells:'
   m_OffsetZ: 0
   m_CharacterSize: 0.07
   m_LineSpacing: 1
@@ -910,7 +910,7 @@ Transform:
   m_GameObject: {fileID: 658239363}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -11.65282, y: -0.18310308, z: 0.17586035}
-  m_LocalScale: {x: 1.500001, y: 1.500001, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 852339999}
   m_RootOrder: 0
@@ -1316,7 +1316,7 @@ Transform:
   m_GameObject: {fileID: 1902639313}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -11.65282, y: -2.45, z: 0.17586035}
-  m_LocalScale: {x: 1.500001, y: 1.500001, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1045842414}
   m_RootOrder: 1
@@ -1395,7 +1395,7 @@ Transform:
   m_GameObject: {fileID: 1931299752}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -11.65282, y: 1.19, z: 0.17586035}
-  m_LocalScale: {x: 1.500001, y: 1.500001, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 287329045}
   m_RootOrder: 1
