@@ -47,8 +47,10 @@ public class RoomController : MonoBehaviour
     /// <summary>
     /// set of room names where doors have been unlocked
     /// </summary>
-    HashSet<string> unlockedDoors = new HashSet<string>();
-    HashSet<string> pickedUpKeys = new HashSet<string>();
+    [NonSerialized]
+    public HashSet<string> unlockedDoors = new HashSet<string>();
+    [NonSerialized]
+    public HashSet<string> pickedUpKeys = new HashSet<string>();
     /// <summary>
     /// collider for fountain
     /// </summary>

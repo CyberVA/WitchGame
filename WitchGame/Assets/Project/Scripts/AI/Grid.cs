@@ -121,7 +121,7 @@ public class Grid : MonoBehaviour
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         //associates p with the world position of the node
-        GridPos p = gridTransform.GetGridPos(worldPosition);
+        GridPos p = gridTransform.GetGridPos(worldPosition).Clamp(room.width, room.height);
         //returns P
         return grid[p.x, p.y];
     }

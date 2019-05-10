@@ -231,7 +231,6 @@ public class ArmShroom : Enemy
             {
                 if (iTimer <= 0)
                 {
-                    if(attackPrepTimer > 0) PrepAttack();
                     //set knockback
                     velocity = vector * combatSettings.armShroom.vMulitplierMelee;
                     if (TakeDamage(damage))
