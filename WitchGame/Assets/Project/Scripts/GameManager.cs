@@ -54,10 +54,6 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("LevelEditor");
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
 
         //Fade out
         if (loaded)
