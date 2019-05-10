@@ -54,21 +54,21 @@ public class Clickable_MapNode : Clickable
             case "FF5":
                 transform.localPosition = new Vector3(-0.6f, 0.15f, 0);
                 break;
-            case "FF6":
-                transform.localPosition = new Vector3(1.4f, 0.15f, 0);
-                break;
-            case "FF7":
-                transform.localPosition = new Vector3(-3.7f, -1f, 0);
-                break;
+            //case "FF6":
+            //    transform.localPosition = new Vector3(1.4f, 0.15f, 0);
+            //    break;
+            //case "FF7":
+            //    transform.localPosition = new Vector3(-3.7f, -1f, 0);
+            //    break;
             //Fountain's Edge Coords - DONE
             case "FE1":
                 transform.localPosition = new Vector3(0.4f, 0.15f, 0);
                 break;
             case "FE2":
-                transform.localPosition = new Vector3(2.6f, 0.15f, 0);
+                transform.localPosition = new Vector3(1.4f, 0.15f, 0);
                 break;
             case "FE3":
-                transform.localPosition = new Vector3(3.5f, 0.15f, 0);
+                transform.localPosition = new Vector3(2.6f, 0.15f, 0);
                 break;
             //Bramble Maze Coords - DONE
             case "BM1":
