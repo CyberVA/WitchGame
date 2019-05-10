@@ -18,7 +18,7 @@ public struct GridPos : IEquatable<GridPos>
     
     public GridPos Clamp(int width, int height)
     {
-        GridPos p = new GridPos();
+        GridPos p = this;
         if (x < 0)
             p.x = 0;
         else if (x >= width)

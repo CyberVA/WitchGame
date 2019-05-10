@@ -102,8 +102,8 @@ namespace TwoStepCollision
     public class Tri : ICollidesWith<Box>
     {
         public Vector2 pos;
-        public float x;
-        public float y;
+        public Vector2 pos2;
+        public Vector2 pos3;
 
         bool ICollidesWith<Box>.Intersects(Box other)
         {
