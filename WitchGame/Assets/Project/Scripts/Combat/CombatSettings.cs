@@ -10,7 +10,6 @@ public class CombatSettings : ScriptableObject
     public float playerMeleeLength, playerShroomSpeed, playerCloudLife, playerCloudMoveTime, playerCloudSpeed;
     public float armShroomAttackTriggerRange, armShroomAttackRange, armShroomAttackCooldown, armShroomAttackPrep, armShroomAttackDamage;
     public float geblinStabDelay, geblinStabDamage, geblinStabRecover, geblinStabBeginRange, geblinStopMoveRange, geblinStabRange;
-    public float slideSpeed;
     public float slowEffectLength;
     public float slowEffectMultiplier;
     public float minVelocity;

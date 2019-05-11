@@ -267,27 +267,6 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             }
         }
 
-        //Movement Mod
-        /*
-        if (sliding)
-        {
-            switch (slidingDir)
-            {
-                case Direction.Up:
-                    movement.y = Mathf.Max(combatSettings.slideSpeed, movement.y);
-                    break;
-                case Direction.Down:
-                    movement.y = Mathf.Min(-combatSettings.slideSpeed, movement.y);
-                    break;
-                case Direction.Left:
-                    movement.x = Mathf.Min(-combatSettings.slideSpeed, movement.x);
-                    break;
-                case Direction.Right:
-                    movement.x = Mathf.Max(combatSettings.slideSpeed, movement.x);
-                    break;
-            }
-        }*/
-
         //Movement Applied
         SuperTranslate(this, movement * Time.deltaTime, roomController.GetStaticBoxes(keys == 0));
 
@@ -479,15 +458,19 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             {
                 case Direction.Up:
                     animator.SetTrigger("attackUp");
+                    weapon.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                     break;
                 case Direction.Down:
                     animator.SetTrigger("attackDown");
+                    weapon.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
                     break;
                 case Direction.Left:
                     animator.SetTrigger("attackLeft");
+                    weapon.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                     break;
                 case Direction.Right:
                     animator.SetTrigger("attackRight");
+                    weapon.transform.rotation = Quaternion.Euler(0f, 0f, 270f);
                     break;
             }
 

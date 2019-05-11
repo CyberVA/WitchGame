@@ -10,7 +10,6 @@ public class Geblin : Enemy
     //Melee Attack
     float attackDelayTimer;
     float attackRecoverTimer;
-    float meleeTimer;
     bool charging = false;
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
     Vector2 toPlayer;
@@ -218,9 +217,6 @@ public class Geblin : Enemy
                 GameManager.gMan.audioLibrary.GoblinSounds(goblinEffects.Attack, 0.05f);
                 break;
         }
-    }
-    void TriggerAttack()
-    {
     }
     void CalculateToPlayer()
     {
