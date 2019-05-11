@@ -15,7 +15,7 @@ public class Geblin : Enemy
     Vector2 meleeVector; //position of melee attack hitbox relative to player and direction of knockback
     Vector2 toPlayer;
     float distanceToPlayer;
-    Box attackBox = new Box(Vector2.zero, 1f, 1f);
+    Box attackBox = new Box(Vector2.zero, 0.5f, 0.5f);
 
     float slowTime;
     
@@ -79,6 +79,8 @@ public class Geblin : Enemy
                     attackDelayTimer -= Time.deltaTime;
                     if(attackDelayTimer <= 0f)
                     {
+                        attackBox.Center = pos + meleeVector * combatSettings.geblinStabRange;
+                        
                         if(Intersects(attackBox, playerHurt.HitBox))
                         {
                             playerHurt.Hurt(combatSettings.geblinStabDamage, DamageTypes.Knife, meleeVector);

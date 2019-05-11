@@ -39,7 +39,9 @@ public class GameController : MonoBehaviour
 
     //Resolution Settings
     public int targetResolutionY = 360;
+    [NonSerialized]
     public int scale = 1;
+    [NonSerialized]
     public int maxScale;
 
     public void Awake()

@@ -322,33 +322,58 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             sliding = false;
             foreach (NoMove noMove in roomController.noMoves)
             {
-                if (Contains(noMove.box, pos))
+                switch (noMove.direction)
                 {
-                    sliding = true;
-                    break;
+                    case Direction.Up:
+                        if (Intersects(noMove.box, colbox))
+                        {
+                            sliding = true;
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    case Direction.Down:
+                    case Direction.Left:
+                    case Direction.Right:
+                        if (Contains(noMove.box, pos))
+                        {
+                            sliding = true;
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
                 }
+                //only reached if continue isnt run
+                break;
             }
         }
         else
         {
             foreach (NoMove noMove in roomController.noMoves)
             {
-                if (Contains(noMove.box, pos))
+                switch (noMove.direction)
                 {
-                    switch (noMove.direction)
-                    {
-                        case Direction.Up:
-                            if(movement.y < 0f)
+                    case Direction.Up:
+                        if (Intersects(noMove.box, colbox))
+                        {
+                            if (movement.y < 0f)
                             {
-                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f);
+                                pos = new Vector2(pos.x, noMove.box.y + noMove.box.height * 0.5f + colbox.height * 0.5f);
                             }
                             else
                             {
                                 sliding = true;
                                 slidingDir = noMove.direction;
                             }
-                            break;
-                        case Direction.Down:
+                        }
+                        break;
+                    case Direction.Down:
+                        if (Contains(noMove.box, pos))
+                        {
                             if (movement.y > 0f)
                             {
                                 pos = new Vector2(pos.x, noMove.box.y - noMove.box.height * 0.5f);
@@ -358,8 +383,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                                 sliding = true;
                                 slidingDir = noMove.direction;
                             }
-                            break;
-                        case Direction.Left:
+                        }
+                        break;
+                    case Direction.Left:
+                        if (Contains(noMove.box, pos))
+                        {
                             if (movement.x > 0f)
                             {
                                 pos = new Vector2(noMove.box.x - noMove.box.width * 0.5f, pos.y);
@@ -369,8 +397,11 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                                 sliding = true;
                                 slidingDir = noMove.direction;
                             }
-                            break;
-                        case Direction.Right:
+                        }
+                        break;
+                    case Direction.Right:
+                        if (Contains(noMove.box, pos))
+                        {
                             if (movement.x < 0f)
                             {
                                 pos = new Vector2(noMove.box.x + noMove.box.width * 0.5f, pos.y);
@@ -380,8 +411,8 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
                                 sliding = true;
                                 slidingDir = noMove.direction;
                             }
-                            break;
-                    }
+                        }
+                        break;
                 }
             }
         }
@@ -443,7 +474,7 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             //Activate Attack
             meleeActive = true;
             weapon.enabled = true;          
-            meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized; //use this for attack anim
+            meleeVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - colbox.Center).normalized;
             switch (Utils.GetDirection(meleeVector))
             {
                 case Direction.Up:
