@@ -48,11 +48,11 @@ public class AudioLibrary : MonoBehaviour
     /// <param name="s">Combat sound</param>
     public void MushroomSounds(mushroomEffects s, float volume)
     {
-        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero, volume);
+        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero, volume * GameManager.gMan.volume);
     }
     public void MushroomSounds(mushroomEffects s)
     {
-        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero, 0.1f);
+        AudioSource.PlayClipAtPoint(mushroom[(int)s], Vector3.zero);
     }
     /// <summary>
     /// Plays a combat sound at a certain point
@@ -60,7 +60,7 @@ public class AudioLibrary : MonoBehaviour
     /// <param name="s">Combat sound</param>
     public void GoblinSounds(goblinEffects s, float volume)
     {
-        AudioSource.PlayClipAtPoint(goblin[(int)s], Vector3.zero, volume);
+        AudioSource.PlayClipAtPoint(goblin[(int)s], Vector3.zero, volume * GameManager.gMan.volume);
     }
     public void GoblinSounds(goblinEffects s)
     {
@@ -69,7 +69,7 @@ public class AudioLibrary : MonoBehaviour
 
     public void WalkingSounds(walk s, float volume)
     {
-        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero, volume);
+        AudioSource.PlayClipAtPoint(walk[(int)s], Vector3.zero, volume * GameManager.gMan.volume);
     }
     public void WalkingSounds(walk s)
     {
@@ -82,7 +82,7 @@ public class AudioLibrary : MonoBehaviour
     /// <param name="s">Miscelanious sound</param>
     public void miscSounds(miscEffects s, float volume)
     {
-        AudioSource.PlayClipAtPoint(misc[(int)s], Vector3.zero, volume);
+        AudioSource.PlayClipAtPoint(misc[(int)s], Vector3.zero, volume * GameManager.gMan.volume);
     }
     public void miscSounds(miscEffects s)
     {

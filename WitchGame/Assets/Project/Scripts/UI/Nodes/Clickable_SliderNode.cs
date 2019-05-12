@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Clickable_SliderNode : Clickable
 {
+
+    //References
+    GameManager gMan;
+
     //Cameras
     public Camera mainCam;
 
