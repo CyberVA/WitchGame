@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     private void ChangedActiveScene(Scene current, Scene next)
     {
+        Time.timeScale = 1f;
         switch(next.name)
         {
             case "MainMenu":
