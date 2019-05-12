@@ -40,6 +40,7 @@ public class Clickable_SliderNode : Clickable
     // Update is called once per frame
     void Update()
     {
+        pos = gameObject.transform.position;
         mousePoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
         //fillBarSize = fillBar.GetComponent<SpriteRenderer>().size;
         if (Input.GetKeyDown(KeyCode.Mouse0)) isMouseDown = true;
