@@ -179,10 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 897474175, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
-      propertyPath: pixelsPerUnit
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1136442700, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -232,11 +228,6 @@ PrefabInstance:
     - target: {fileID: 1136442701, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
       propertyPath: pause
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2403862659799277626, guid: 838483d3ffc8fd646ae79afcd9882b98,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838483d3ffc8fd646ae79afcd9882b98, type: 3}
