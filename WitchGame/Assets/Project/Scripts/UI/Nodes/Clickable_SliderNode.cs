@@ -37,6 +37,7 @@ public class Clickable_SliderNode : Clickable
     void Update()
     {
         mousePoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        //fillBarSize = fillBar.GetComponent<SpriteRenderer>().size;
         if (Input.GetKeyDown(KeyCode.Mouse0)) isMouseDown = true;
         else if (Input.GetKeyUp(KeyCode.Mouse0)) isMouseDown = false;
         

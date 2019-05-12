@@ -67,7 +67,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 165333233
   m_SortingLayer: 1
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 320f7870f451eab4183113a416d519fd, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -274,17 +274,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioLibrary: {fileID: 2047350381}
+  VolumeSlider: {fileID: 0}
   fadeInOut: {fileID: 377774511}
-  playerHealth: 1
-  mana: 1
+  currentScene:
+    m_Handle: 0
   currentCooldowns:
   - 0
   - 0
   - 0
   - 0
   - 0
-  currentScene:
-    m_Handle: 0
+  mana: 1
+  playerHealth: 1
+  volume: 0
   loaded: 0
 --- !u!114 &2047350381
 MonoBehaviour:
@@ -310,9 +312,7 @@ MonoBehaviour:
   goblin:
   - {fileID: 8300000, guid: ec0da8899f7f57749b51ea4daa3e4f54, type: 3}
   walk:
-  - {fileID: 8300000, guid: 92524654289394d4eb0dcd732b82b3c2, type: 3}
   - {fileID: 8300000, guid: d966ff707cad8784c8c1f20a36c55bc7, type: 3}
-  - {fileID: 8300000, guid: 366cf90a9a6cb9f4e9b8c1bb2c9eea0c, type: 3}
   misc:
   - {fileID: 0}
   music:

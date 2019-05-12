@@ -81,7 +81,9 @@ public class GameManager : MonoBehaviour
         {
             VolumeSlider = FindObjectOfType<Clickable_SliderNode>();
         }
-        volume = VolumeSlider.output;
+        if(VolumeSlider != null) volume = VolumeSlider.output;
+        gMan.audioLibrary.musicPlayer.volume = volume;
+        Debug.Log("Volume: " + volume);
     }
 
     private void ChangedActiveScene(Scene current, Scene next)
@@ -94,9 +96,6 @@ public class GameManager : MonoBehaviour
                 break;
             case "Game":
                 audioLibrary.musicSounds(music.Background, true, 3 * volume);
-                break;
-            case "Win":
-                audioLibrary.musicSounds(music.Win, true, 6 * volume);  
                 break;
             default:
                 audioLibrary.musicSounds(music.MainMenu, true, 5 * volume);
