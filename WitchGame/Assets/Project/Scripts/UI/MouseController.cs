@@ -61,7 +61,8 @@ public class MouseController : MonoBehaviour
                     {
                         //calls OnHover
                         clickables[i].OnHover();
-                        Debug.Log("Hovering");
+                        //Debug.Log("Hovering");
+                        //this one too. sorry vince.
                         
                         //If player left clicks the mouse
                         if (Input.GetKeyDown(KeyCode.Mouse0)) clickables[i].OnClick();

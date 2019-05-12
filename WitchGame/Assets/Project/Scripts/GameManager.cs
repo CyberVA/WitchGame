@@ -83,7 +83,8 @@ public class GameManager : MonoBehaviour
         }
         if(VolumeSlider != null) volume = VolumeSlider.output;
         gMan.audioLibrary.musicPlayer.volume = volume;
-        Debug.Log("Volume: " + volume);
+        //Debug.Log("Volume: " + volume);
+        //vince.......... this kills me to see here.
     }
 
     private void ChangedActiveScene(Scene current, Scene next)
