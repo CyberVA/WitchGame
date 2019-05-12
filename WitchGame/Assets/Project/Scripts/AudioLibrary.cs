@@ -6,7 +6,7 @@ using UnityEngine;
 public enum playerEffects { Attack, Damaged, MushMancy, RootWall, Cure }
 public enum mushroomEffects { Attack, Damaged}
 public enum goblinEffects { Attack, Damage}
-public enum walk { WalkLight}
+public enum walk { WalkLight }
 public enum miscEffects {  }
 public enum music { MainMenu, Background, Win}
 

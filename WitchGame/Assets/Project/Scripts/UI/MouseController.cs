@@ -52,21 +52,22 @@ public class MouseController : MonoBehaviour
             //For each clickable, do this...)
             for (int i = 0; i < clickables.Length; i++)
             {
-                //if clickable i has a collider attached to it, then do this...
+                //if clickable I has a collider attached to it, then do this...
                 if (clickables[i].myBox != null)
                 {
+
                     //if the mouse position is hovering over the clickables collider, then do this...)
                     if (clickables[i].myBox.OverlapPoint(mainCam.ScreenToWorldPoint(Input.mousePosition)))
                     {
                         //calls OnHover
                         clickables[i].OnHover();
+                        Debug.Log("Hovering");
                         
                         //If player left clicks the mouse
-                        if (Input.GetKeyDown(KeyCode.Mouse0))
-                        {
-                            //calls OnClick
-                            clickables[i].OnClick();
-                        }
+                        if (Input.GetKeyDown(KeyCode.Mouse0)) clickables[i].OnClick();
+                        //If the player is holding down the left click
+                        if (Input.GetKey(KeyCode.Mouse0)) clickables[i].OnClickStay();
+                        else if (Input.GetKeyUp(KeyCode.Mouse0)) clickables[i].OnClickStay();
                     }
                     else
                     {

@@ -13,6 +13,7 @@ public class Clickable : MonoBehaviour
     }
 
     public virtual void OnClick() { }
+    public virtual void OnClickStay() { }
     public virtual void OnHover() { }
     public virtual void OnEmpty() { }
 }

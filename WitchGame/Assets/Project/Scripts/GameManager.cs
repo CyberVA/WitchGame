@@ -10,20 +10,28 @@ public class GameManager : MonoBehaviour
     public AudioLibrary audioLibrary;
     Clickable_SceneNode clickableScene;
 
-    //Sprites
+    //GameObjects
+    public Clickable_SliderNode VolumeSlider;
+
+    //SpriteRenderers
     public SpriteRenderer fadeInOut;
 
-    //Amount of player health
+    //Scene management
+    public Scene currentScene;
+
+    //Floats
+    public float[] currentCooldowns = new float[5];
+
+    [Range(0, 1)]
+    public float mana;
+
     [Range(0, 1)]
     public float playerHealth;
-    //Amount of player Mana
-    [Range(0,1)]
-    public float mana;
-    //cooldowns
-    public float[] currentCooldowns = new float[5];
-    //Scene management
+
+    public float volume;
+
+    //Integers
     int countLoaded;
-    public Scene currentScene;
 
     bool check;
     public bool loaded = false;
@@ -69,6 +77,11 @@ public class GameManager : MonoBehaviour
                 loaded = false;
             }
         }
+        if(SceneManager.sceneCount < 2)
+        {
+            VolumeSlider = FindObjectOfType<Clickable_SliderNode>();
+        }
+        volume = VolumeSlider.output;
     }
 
     private void ChangedActiveScene(Scene current, Scene next)
@@ -76,16 +89,16 @@ public class GameManager : MonoBehaviour
         switch(next.name)
         {
             case "MainMenu":
-                audioLibrary.musicSounds(music.MainMenu, true, 0.5f);
+                audioLibrary.musicSounds(music.MainMenu, true, 5 * volume);
                 break;
             case "Game":
-                audioLibrary.musicSounds(music.Background, true, 0.3f);
+                audioLibrary.musicSounds(music.Background, true, 3 * volume);
                 break;
             case "Win":
-                audioLibrary.musicSounds(music.Win, true, 0.6f);  
+                audioLibrary.musicSounds(music.Win, true, 6 * volume);  
                 break;
             default:
-                audioLibrary.musicSounds(music.MainMenu, true, 0.5f);
+                audioLibrary.musicSounds(music.MainMenu, true, 5 * volume);
                 break;
         }
         Debug.Log("Current: " + current.name + ", Next: " + next.name);
