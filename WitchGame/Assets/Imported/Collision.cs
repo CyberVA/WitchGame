@@ -15,6 +15,11 @@ namespace TwoStepCollision
         {
             return a.x <= b.x + b.width && a.x + a.width >= b.x && a.y <= b.y + b.height && a.y + a.height >= b.y;
         }
+        /*
+        public static bool Intersects<T>(this T a, ICollidesWith<T> b)
+        {
+            return b.Intersects(a);
+        }*/
         public static bool Touch(Box a, Box b)
         {
             return (Mathf.Abs(a.x - b.x) * 2f <= (a.width + b.width)) && (Mathf.Abs(a.y - b.y) * 2f <= (a.height + b.height));
@@ -25,31 +30,41 @@ namespace TwoStepCollision
             float hheight = a.height * 0.5f;
             return x > a.x - hwidth && x < a.x + hwidth && y > a.y - hheight && y < a.y + hheight;
         }
+        public static bool Contains(Tri a, float x, float y)
+        {
+            return x < a.edges.x && y > a.edges.y && x + y > a.k;
+        }
         public static bool Contains(Box a, Vector2 p)
         {
             return Contains(a, p.x, p.y);
         }
-        public static void SuperTranslate(IMover mover, Vector2 movement, IEnumerator<Box> boxEnum)
+        /// <summary>
+        /// twice collision check translation
+        /// </summary>
+        public static void SuperTranslate(ICollisionAgent agent, Vector2 movement, IEnumerator<Box> boxEnum)
         {
-            Box box = mover.box;
+            Box box = agent.box;
             float f;
+            //agent is moved on each axis separately 
             if (movement.y != 0f)
             {
-                f = movement.y > 0f ? -0.5f : 0.5f;
-                box.y += movement.y;
-                while (boxEnum.MoveNext())
+                f = movement.y > 0f ? -0.5f : 0.5f; //set multiplier based on move direction
+                box.y += movement.y; //apply movement
+                while (boxEnum.MoveNext()) //traverse collection of solid boxes
                 {
-                    if (Intersects(box, boxEnum.Current))
-                    {
+                    if (Intersects(box, boxEnum.Current)) //test applied movement
+                    { 
+                        //upon collision, place agent on appropriate edge of collider
                         box.y = boxEnum.Current.y + f * (boxEnum.Current.height + box.height + padding);
                     }
                 }
             }
+            //repeat above for x-axis
             if (movement.x != 0f)
             {
+                boxEnum.Reset(); //reset enumerator for reuse
                 f = movement.x > 0f ? -0.5f : 0.5f;
                 box.x += movement.x;
-                boxEnum.Reset();
                 while (boxEnum.MoveNext())
                 {
                     if (Intersects(box, boxEnum.Current))
@@ -58,9 +73,9 @@ namespace TwoStepCollision
                     }
                 }
             }
-            mover.SetPosition(box.Center);
+            agent.SetPosition(box.Center); //apply final position
         }
-        public static void SuperTranslate(IMover mover, Vector2 movement, IEnumerable<Box> boxes)
+        public static void SuperTranslate(ICollisionAgent mover, Vector2 movement, IEnumerable<Box> boxes)
         {
             SuperTranslate(mover, movement, boxes.GetEnumerator());
         }
@@ -102,12 +117,31 @@ namespace TwoStepCollision
     public class Tri : ICollidesWith<Box>
     {
         public Vector2 pos;
-        public Vector2 pos2;
-        public Vector2 pos3;
+        public Vector2 edges;
+        public float k;
 
-        bool ICollidesWith<Box>.Intersects(Box other)
+        public Tri(Vector2 pos, float w, float h)
         {
-            throw new NotImplementedException();
+            this.pos = pos;
+            edges = new Vector2(w, h);
+            k = Mathf.Sqrt(w * w + h * h);
+        }
+        public Tri(Vector2 pos, float w, float h, float k)
+        {
+            this.pos = pos;
+            edges = new Vector2(w, h);
+            this.k = k;
+        }
+
+        bool ICollidesWith<Box>.Intersects(Box box)
+        {
+            return ContainsPoint(box.Left, box.Bottom) || ContainsPoint(box.Right, box.Bottom) || ContainsPoint(box.Left, box.Top) || ContainsPoint(box.Right, box.Top)
+                || Func.Contains(box, pos) || Func.Contains(box, new Vector2(pos.x, pos.y + edges.y)) || Func.Contains(box, new Vector2(pos.x + edges.x, pos.y));
+        }
+
+        bool ContainsPoint(float x, float y)
+        {
+            return x < pos.x && y > pos.y && x + y > k;
         }
     }
 
@@ -214,7 +248,7 @@ namespace TwoStepCollision
         #endregion
     }
 
-    public interface IMover
+    public interface ICollisionAgent
     {
         Box box { get; }
         void SetPosition(Vector2 position);

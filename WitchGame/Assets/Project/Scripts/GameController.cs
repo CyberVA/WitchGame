@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public PixPerf pixelPerfect;
     public PixelPerfectUIAnchorManager uiAnchorManager;
     public Pause pause;
+    public Clickable_SceneNode deathSceneTransition;
 
     //Runtime References
     public Room currentRoom;

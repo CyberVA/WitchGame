@@ -5,7 +5,7 @@ using static TwoStepCollision.Func;
 using static Enemy.AISTATES;
 using System;
 
-public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackReciever
+public abstract class Enemy : MonoBehaviour, ICollisionAgent, IHurtable, ICallbackReciever
 {
     public static int enemyCount;
 
@@ -53,8 +53,8 @@ public abstract class Enemy : MonoBehaviour, IMover, IHurtable, ICallbackRecieve
     public Box HitBox => box;
     public bool Friendly => false;
     //IMover (used for collision)
-    Box IMover.box => box;
-    void IMover.SetPosition(Vector2 position)
+    Box ICollisionAgent.box => box;
+    void ICollisionAgent.SetPosition(Vector2 position)
     {
         transform.position = position;
     }

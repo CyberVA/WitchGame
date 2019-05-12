@@ -122,7 +122,7 @@ MonoBehaviour:
   myBox: {fileID: 0}
   scenes: Project/Scenes/MainMenu
   highlightColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
-  fadeSpeed: 0.8
+  fadeSpeed: 0.4
 --- !u!1 &976347797484964275
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using static TwoStepCollision.Func;
 
-public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
+public class Player : MonoBehaviour, ICollisionAgent, IHurtable, ICallbackReciever
 {
     //Editor Ref
     public SpriteRenderer weapon; //spriterenderer for melee hitbox
@@ -133,10 +133,17 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
             {
                 Health = 0;
 
+                flash.gameObject.SetActive(false);
+                Time.timeScale = 0f;
+                enabled = false;
+                GameController.Main.deathSceneTransition.OnClick();
+
+                /*
                 GameController.Main.Load("start");
                 pos = Vector2.zero;
+                velocity = Vector2.zero;
                 Health = combatSettings.player.hp;
-                Mana = combatSettings.playerMana;
+                Mana = combatSettings.playerMana;*/
             }
             return true;
         }
@@ -148,9 +155,9 @@ public class Player : MonoBehaviour, IMover, IHurtable, ICallbackReciever
     bool IHurtable.Friendly => true;
     
     #region IMover
-    Box IMover.box => colbox;
+    Box ICollisionAgent.box => colbox;
 
-    void IMover.SetPosition(Vector2 position)
+    void ICollisionAgent.SetPosition(Vector2 position)
     {
         pos = position;
     }
