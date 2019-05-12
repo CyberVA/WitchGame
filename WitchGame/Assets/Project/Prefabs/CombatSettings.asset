@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     hp: 1
-    moveSpeed: 2.3
+    moveSpeed: 3
     inertia: 7
     vMulitplierMelee: 4
     vMultiplierRange: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     vMultiplierRange: 4
     flashLength: 1
     invincibleLength: 1
-  playerMana: 2
+  playerMana: 3
   playerMelee:
     cost: -0.5
     cooldown: 0.25
@@ -68,7 +68,7 @@ MonoBehaviour:
   geblinStabRecover: 1
   geblinStabBeginRange: 2
   geblinStopMoveRange: 0.8
-  slideSpeed: 1
+  geblinStabRange: 0.5
   slowEffectLength: 3
   slowEffectMultiplier: 0.3
   minVelocity: 0.1
