@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     [Range(0, 1)]
     public float playerHealth;
 
-    public float volume;
+    public float volume = 0.5f;
 
     //Integers
     int countLoaded;

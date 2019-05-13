@@ -286,7 +286,7 @@ MonoBehaviour:
   - 0
   mana: 1
   playerHealth: 1
-  volume: 0
+  volume: 0.5
   loaded: 0
 --- !u!114 &2047350381
 MonoBehaviour:

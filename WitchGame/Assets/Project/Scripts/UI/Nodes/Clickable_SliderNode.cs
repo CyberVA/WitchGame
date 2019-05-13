@@ -5,9 +5,6 @@ using UnityEngine;
 public class Clickable_SliderNode : Clickable
 {
 
-    //References
-    GameManager gMan;
-
     //Cameras
     public Camera mainCam;
 
@@ -29,12 +26,18 @@ public class Clickable_SliderNode : Clickable
     //GameObjects
     public GameObject fillBar;
 
+    //SpriteRenderers
+    SpriteRenderer fillBarSize;
+
 
     // Start is called before the first frame update
     void Start()
     {
         mainCam = Camera.main;
         pos = gameObject.transform.position;
+        fillBarSize = fillBar.GetComponent<SpriteRenderer>();
+        fillBarSize.size = new Vector2(GameManager.gMan.volume * upperLimit, 1);
+        gameObject.transform.position = new Vector2(fillBar.transform.position.x + fillBarSize.size.x, pos.y);
     }
 
     // Update is called once per frame
@@ -42,7 +45,6 @@ public class Clickable_SliderNode : Clickable
     {
         pos = gameObject.transform.position;
         mousePoint = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        //fillBarSize = fillBar.GetComponent<SpriteRenderer>().size;
         if (Input.GetKeyDown(KeyCode.Mouse0)) isMouseDown = true;
         else if (Input.GetKeyUp(KeyCode.Mouse0)) isMouseDown = false;
         
@@ -51,26 +53,26 @@ public class Clickable_SliderNode : Clickable
         //If left click is being held down and OnClickStay was clicked, set sliders position to mouse x position
         if (wasClicked && isMouseDown)
         {
-            if (fillBar.GetComponent<SpriteRenderer>().size.x > lowerLimit && fillBar.GetComponent<SpriteRenderer>().size.x < upperLimit)
+            if (fillBarSize.size.x > lowerLimit && fillBarSize.size.x < upperLimit)
             {
                 gameObject.transform.position = new Vector2(mousePoint.x, pos.y);
-                fillBar.GetComponent<SpriteRenderer>().size = new Vector2(mousePoint.x - fillBar.transform.position.x, 1);
+                fillBarSize.size = new Vector2(mousePoint.x - fillBar.transform.position.x, 1);
             }
         }
-        if (fillBar.GetComponent<SpriteRenderer>().size.x < lowerLimit)
+        if (fillBarSize.size.x < lowerLimit)
         {
             Debug.Log("UnderBound");
-            fillBar.GetComponent<SpriteRenderer>().size = new Vector2(lowerLimit + 0.0001f, 1);
+            fillBarSize.size = new Vector2(lowerLimit + 0.0001f, 1);
             gameObject.transform.localPosition = new Vector2(-1.25f, 0);
         }
-        else if (fillBar.GetComponent<SpriteRenderer>().size.x > upperLimit)
+        else if (fillBarSize.size.x > upperLimit)
         {
             Debug.Log("OverBound");
-            fillBar.GetComponent<SpriteRenderer>().size = new Vector2(upperLimit - 0.0001f, 1);
+            fillBarSize.size = new Vector2(upperLimit - 0.0001f, 1);
             gameObject.transform.localPosition = new Vector2(1.25f, 0);
         }
 
-        output = fillBar.GetComponent<SpriteRenderer>().size.normalized.x;
+        output = fillBarSize.size.x / upperLimit;
 
         //If left click is not being held down, wasClicked is nolonger true; 
         if (!isMouseDown) wasClicked = false;
